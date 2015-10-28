@@ -12,6 +12,9 @@ class MovieTableViewCell: UITableViewCell {
 
     var movie: Movie? {
         didSet {
+            
+            //Set labels and imageView
+            
             if let movieUnwrapped = movie {
                 titelLabel.text = movieUnwrapped.titel
                 descriptionLabel.text = movieUnwrapped.description
