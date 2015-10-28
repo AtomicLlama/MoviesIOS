@@ -1,6 +1,4 @@
 # Movies
-
-Movies
 ======
 
 This is the repo for our small Movie/Ticketing/SocialIntergration App
