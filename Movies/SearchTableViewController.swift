@@ -17,7 +17,7 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
     
     var currentActor: Actor?
     
-    let activity = UIActivityIndicatorView()
+    //Array of popular films to suggest the user before typing
     
     var popFilm: [Movie]? {
         didSet {
@@ -39,14 +39,21 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Immediatly select the search textfield
+        
         searchTextField.becomeFirstResponder()
         searchTextField.delegate = self
-        searchTextField.leftView?.addSubview(activity)
+        
+        //Fixing issues with Cell sizes
+        
         tableView.rowHeight = (CGFloat) (140)
+        
+        //Make sure there are no white separator lines after the items
+        
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        title = "Search"
         
     }
     
@@ -56,28 +63,63 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
         return 1
     }
     
-    var results = [String:[AnyObject]]()
+    var results = [String:[AnyObject]]()    //Cached searches to avoid too many requests after deleting letters
     
-    var elements = [AnyObject]()
+    //Should be deallocated of the memory after you go back to the featured view.
+    
+    var elements = [AnyObject]()    //Actors and Movies returned by search
     
     func parseData(searchString: String?) {
-        if let searchQuery =  searchString?.stringByReplacingOccurrencesOfString(" ", withString: "+") {
+        
+        //Safely making url for the request
+        
+        if let searchQuery =  searchString?.stringByReplacingOccurrencesOfString(" ", withString: "+").stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
+            
             let url = "http://api.themoviedb.org/3/search/multi?api_key=18ec732ece653360e23d5835670c47a0&query=" + searchQuery
-            activity.startAnimating()
+            
+            // Make request
+            
             Alamofire.request(.GET, url).responseJSON() { (response) in
+                
+                //Don't suggest a new Movie to search if it previously wasn't showing anything.
+                
                 var refresh = self.elements.count != 0
+                
+                //Reinitialize
+                
                 self.elements = []
+                
+                //Cast results as array
+                
                 if let body = response.result.value as? [String:AnyObject], results = body["results"] as? [AnyObject] {
                     if results.count != 0 {
+                        
+                        //Iterate through the first 10 items in the array
+                        
                         for i in 0...min(results.count-1,9) {
+                            
+                            //Cast item as JSON Object and get media type to create the proper object
+                            
                             if let parsedItem = results[i] as? [String:AnyObject], medium = parsedItem["media_type"] as? String {
+                                
+                                //Check if it's a movie or a person
+                                
                                 if medium == "movie" {
                                     let movieAsDictionary = parsedItem
+                                    
+                                    //Get Movie Data
+                                    
                                     if let id = movieAsDictionary["id"] as? Int, title = movieAsDictionary["title"] as? String, plot = movieAsDictionary["overview"] as? String, year = movieAsDictionary["release_date"] as? String, rating = movieAsDictionary["vote_average"] as? Double, poster = movieAsDictionary["poster_path"] as? String {
+                                        
+                                        //Check if movie was cached
+                                        
                                         if let alreadyKnownMovie = self.delegate?.knownMovie(id.description) {
                                             self.elements.append(alreadyKnownMovie)
                                             self.tableView.reloadData()
                                         } else {
+                                            
+                                            //Create object
+                                            
                                             let yearOnly: [String]
                                             if year == "" {
                                                 yearOnly = [1970.description]
@@ -91,13 +133,22 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                                         }
                                     }
                                 } else if medium == "person" {
+                                    
+                                    //Get person data
+                                    
                                     if let actorID = parsedItem["id"] as? Int, name = parsedItem["name"] as? String {
+                                        
+                                        //Check if person was cached
+                                        
                                         if let knownPerson = self.delegate?.knownPerson(actorID.description) {
                                             self.elements.append(knownPerson)
                                             if i == min(results.count-1,5) {
                                                 self.results[searchString!] = self.elements
                                             }
                                         } else {
+                                            
+                                            //Create object
+                                            
                                             let actorAsObject: Actor
                                             if let pic = parsedItem["profile_path"] as? String {
                                                 actorAsObject = Actor(name: name, pic: "https://image.tmdb.org/t/p/w185" + pic, id: actorID.description, delegate: self.delegate)
@@ -109,7 +160,10 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                                         }
                                     }
                                 }
-                                if i == min(results.count-1,5) {
+                                
+                                //Cache Results to minimize damage on network when deleting characters
+                                
+                                if i == min(results.count-1,9) {
                                     self.results[searchString!] = self.elements
                                 }
                             }
@@ -126,10 +180,12 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                         }
                     }
                 }
+                
+                //If there were previously movies, and now there aren't, refresh to get a new Suggestion
+                
                 if refresh {
                     self.tableView.reloadData()
                 }
-                self.activity.stopAnimating()
             }
         }
     }
@@ -143,13 +199,25 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        
+        //If the change isn't meaningless make a search
+        
         if string != " " {
+            
+            //Check what the change means
+            
             let replaced = NSString(string: textField.text ?? "").stringByReplacingCharactersInRange(range, withString: string)
             if  replaced != "" {
+                
+                //If the result isn't empty check if we cached something for it
+                
                 if let prevResult = results[replaced] {
                     elements = prevResult
                     tableView.reloadData()
                 } else {
+                    
+                    //Search for our new query!!!
+                    
                     parseData(replaced)
                 }
                 
@@ -178,6 +246,9 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if elements.count == 0 {
+            
+            //Create cell and suggest something randomly
+            
             let cell = tableView.dequeueReusableCellWithIdentifier("welcome") ?? UITableViewCell()
             cell.textLabel?.numberOfLines = 0
             var text = "I'm here to help.\nJust Type Away!\nWhat Are you waiting for?"
@@ -186,12 +257,18 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                     text = "Search for \"" + movieTitle + "\", maybe...\nI've heard it's good."
                 }
             }
+            
+            //Make sure it looks nice!
+            
             cell.textLabel?.text = text
             cell.backgroundColor = UIColor.clearColor()
             cell.textLabel?.textColor = UIColor.whiteColor()
             cell.textLabel?.textAlignment = NSTextAlignment.Center
             return cell
         } else {
+            
+            //Check the current element and return the proper Cell
+            
             if let actor = elements[indexPath.row] as? Actor {
                 let cell = tableView.dequeueReusableCellWithIdentifier("actor") as? ActorTableViewCell ?? ActorTableViewCell()
                 cell.actor = (actor, actor.bio)
@@ -202,10 +279,16 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                 return cell
             }
         }
+        
+        //Satisfying Compiler!
+        
         return UITableViewCell()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        //Point selector to new item and hide Keyboard
+        
         searchTextField.resignFirstResponder()
         if elements.count > 0 {
             if let movie = elements[indexPath.row] as? Movie {
@@ -217,6 +300,9 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        //Set self as delegate of the next view!
+        
         if let mvc = segue.destinationViewController as? MovieDetailViewController {
             mvc.movieDataSource = self
         } else if let mvc = segue.destinationViewController as? PersonViewController {
@@ -225,6 +311,9 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
+        
+        //If text is clearing delete elements and reload.
+        
         elements = []
         tableView.reloadData()
         return true

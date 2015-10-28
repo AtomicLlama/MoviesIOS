@@ -20,21 +20,33 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
     var currentMovie = 0
     
     func moviesArrived(newMovies: [Movie]) {
+        
+        //Get the movie objects and refresh the view.
+        
         movies = newMovies
         tableView.reloadData()
         if refreshHeaderView != nil {
+            
+            //Stop refreshing animation
+            
             self.refreshHeaderView?.isLoading = false
             self.refreshHeaderView?.refreshScrollViewDataSourceDidFinishedLoading(self.tableView)
         }
     }
     
     func imageDownloaded() {
+        
+        //Reload tables if the image has been downloaded.
+        
         tableView.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         fetcher.receiver = self
+        
+        //Set up basic UI
+        
         tableView.backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
         self.edgesForExtendedLayout = UIRectEdge.None
         if refreshHeaderView == nil {
@@ -43,6 +55,9 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
             self.tableView.addSubview(view)
             refreshHeaderView = view
         }
+        
+        //Fetch Movies immediatly
+        
         if movies.count == 0 {
             fetcher.fetchNewMovies()
         }
@@ -62,14 +77,12 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let dequeuedCell = tableView.dequeueReusableCellWithIdentifier("movie") as? MovieTableViewCell {
-            dequeuedCell.movie = movies[indexPath.row]
-            return dequeuedCell
-        } else {
-            let newCell = MovieTableViewCell()
-            newCell.movie = movies[indexPath.row]
-            return newCell
-        }
+        
+        //Reuse already cached Cell from tableView or instanciate new Cell if nil and give value
+        
+        let dequeuedCell = tableView.dequeueReusableCellWithIdentifier("movie") as? MovieTableViewCell ?? MovieTableViewCell()
+        dequeuedCell.movie = movies[indexPath.row]
+        return dequeuedCell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
