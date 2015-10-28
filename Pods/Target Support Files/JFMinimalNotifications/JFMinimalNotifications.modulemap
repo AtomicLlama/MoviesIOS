@@ -1,0 +1,6 @@
+framework module JFMinimalNotifications {
+  umbrella header "JFMinimalNotifications-umbrella.h"
+
+  export *
+  module * { export * }
+}
