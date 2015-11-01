@@ -34,7 +34,7 @@ class Movie {
     let id: String
     var actors: [(Actor, String)]
     var poster: UIImage?
-    var trailerURL: String?
+    var trailerID: String?
     
     
     init(title: String, year: Int, rating: Double, description: String, id: String, posterURL: String, handler: MovieReceiverProtocol?, dataSource: MovieInfoDataSource?) {
@@ -79,6 +79,21 @@ class Movie {
         
         if poster == nil {
             subscribedControllers.append(controller)
+        }
+        
+    }
+    
+    func getTrailerUrl(controller: MovieReceiverProtocol) {
+        if trailerID == nil {
+            let url = "http://api.themoviedb.org/3/movie/" + id + "/videos?api_key=18ec732ece653360e23d5835670c47a0"
+            Alamofire.request(.GET, url).responseJSON() { (response) in
+                if let dictionary = response.result.value as? [String:AnyObject], results = dictionary["results"] as? [AnyObject], trailer = results.first as? [String:AnyObject], videoID = trailer["key"] as? String {
+                    self.trailerID = videoID
+                    dispatch_async(dispatch_get_main_queue()) {
+                        controller.imageDownloaded()
+                    }
+                }
+            }
         }
     }
     

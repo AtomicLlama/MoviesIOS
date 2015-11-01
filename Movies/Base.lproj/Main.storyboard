@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Mml-0B-5bB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Mml-0B-5bB">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -351,8 +351,36 @@
                                             <outlet property="yearLabel" destination="X3t-dN-QSs" id="PaR-IK-b6v"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="trailer" rowHeight="50" id="i49-js-Nqt" customClass="TrailerViewCell" customModule="Movies" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="183" width="560" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i49-js-Nqt" id="cHg-26-F83">
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="49.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play Trailer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysY-Zz-yPg">
+                                                    <rect key="frame" x="8" y="8" width="536" height="25.5"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="leadingMargin" secondItem="ysY-Zz-yPg" secondAttribute="leading" id="Agf-mW-woE"/>
+                                                <constraint firstAttribute="topMargin" secondItem="ysY-Zz-yPg" secondAttribute="top" id="FMH-WB-zY2"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ysY-Zz-yPg" secondAttribute="trailing" constant="8" id="vS1-23-suj"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ysY-Zz-yPg" secondAttribute="bottom" constant="8" id="zWc-LX-HRl"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <outlet property="label" destination="ysY-Zz-yPg" id="zAd-eg-9g3"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="description" rowHeight="120" id="TpY-JQ-zLu" customClass="DescriptionTableViewCell" customModule="Movies" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="183" width="560" height="120"/>
+                                        <rect key="frame" x="0.0" y="233" width="560" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TpY-JQ-zLu" id="179-Ug-sz3">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="119.5"/>
@@ -380,7 +408,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="director" textLabel="Enc-uj-Xek" style="IBUITableViewCellStyleDefault" id="nCA-Kr-IC8">
-                                        <rect key="frame" x="0.0" y="303" width="560" height="38"/>
+                                        <rect key="frame" x="0.0" y="353" width="560" height="38"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nCA-Kr-IC8" id="kbW-1G-5XO">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="37.5"/>
@@ -403,7 +431,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="actor" rowHeight="110" id="BYn-6A-cXR" customClass="ActorTableViewCell" customModule="Movies" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="341" width="560" height="110"/>
+                                        <rect key="frame" x="0.0" y="391" width="560" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BYn-6A-cXR" id="xul-oz-Eu6">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="109.5"/>
@@ -465,7 +493,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="book" textLabel="V8I-gN-zLy" rowHeight="60" style="IBUITableViewCellStyleDefault" id="EeS-ka-m6C">
-                                        <rect key="frame" x="0.0" y="451" width="560" height="60"/>
+                                        <rect key="frame" x="0.0" y="501" width="560" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EeS-ka-m6C" id="k9g-Yi-Plv">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="59.5"/>
@@ -846,7 +874,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ivz-jb-6GR"/>
         <segue reference="eR7-sn-KA6"/>
+        <segue reference="ivz-jb-6GR"/>
     </inferredMetricsTieBreakers>
 </document>

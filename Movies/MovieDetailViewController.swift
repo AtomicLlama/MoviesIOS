@@ -46,7 +46,11 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     // MARK: Table View Stuff
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 5
+        if movieDataSource?.currentMovieForDetail()?.trailerID != nil {
+            return 6
+        } else {
+            return 5
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,6 +70,7 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         case 1: return descriptionRow()
         case 2: return directorRow()
         case 3: return actorRow(indexPath.row)
+        case 4: return movieDataSource?.currentMovieForDetail()?.trailerID != nil ? trailerRow() : bookingRow()
         default: return bookingRow()
         }
     }
@@ -75,6 +80,8 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
             currentActor = movieDataSource?.currentMovieForDetail()?.actors[indexPath.row].0
         } else if indexPath.section == 2 {
             currentActor = movieDataSource?.currentMovieForDetail()?.director
+        } else if let cell = tableView.cellForRowAtIndexPath(indexPath) as? TrailerViewCell {
+            cell.playVideo()
         }
     }
     
@@ -143,6 +150,13 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
+    func trailerRow() -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("trailer") as? TrailerViewCell ?? TrailerViewCell()
+        cell.id = movieDataSource?.currentMovieForDetail()?.trailerID
+        return cell
+    }
+    
+    
     // MARK: UI Misc. (Image, ...)
     
     @IBOutlet weak var backgroundImageView: UIImageView! {
@@ -173,6 +187,7 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         if let movieUnwrapped = movieDataSource?.currentMovieForDetail() {
             self.title = movieUnwrapped.titel
             movieUnwrapped.subscribeToImage(self)
+            movieUnwrapped.getTrailerUrl(self)
             if let posterImage = movieUnwrapped.poster {
                 backgroundImageView.image = posterImage
             }

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '8AD307EBCCE13D4771338CB6'
+               BlueprintIdentifier = '516E4F8E4322BE0DE3454559'
                BlueprintName = 'JFMinimalNotifications'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'JFMinimalNotifications.framework'>

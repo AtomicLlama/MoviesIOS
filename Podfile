@@ -9,4 +9,5 @@ target "Movies" do
 	pod 'Alamofire', '~> 3.0'
 	pod 'PZPullToRefresh'
 	pod 'JFMinimalNotifications', '~> 0.0.4'
+	pod 'YouTubePlayer'
 end
