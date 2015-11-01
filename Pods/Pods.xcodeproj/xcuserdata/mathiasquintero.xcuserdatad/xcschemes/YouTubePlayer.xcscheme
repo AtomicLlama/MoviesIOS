@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '66984D5A6D8124936B90B74E'
-               BlueprintName = 'PZPullToRefresh'
+               BlueprintIdentifier = 'E795581926C043735593B13D'
+               BlueprintName = 'YouTubePlayer'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'PZPullToRefresh.framework'>
+               BuildableName = 'YouTubePlayer.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
