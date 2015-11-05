@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import YouTubePlayer
 
 protocol MovieDetailDataSource {
     func currentMovieForDetail() -> Movie?
 }
 
-class MovieDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PersonBioDataSource, MovieReceiverProtocol {
+class MovieDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PersonBioDataSource, MovieReceiverProtocol, YouTubePlayerDelegate {
     
     //MARK: Data
     
@@ -80,8 +81,6 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
             currentActor = movieDataSource?.currentMovieForDetail()?.actors[indexPath.row].0
         } else if indexPath.section == 2 {
             currentActor = movieDataSource?.currentMovieForDetail()?.director
-        } else if let cell = tableView.cellForRowAtIndexPath(indexPath) as? TrailerViewCell {
-            cell.playVideo()
         }
     }
     
@@ -152,7 +151,10 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     
     func trailerRow() -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("trailer") as? TrailerViewCell ?? TrailerViewCell()
-        cell.id = movieDataSource?.currentMovieForDetail()?.trailerID
+        if !cell.player.ready {
+            cell.player.loadVideoID(movieDataSource?.currentMovieForDetail()?.trailerID ?? "")
+        }
+        cell.player.delegate = self
         return cell
     }
     
@@ -204,7 +206,24 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let personDetailViewController = segue.destinationViewController as? PersonViewController {
             personDetailViewController.delegate = self
-            // personDetailViewController.hidesBottomBarWhenPushed = true
+        }
+    }
+    
+    func playerQualityChanged(videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
+        print(playbackQuality)
+    }
+    
+    func playerReady(videoPlayer: YouTubePlayerView) {
+        print("Player Ready")
+    }
+    
+    func playerStateChanged(videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
+        if videoPlayer.playerState == YouTubePlayerState.Paused || videoPlayer.playerState == YouTubePlayerState.Ended {
+            self.view.setNeedsLayout()
+            self.view.setNeedsUpdateConstraints()
+            self.navigationController?.view.setNeedsUpdateConstraints()
+            self.navigationController?.view.setNeedsLayout()
+            // tableView.reloadData()
         }
     }
     

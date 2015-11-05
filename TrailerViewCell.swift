@@ -11,25 +11,18 @@ import YouTubePlayer
 
 
 class TrailerViewCell: UITableViewCell {
-
-    var videoPlayerView = YouTubePlayerView()
     
     var id: String? {
         didSet {
             if let unwrappedID = id {
-                videoPlayerView.loadVideoID(unwrappedID)
+                player.loadVideoID(unwrappedID)
             }
         }
     }
     
-    @IBOutlet weak var label: UILabel! {
+    @IBOutlet weak var player: YouTubePlayerView! {
         didSet {
             backgroundColor = UIColor.clearColor()
-            addSubview(videoPlayerView)
         }
-    }
-    
-    func playVideo() {
-        videoPlayerView.play()
     }
 }
