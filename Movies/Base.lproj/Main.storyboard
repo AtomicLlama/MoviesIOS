@@ -278,12 +278,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PBd-a0-lSl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PBd-a0-lSl">
                                 <rect key="frame" x="-10" y="34" width="620" height="525"/>
                                 <animations/>
                                 <color key="tintColor" red="0.4941176471" green="0.4941176471" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="38" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-rD-45m">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="38" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-rD-45m">
                                 <rect key="frame" x="20" y="72" width="560" height="471"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -351,36 +351,43 @@
                                             <outlet property="yearLabel" destination="X3t-dN-QSs" id="PaR-IK-b6v"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="trailer" rowHeight="50" id="i49-js-Nqt" customClass="TrailerViewCell" customModule="Movies" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="183" width="560" height="50"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="trailer" rowHeight="173" id="i49-js-Nqt" customClass="TrailerViewCell" customModule="Movies" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="183" width="560" height="173"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i49-js-Nqt" id="cHg-26-F83">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="49.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="i49-js-Nqt" id="cHg-26-F83">
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="172.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play Trailer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysY-Zz-yPg">
-                                                    <rect key="frame" x="8" y="8" width="536" height="25.5"/>
+                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vDL-tI-xps" customClass="YouTubePlayerView" customModule="YouTubePlayer">
+                                                    <rect key="frame" x="8" y="8" width="544" height="156.5"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="156.5" id="HwQ-ps-C3Z"/>
+                                                        <constraint firstAttribute="width" secondItem="vDL-tI-xps" secondAttribute="height" multiplier="16:9" id="TUv-Oe-NON"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="HwQ-ps-C3Z"/>
+                                                        </mask>
+                                                    </variation>
+                                                </view>
                                             </subviews>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="leadingMargin" secondItem="ysY-Zz-yPg" secondAttribute="leading" id="Agf-mW-woE"/>
-                                                <constraint firstAttribute="topMargin" secondItem="ysY-Zz-yPg" secondAttribute="top" id="FMH-WB-zY2"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ysY-Zz-yPg" secondAttribute="trailing" constant="8" id="vS1-23-suj"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="ysY-Zz-yPg" secondAttribute="bottom" constant="8" id="zWc-LX-HRl"/>
+                                                <constraint firstAttribute="topMargin" secondItem="vDL-tI-xps" secondAttribute="top" id="7e2-Kk-6nv"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="vDL-tI-xps" secondAttribute="bottom" id="JqX-nH-va5"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="vDL-tI-xps" secondAttribute="trailing" id="Slo-YS-b2I"/>
+                                                <constraint firstAttribute="leadingMargin" secondItem="vDL-tI-xps" secondAttribute="leading" id="fLc-hS-t53"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                         <connections>
-                                            <outlet property="label" destination="ysY-Zz-yPg" id="zAd-eg-9g3"/>
+                                            <outlet property="player" destination="vDL-tI-xps" id="mho-e7-Nkm"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="description" rowHeight="120" id="TpY-JQ-zLu" customClass="DescriptionTableViewCell" customModule="Movies" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="233" width="560" height="120"/>
+                                        <rect key="frame" x="0.0" y="356" width="560" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TpY-JQ-zLu" id="179-Ug-sz3">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="119.5"/>
@@ -408,7 +415,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="director" textLabel="Enc-uj-Xek" style="IBUITableViewCellStyleDefault" id="nCA-Kr-IC8">
-                                        <rect key="frame" x="0.0" y="353" width="560" height="38"/>
+                                        <rect key="frame" x="0.0" y="476" width="560" height="38"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nCA-Kr-IC8" id="kbW-1G-5XO">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="37.5"/>
@@ -431,7 +438,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="actor" rowHeight="110" id="BYn-6A-cXR" customClass="ActorTableViewCell" customModule="Movies" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="391" width="560" height="110"/>
+                                        <rect key="frame" x="0.0" y="514" width="560" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BYn-6A-cXR" id="xul-oz-Eu6">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="109.5"/>
@@ -493,7 +500,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="book" textLabel="V8I-gN-zLy" rowHeight="60" style="IBUITableViewCellStyleDefault" id="EeS-ka-m6C">
-                                        <rect key="frame" x="0.0" y="501" width="560" height="60"/>
+                                        <rect key="frame" x="0.0" y="624" width="560" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EeS-ka-m6C" id="k9g-Yi-Plv">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="59.5"/>
@@ -549,11 +556,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WPs-6L-sD4">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WPs-6L-sD4">
                                 <rect key="frame" x="-30" y="-30" width="660" height="611"/>
                                 <animations/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="153" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Mjy-Eg-YY5">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="153" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Mjy-Eg-YY5">
                                 <rect key="frame" x="20" y="72" width="560" height="471"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -874,7 +881,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="eR7-sn-KA6"/>
         <segue reference="ivz-jb-6GR"/>
+        <segue reference="3Rd-Zm-mc4"/>
     </inferredMetricsTieBreakers>
 </document>
