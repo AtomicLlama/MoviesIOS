@@ -16,7 +16,7 @@ class MovieTableViewCell: UITableViewCell {
             //Set labels and imageView
             
             if let movieUnwrapped = movie {
-                titelLabel.text = movieUnwrapped.titel
+                titelLabel.text = movieUnwrapped.title
                 descriptionLabel.text = movieUnwrapped.description
                 if let posterImage = movieUnwrapped.poster {
                     posterImageView.image = posterImage

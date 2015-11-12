@@ -13,7 +13,7 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
     
     var refreshHeaderView: PZPullToRefreshView?
     
-    let fetcher = MovieDataFetcher()
+    var fetcher: MovieDataFetcher?
     
     var movies = [Movie]()
     
@@ -43,7 +43,10 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetcher.receiver = self
+        if let mvc = tabBarController as? MoviesTabBarController {
+            fetcher = mvc.dataFetcher
+        }
+        fetcher?.receiver = self
         
         //Set up basic UI
         
@@ -59,7 +62,7 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
         //Fetch Movies immediatly
         
         if movies.count == 0 {
-            fetcher.fetchNewMovies()
+            fetcher?.fetchNewMovies()
         }
     }
 
@@ -104,7 +107,7 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
     
     func pullToRefreshDidTrigger(view: PZPullToRefreshView) {
         refreshHeaderView?.isLoading = true
-        fetcher.fetchNewMovies()
+        fetcher?.fetchNewMovies()
     }
     
     func pullToRefreshLastUpdated(view: PZPullToRefreshView) -> NSDate {

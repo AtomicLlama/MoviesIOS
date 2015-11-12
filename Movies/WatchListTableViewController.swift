@@ -11,8 +11,7 @@ import UIKit
 class WatchListTableViewController: UITableViewController, MovieReceiverProtocol, MovieDetailDataSource {
     
     
-    
-    let list = Watchlist()
+    var list: MovieDataFetcher?
     
     var movies = [Movie]()
     
@@ -24,6 +23,9 @@ class WatchListTableViewController: UITableViewController, MovieReceiverProtocol
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let mvc = tabBarController as? MoviesTabBarController {
+            list = mvc.dataFetcher
+        }
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
         tableView.separatorColor = UIColor.clearColor()
@@ -31,7 +33,7 @@ class WatchListTableViewController: UITableViewController, MovieReceiverProtocol
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        list.getListOfMovies(self)
+        list?.getListOfMovies(self)
     }
     
     func imageDownloaded() {

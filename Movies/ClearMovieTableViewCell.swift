@@ -13,7 +13,7 @@ class ClearMovieTableViewCell: UITableViewCell {
     var movie: Movie? {
         didSet {
             if let unwrappedMovie = movie {
-                titleLabel.text = unwrappedMovie.titel
+                titleLabel.text = unwrappedMovie.title
                 descriptionLabel.text = unwrappedMovie.description
                 if let poster = unwrappedMovie.poster {
                     posterImageView.image = poster

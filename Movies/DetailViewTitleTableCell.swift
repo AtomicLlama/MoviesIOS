@@ -18,7 +18,7 @@ class DetailViewTitleTableCell: UITableViewCell {
             if let poster = movie?.poster {
                 posterImageView.image = poster
             }
-            titleLabel.text = movie?.titel
+            titleLabel.text = movie?.title
             yearLabel.text = movie?.year.description
             if let ratingString =  movie?.rating.description {
                 rating.text = "★" + ratingString

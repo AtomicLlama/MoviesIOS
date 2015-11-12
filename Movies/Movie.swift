@@ -11,9 +11,9 @@ import UIKit
 import Alamofire
 
 protocol MovieInfoDataSource {
-    
+
     // Protocol for the Object that will cache the Movies and Actors
-    
+
     func knownMovie(id: String) -> Movie?
     func learnMovie(id:String, movie: Movie)
     func knownPerson(id: String) -> Actor?
@@ -21,12 +21,12 @@ protocol MovieInfoDataSource {
 }
 
 class Movie {
-    
+
     var delegate: MovieInfoDataSource?
-    
+
     var subscribedControllers = [MovieReceiverProtocol]()
-    
-    let titel: String
+
+    let title: String
     var director: Actor
     let year: Int
     let rating: Double
@@ -35,13 +35,15 @@ class Movie {
     var actors: [(Actor, String)]
     var poster: UIImage?
     var trailerID: String?
-    
-    
+    var netflixLink: String?
+    var fetcher: MovieDataFetcher?
+
+
     init(title: String, year: Int, rating: Double, description: String, id: String, posterURL: String, handler: MovieReceiverProtocol?, dataSource: MovieInfoDataSource?) {
-        
+
         // Set Properties
-        
-        self.titel = title
+
+        self.title = title
         self.year = year
         self.rating = rating
         self.description = description
@@ -49,40 +51,61 @@ class Movie {
         actors = []
         delegate = dataSource
         director = Actor(director: "Tarantino")
-        
+
         // Download Image on another queue
-        
+
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
             if let url = NSURL(string: posterURL), dataFromImage = NSData(contentsOfURL: url), image = UIImage(data: dataFromImage) {
                 self.poster = image
                 dispatch_async(dispatch_get_main_queue()) {
-                    
+
                     // Return to main queue to update view
-                    
+
                     handler?.imageDownloaded()
-                    for view in self.subscribedControllers {
-                        
-                        //Alert all subscribers
-                        
-                        view.imageDownloaded()
-                    }
+                    self.notifySubscribers()
                 }
                 self.fetchActors()
             }
         }
-        
+
     }
     
-    func subscribeToImage(controller: MovieReceiverProtocol) {
+    func isMovieInWatchList() -> Bool {
+        return fetcher?.isMovieInWatchList(Int(id) ?? -1) ?? false
+    }
     
+    func toggleMovieInWatchList() -> Bool {
+        if let itemID = Int(id) {
+            if (isMovieInWatchList()) {
+                fetcher?.removeFromWatchList(itemID)
+                return false
+            } else {
+                fetcher?.addToWatchList(itemID)
+                return true
+            }
+        }
+        return false
+    }
+
+    func notifySubscribers() {
+        for view in self.subscribedControllers {
+
+            //Alert all subscribers
+
+            view.imageDownloaded()
+        }
+    }
+
+    func subscribeToImage(controller: MovieReceiverProtocol) {
+
         //Add Subscribed View Controllers in case of a segue before the image has been downloaded.
-        
+
         if poster == nil {
             subscribedControllers.append(controller)
         }
-        
+
     }
-    
+
     func getTrailerUrl(controller: MovieReceiverProtocol) {
         if trailerID == nil {
             let url = "http://api.themoviedb.org/3/movie/" + id + "/videos?api_key=18ec732ece653360e23d5835670c47a0"
@@ -96,55 +119,56 @@ class Movie {
             }
         }
     }
-    
+
     func fetchActors() {
-        
+
         // Makes a request for all the Actors in the movie  and picks the 5 most important
-        
+
         // Create the right URL and reinitialize the actor array just in case
-        
+
         actors = []
         let url = "http://api.themoviedb.org/3/movie/" + id + "/credits?api_key=18ec732ece653360e23d5835670c47a0"
-        
+
         // Start request
-        
+
         Alamofire.request(.GET, url).responseJSON() { (response) in
-            
+
             //Get Cast Object in the JSON body as an array of dictionaries
-            
+
             if let dictionary = response.result.value as? [String:AnyObject], cast = dictionary["cast"] as? [AnyObject], crew = dictionary["crew"] as? [AnyObject] {
                 if (cast.count != 0) {
-                    
+
                     // Only read the first 5
-                    
+
                     for actor in cast[0...(min(max(cast.count-1,0), 4))] {
-                        
+
                         // Get the actor as a dictionary to read the properties of the SubObject
-                        
+
                         if let actorAsDictionary = actor as? [String:AnyObject] {
-                            
+
                             // Get the properties of the actor
-                            
+
                             if let name = actorAsDictionary["name"] as? String, character = actorAsDictionary["character"] as? String, actorID = actorAsDictionary["id"] as? Int {
-                                
+
                                 // Define the picture as an optional
-                                
+
                                 let pic = actorAsDictionary["profile_path"] as? String
-                                
+
                                 // Check if the actor was already cached, if not create the Object of the Actor
-                                
+
                                 if let actorKnown = self.delegate?.knownPerson(actorID.description) {
                                     self.actors.append(actorKnown, character)
                                 } else {
-                                    
+
                                     // Create Actor Object, add to cache Dictionary and add him to the actor array
-                                    
+
                                     let actorAsObject: Actor
                                     if let picURL = pic {
                                         actorAsObject = Actor(name: name, pic: "https://image.tmdb.org/t/p/w185" + picURL, id: actorID.description, delegate: self.delegate)
                                     } else {
                                         actorAsObject = Actor(name: name, pic: nil, id: actorID.description, delegate: self.delegate)
                                     }
+                                    actorAsObject.fetcher = self.fetcher
                                     self.actors.append((actorAsObject, character))
                                     self.delegate?.learnPerson(actorID.description, actor: actorAsObject)
                                 }
@@ -167,6 +191,7 @@ class Movie {
                                         } else {
                                             memberAsObject = Actor(name: name, pic: nil, id: personID.description, delegate: self.delegate)
                                         }
+                                        memberAsObject.fetcher = self.fetcher
                                         self.director = memberAsObject
                                         self.delegate?.learnPerson(personID.description, actor: memberAsObject)
                                     }
@@ -177,14 +202,14 @@ class Movie {
                 }
             } else {
                 print("Error Unwrapping cast" + (response.result.value?.description ?? "Nothing!"))
-                
+
                 // Check if the problem was that too many request were made, if so: make the request again, until it works.
-                
+
                 if let data = response.result.value as? [String:AnyObject], status = data["status"] as? Int {
                     if status == 25 {
                         self.fetchActors()
                     }
-                } 
+                }
             }
         }
     }
