@@ -12,4 +12,9 @@ class MoviesTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     let dataFetcher = MovieDataFetcher()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dataFetcher.getDefaultsFromMemory()
+    }
+    
 }

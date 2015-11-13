@@ -16,6 +16,8 @@ protocol MovieReceiverProtocol {
 
 class MovieDataFetcher: MovieInfoDataSource {
     
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
     var receiver: MovieReceiverProtocol?
     
     let newMoviesURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=18ec732ece653360e23d5835670c47a0"
@@ -26,7 +28,17 @@ class MovieDataFetcher: MovieInfoDataSource {
     
  //   var watchList = [1771, 286217,99861,206647,140607]
     
-    var watchList = [Int]()
+    var watchList = [Int]() {
+        didSet {
+            defaults.setObject(watchList, forKey: "watchlistForUser")
+        }
+    }
+    
+    func getDefaultsFromMemory() {
+        if let array = defaults.arrayForKey("watchlistForUser") as? [Int] {
+            watchList = array
+        }
+    }
     
     func fetchNewMovies() {
         
