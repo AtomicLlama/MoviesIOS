@@ -109,6 +109,10 @@ class MovieDataFetcher: MovieInfoDataSource {
         return watchList.contains(id)
     }
     
+    func deleteFromWatchList(index: Int) {
+        watchList.removeAtIndex(index)
+    }
+    
     func getListOfMovies(delegate: MovieReceiverProtocol) {
         
         // Do Parsing of PList or XML file here or fetch from our backend.
@@ -180,6 +184,12 @@ class MovieDataFetcher: MovieInfoDataSource {
             delegate.moviesArrived([])
         }
         
+    }
+    
+    func reArrangeWatchList(from: Int, to: Int) {
+        let id = watchList[from]
+        watchList.removeAtIndex(from)
+        watchList.insert(id, atIndex: to)
     }
     
     // public access to the cache system of the object.

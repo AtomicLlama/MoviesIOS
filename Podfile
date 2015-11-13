@@ -10,4 +10,5 @@ target "Movies" do
 	pod 'PZPullToRefresh'
 	pod 'JFMinimalNotifications', '~> 0.0.4'
 	pod 'YouTubePlayer'
+	pod 'MCSwipeTableViewCell', '~> 2.1.4'
 end
