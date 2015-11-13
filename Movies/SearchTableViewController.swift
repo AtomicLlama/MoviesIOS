@@ -252,7 +252,7 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
             let cell = tableView.dequeueReusableCellWithIdentifier("welcome") ?? UITableViewCell()
             cell.textLabel?.numberOfLines = 0
             var text = "I'm here to help.\nJust Type Away!\nWhat Are you waiting for?"
-            if let movieTitle = popFilm?[(Int) (random()) % (popFilm?.count ?? 0)].titel {
+            if let movieTitle = popFilm?[(Int) (random()) % (popFilm?.count ?? 0)].title {
                 if (Int) (random())%2 == 0 {
                     text = "Search for \"" + movieTitle + "\", maybe...\nI've heard it's good."
                 }

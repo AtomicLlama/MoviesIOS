@@ -16,6 +16,8 @@ protocol MovieReceiverProtocol {
 
 class MovieDataFetcher: MovieInfoDataSource {
     
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
     var receiver: MovieReceiverProtocol?
     
     let newMoviesURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=18ec732ece653360e23d5835670c47a0"
@@ -23,6 +25,20 @@ class MovieDataFetcher: MovieInfoDataSource {
     var knownActors = [String:Actor]()
     
     var knownMovies = [String:Movie]()
+    
+ //   var watchList = [1771, 286217,99861,206647,140607]
+    
+    var watchList = [Int]() {
+        didSet {
+            defaults.setObject(watchList, forKey: "watchlistForUser")
+        }
+    }
+    
+    func getDefaultsFromMemory() {
+        if let array = defaults.arrayForKey("watchlistForUser") as? [Int] {
+            watchList = array
+        }
+    }
     
     func fetchNewMovies() {
         
@@ -72,6 +88,96 @@ class MovieDataFetcher: MovieInfoDataSource {
                     }
                 }
             }
+        }
+        
+    }
+    
+    func addToWatchList(id: Int) {
+        watchList.append(id)
+    }
+    
+    func removeFromWatchList(id: Int) {
+        for i in 0...watchList.count {
+            if (watchList[i] == id) {
+                watchList.removeAtIndex(i)
+                return
+            }
+        }
+    }
+    
+    func isMovieInWatchList(id: Int) -> Bool {
+        return watchList.contains(id)
+    }
+    
+    func getListOfMovies(delegate: MovieReceiverProtocol) {
+        
+        // Do Parsing of PList or XML file here or fetch from our backend.
+        
+        getMoviesForWatchList(watchList, delegate: delegate)
+    }
+    
+    func getMovieURL(id: Int) -> String{
+        return "http://api.themoviedb.org/3/movie/" + id.description + "?api_key=18ec732ece653360e23d5835670c47a0"
+    }
+    
+    func getMoviesForWatchList(ids: [Int], delegate: MovieReceiverProtocol) {
+        
+        // initialize empty array
+        
+        var movies = [Movie]()
+        
+        if !ids.isEmpty {
+            for iterator in 0...(ids.count - 1) {
+                
+                //Fetch every movie in the array of ids
+                
+                if let alreadyKnownMovie = self.knownMovies[ids[iterator].description] {
+                    movies.append(alreadyKnownMovie)
+                    if iterator == ids.count - 1 {
+                        delegate.moviesArrived(movies)
+                    }
+                } else {
+                    Alamofire.request(.GET, getMovieURL(ids[iterator])).responseJSON() { (response) in
+                        
+                        // Get Movie Object
+                        
+                        if let movieAsDictionary = response.result.value as? [String:AnyObject] {
+                            
+                            //Get data from movie
+                            
+                            if let id = movieAsDictionary["id"] as? Int, title = movieAsDictionary["title"] as? String, plot = movieAsDictionary["overview"] as? String, year = movieAsDictionary["release_date"] as? String, rating = movieAsDictionary["vote_average"] as? Double, poster = movieAsDictionary["poster_path"] as? String {
+                                
+                                //Check if movie is cached
+                                
+                                if let alreadyKnownMovie = self.knownMovies[id.description] {
+                                    
+                                    movies.append(alreadyKnownMovie)
+                                    
+                                } else {
+                                    
+                                    //Create Movie Object!
+                                    
+                                    let yearOnly = year.componentsSeparatedByString("-")
+                                    let newMovie = Movie(title: title, year: Int(yearOnly[0])!, rating: rating, description: plot, id: id.description, posterURL: "https://image.tmdb.org/t/p/w500" + poster, handler: self.receiver, dataSource: self)
+                                    self.knownMovies[id.description] = newMovie
+                                    movies.append(newMovie)
+                                }
+                            }
+                        }
+                        
+                        //Send movie at the end to the receiving view!
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if iterator == ids.count - 1 {
+                                delegate.moviesArrived(movies)
+                            }
+                        }
+                    }
+                }
+                
+            }
+        } else {
+            delegate.moviesArrived([])
         }
         
     }

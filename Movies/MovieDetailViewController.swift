@@ -17,6 +17,8 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     
     //MARK: Data
     
+    var likeButton: UIBarButtonItem?
+    
     var movieDataSource: MovieDetailDataSource?
     
     var currentActor: Actor?
@@ -27,6 +29,16 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     
     func picture() -> UIImage? {
         return movieDataSource?.currentMovieForDetail()?.poster
+    }
+    
+    func likeMovie(send: AnyObject?) {
+        if movieDataSource?.currentMovieForDetail()?.toggleMovieInWatchList() ?? false {
+            likeButton?.image = UIImage(named: "Like Filled-25")
+            DoneHUD.showInView(self.view, message: "Added To Watch List")
+        } else {
+            likeButton?.image = UIImage(named: "heart-7")
+        }
+        
     }
     
     func imageDownloaded() {
@@ -181,13 +193,19 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     // MARK: Controller Lifecycle
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("likeMovie:"))
+        navigationItem.rightBarButtonItem = likeButton
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView(frame: CGRectZero)
         if let movieUnwrapped = movieDataSource?.currentMovieForDetail() {
-            self.title = movieUnwrapped.titel
+            self.title = movieUnwrapped.title
+            if movieUnwrapped.isMovieInWatchList() {
+                likeButton?.image = UIImage(named: "Like Filled-25")
+            }
             movieUnwrapped.subscribeToImage(self)
             movieUnwrapped.getTrailerUrl(self)
             if let posterImage = movieUnwrapped.poster {

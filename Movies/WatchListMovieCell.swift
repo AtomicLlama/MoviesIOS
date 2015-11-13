@@ -15,7 +15,7 @@ class WatchListMovieCell: UITableViewCell {
             if let unwrappedMovie = movie {
 //                backgroundCardView.image = unwrappedMovie.poster
                 moviePosterView.image = unwrappedMovie.poster
-                titleLabel.text = unwrappedMovie.titel
+                titleLabel.text = unwrappedMovie.title
                 descriptionLabel.text = unwrappedMovie.description
             }
         }
