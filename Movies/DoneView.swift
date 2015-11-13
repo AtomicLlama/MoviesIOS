@@ -109,13 +109,7 @@ public class DoneView: UIView {
         self.lineLayer.strokeColor = UIColor.blackColor().CGColor
         
         // Generate blur view
-        var blurView: UIView
-        if #available(iOS 8.0, *) {
-            blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
-        } else {
-            blurView = UIView()
-            blurView.backgroundColor = UIColor(white: 1, alpha: 0.8)
-        }
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
         self.blurView = blurView
         self.insertSubview(blurView, atIndex: 0)
         blurView.frame = self.bounds

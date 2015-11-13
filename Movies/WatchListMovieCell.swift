@@ -7,13 +7,13 @@
 //
 
 import UIKit
+import MCSwipeTableViewCell
 
-class WatchListMovieCell: UITableViewCell {
+class WatchListMovieCell: MCSwipeTableViewCell {
     
     var movie: Movie? {
         didSet {
             if let unwrappedMovie = movie {
-//                backgroundCardView.image = unwrappedMovie.poster
                 moviePosterView.image = unwrappedMovie.poster
                 titleLabel.text = unwrappedMovie.title
                 descriptionLabel.text = unwrappedMovie.description
@@ -21,23 +21,12 @@ class WatchListMovieCell: UITableViewCell {
         }
     }
     
-//    @IBOutlet weak var backgroundCardView: UIImageView! {
-//        didSet {
-//            backgroundCardView.layer.masksToBounds = true
-//            let effect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-//            let effectView = UIVisualEffectView(effect: effect)
-//            effectView.alpha = 0.6
-//            effectView.frame = backgroundCardView.bounds
-//            backgroundCardView.addSubview(effectView)
-//            backgroundColor = UIColor.clearColor()
-//            selectionStyle = UITableViewCellSelectionStyle.None
-//        }
-//    }
-    
     @IBOutlet weak var moviePosterView: UIImageView! {
         didSet {
-            backgroundColor = UIColor.clearColor()
+            backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
             selectionStyle = UITableViewCellSelectionStyle.None
+            self.defaultColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
+            self.selectedBackgroundView?.backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
         }
     }
     

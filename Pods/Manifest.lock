@@ -1,18 +1,21 @@
 PODS:
   - Alamofire (3.0.0)
   - JFMinimalNotifications (0.0.5)
+  - MCSwipeTableViewCell (2.1.4)
   - PZPullToRefresh (0.0.7)
   - YouTubePlayer (0.3.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - JFMinimalNotifications (~> 0.0.4)
+  - MCSwipeTableViewCell (~> 2.1.4)
   - PZPullToRefresh
   - YouTubePlayer
 
 SPEC CHECKSUMS:
   Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
   JFMinimalNotifications: c0d1eba2b826c1599416880dd48059c9153a6d9a
+  MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
   PZPullToRefresh: a596d42b90ca42f979f181b5f35c4820406c2136
   YouTubePlayer: 88713a96c356f2c88da8925eb61438eda88bcd57
 
