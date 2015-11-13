@@ -13,6 +13,8 @@ class WatchListTableViewController: UITableViewController, MovieReceiverProtocol
     
     var list: MovieDataFetcher?
     
+    var randomMovie: Movie?
+    
     var movies = [Movie]()
     
     var currentMovie: Movie?
@@ -42,29 +44,60 @@ class WatchListTableViewController: UITableViewController, MovieReceiverProtocol
     
     func moviesArrived(newMovies: [Movie]) {
         movies = newMovies
+        let key = random() % min((list?.knownMovies.count ?? 0), 10)
+        var i = 0;
+        for tuple in list?.knownMovies ?? [String:Movie]() {
+            if i == key {
+                randomMovie = tuple.1
+                break;
+            }
+            i++
+        }
         tableView.reloadData()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return movies.isEmpty ? 2 : 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movies.count
+        if section == 1 || !movies.isEmpty {
+            return max(movies.count, 1)
+        } else {
+            if movies.isEmpty {
+                return 1
+            }
+            return 0
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("movie") as? WatchListMovieCell ?? WatchListMovieCell()
-        cell.movie = movies[indexPath.row]
-        return cell
+        if indexPath.section == 1 || !movies.isEmpty {
+            let cell = tableView.dequeueReusableCellWithIdentifier("movie") as? WatchListMovieCell ?? WatchListMovieCell()
+            if movies.isEmpty {
+                cell.movie = randomMovie
+            } else {
+                cell.movie = movies[indexPath.row]
+            }
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("sugestionCell")!
+            cell.backgroundColor = UIColor.clearColor()
+            return cell
+        }
+        
     }
     
-//    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        return false
-//    }
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return indexPath.section == 1 || !movies.isEmpty
+    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        currentMovie = movies[indexPath.row]
+        if !movies.isEmpty {
+            currentMovie = movies[indexPath.row]
+        } else if movies.isEmpty && indexPath.section == 1 {
+            currentMovie = randomMovie
+        }
     }
     
     

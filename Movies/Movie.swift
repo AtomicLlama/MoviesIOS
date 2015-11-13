@@ -18,6 +18,10 @@ protocol MovieInfoDataSource {
     func learnMovie(id:String, movie: Movie)
     func knownPerson(id: String) -> Actor?
     func learnPerson(id: String, actor: Actor)
+    func addToWatchList(id: Int)
+    func removeFromWatchList(id: Int)
+    func isMovieInWatchList(id: Int) -> Bool
+    
 }
 
 class Movie {
@@ -36,7 +40,6 @@ class Movie {
     var poster: UIImage?
     var trailerID: String?
     var netflixLink: String?
-    var fetcher: MovieDataFetcher?
 
 
     init(title: String, year: Int, rating: Double, description: String, id: String, posterURL: String, handler: MovieReceiverProtocol?, dataSource: MovieInfoDataSource?) {
@@ -71,16 +74,16 @@ class Movie {
     }
     
     func isMovieInWatchList() -> Bool {
-        return fetcher?.isMovieInWatchList(Int(id) ?? -1) ?? false
+        return delegate?.isMovieInWatchList(Int(id) ?? -1) ?? false
     }
     
     func toggleMovieInWatchList() -> Bool {
         if let itemID = Int(id) {
             if (isMovieInWatchList()) {
-                fetcher?.removeFromWatchList(itemID)
+                delegate?.removeFromWatchList(itemID)
                 return false
             } else {
-                fetcher?.addToWatchList(itemID)
+                delegate?.addToWatchList(itemID)
                 return true
             }
         }
@@ -168,7 +171,6 @@ class Movie {
                                     } else {
                                         actorAsObject = Actor(name: name, pic: nil, id: actorID.description, delegate: self.delegate)
                                     }
-                                    actorAsObject.fetcher = self.fetcher
                                     self.actors.append((actorAsObject, character))
                                     self.delegate?.learnPerson(actorID.description, actor: actorAsObject)
                                 }
@@ -191,7 +193,6 @@ class Movie {
                                         } else {
                                             memberAsObject = Actor(name: name, pic: nil, id: personID.description, delegate: self.delegate)
                                         }
-                                        memberAsObject.fetcher = self.fetcher
                                         self.director = memberAsObject
                                         self.delegate?.learnPerson(personID.description, actor: memberAsObject)
                                     }

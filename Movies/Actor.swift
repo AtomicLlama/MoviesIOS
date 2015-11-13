@@ -22,7 +22,6 @@ class Actor {
     var headshot: UIImage?
     var bio: String
     let id: String
-    var fetcher: MovieDataFetcher?
     
     var delegate: MovieInfoDataSource?
     
@@ -78,7 +77,6 @@ class Actor {
                                     
                                     let yearOnly = year.componentsSeparatedByString("-")
                                     let newMovie = Movie(title: title, year: Int(yearOnly[0]) ?? 1970, rating: rating, description: plot, id: movieID.description, posterURL: "https://image.tmdb.org/t/p/w500" + poster, handler: receivingView.receiverOfImage(), dataSource: self.delegate)
-                                    newMovie.fetcher = self.fetcher
                                     self.delegate?.learnMovie(movieID.description, movie: newMovie)
                                     
                                     // Switch to the Main Queue to update the view with the new movie
