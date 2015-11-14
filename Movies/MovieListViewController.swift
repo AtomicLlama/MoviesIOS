@@ -35,6 +35,10 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        tableView.reloadData()
+    }
+    
     func imageDownloaded() {
         
         //Reload tables if the image has been downloaded.
