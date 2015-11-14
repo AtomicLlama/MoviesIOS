@@ -138,6 +138,15 @@
 			name = "Person View";
 			sourceTree = "<group>";
 		};
+		0E2BF5731BF7678D003FD75F /* MoreTab */ = {
+			isa = PBXGroup;
+			children = (
+				0EB4F8DA1BF7574B009BD030 /* UserTableViewCell.swift */,
+				0EB4F8D81BF75626009BD030 /* MoreTableViewController.swift */,
+			);
+			name = MoreTab;
+			sourceTree = "<group>";
+		};
 		0E30F2D51BD6E4C2001EA2D0 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,8 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				0EB50EA51BCFAA7A00616DFD /* Main.storyboard */,
-				0EB4F8DA1BF7574B009BD030 /* UserTableViewCell.swift */,
-				0EB4F8D81BF75626009BD030 /* MoreTableViewController.swift */,
 				0E20BE631BD32E6B00E87873 /* Movies-Bridging-Header.h */,
 				0EDF3EF71BF56EF5003A31B2 /* TabBar */,
 				0E40E9D71BD17B8B0038F893 /* Models */,
@@ -232,6 +239,7 @@
 				0E40E9D51BD17B4C0038F893 /* Movie Detail View */,
 				0E20BE5B1BD2BBE700E87873 /* Person View */,
 				0E30F2D81BD6E4EA001EA2D0 /* Watch List */,
+				0E2BF5731BF7678D003FD75F /* MoreTab */,
 				0EDF3EF81BF56F08003A31B2 /* ThirdParty Classes */,
 				0E40E9D81BD17BA40038F893 /* Assisting Files And App Delegate */,
 			);
