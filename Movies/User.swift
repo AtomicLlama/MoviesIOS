@@ -14,18 +14,21 @@ class User {
     
     var name: String
     var image: UIImage?
+    var id: String
     let token: String
     
-    init(name: String, token: String) {
+    init(name: String, token: String, id: String) {
         self.name = name
         self.token = token
+        self.id = id
         getProfilePic()
     }
     
     init() {
         name = ""
         token = FBSDKAccessToken.currentAccessToken().tokenString ?? ""
-        let request = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        id = ""
+        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields:":"name,id"])
         request.startWithCompletionHandler() { (_,result,_) -> Void in
             print("Request Done!")
             if let dictionary = result as? NSDictionary, username = dictionary["name"] as? String {
@@ -36,10 +39,10 @@ class User {
     }
     
     func getProfilePic() {
-        let request = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["fields":"url"])
+        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"name,picture"])
         request.startWithCompletionHandler() { (_,result,error) -> Void in
             if error == nil {
-                if let dictionary = result as? NSDictionary, url = dictionary["url"] as? String {
+                if let dictionary = result as? NSDictionary,picture = dictionary["picture"] as? NSDictionary, pictureData = picture["data"] as? NSDictionary, url = pictureData["url"] as? String {
                     dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue),0)) {
                         if let urlObject = NSURL(string: url), downloadedData = NSData(contentsOfURL: urlObject), downloadedImage = UIImage(data: downloadedData) {
                             self.image = downloadedImage

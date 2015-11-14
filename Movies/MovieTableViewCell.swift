@@ -34,6 +34,7 @@ class MovieTableViewCell: UITableViewCell {
             effectView.alpha = 0.7
             effectView.frame = posterImageView.bounds
             posterImageView.addSubview(effectView)
+            posterImageView.clipsToBounds = true
         }
     }
     

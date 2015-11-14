@@ -175,6 +175,7 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     
     @IBOutlet weak var backgroundImageView: UIImageView! {
         didSet {
+            backgroundImageView.clipsToBounds = true
             let effect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
             let effectView = UIVisualEffectView(effect: effect)
             effectView.alpha = 0.8
@@ -228,11 +229,11 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func playerQualityChanged(videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
-        print(playbackQuality)
+        // print(playbackQuality)
     }
     
     func playerReady(videoPlayer: YouTubePlayerView) {
-        print("Player Ready")
+        // print("Player Ready")
     }
     
     func playerStateChanged(videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {

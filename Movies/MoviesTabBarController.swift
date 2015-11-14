@@ -28,9 +28,17 @@ class MoviesTabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if FBSDKAccessToken.currentAccessToken() == nil {
-            performSegueWithIdentifier("login", sender: self)
-        } else {
+            showLoginScreen(false)
+        } else if currentUser == nil{
             currentUser = User()
+        }
+    }
+    
+    func showLoginScreen(animated: Bool) {
+        if animated {
+            performSegueWithIdentifier("loginAnimated", sender: self)
+        } else {
+            performSegueWithIdentifier("login", sender: self)
         }
     }
 }

@@ -27,6 +27,8 @@
 		0E9682281BE15896004232B2 /* WatchListMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9682271BE15896004232B2 /* WatchListMovieCell.swift */; };
 		0E9F95FC1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F95FB1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift */; };
 		0E9F95FE1BCFEF530035CF98 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F95FD1BCFEF530035CF98 /* DescriptionTableViewCell.swift */; };
+		0EB4F8D91BF75626009BD030 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4F8D81BF75626009BD030 /* MoreTableViewController.swift */; };
+		0EB4F8DB1BF7574B009BD030 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB4F8DA1BF7574B009BD030 /* UserTableViewCell.swift */; };
 		0EB50EA21BCFAA7A00616DFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB50EA11BCFAA7A00616DFD /* AppDelegate.swift */; };
 		0EB50EA41BCFAA7A00616DFD /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB50EA31BCFAA7A00616DFD /* MovieListViewController.swift */; };
 		0EB50EA71BCFAA7A00616DFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EB50EA51BCFAA7A00616DFD /* Main.storyboard */; };
@@ -72,6 +74,8 @@
 		0E9682271BE15896004232B2 /* WatchListMovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListMovieCell.swift; sourceTree = "<group>"; };
 		0E9F95FB1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewTitleTableCell.swift; sourceTree = "<group>"; };
 		0E9F95FD1BCFEF530035CF98 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		0EB4F8D81BF75626009BD030 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
+		0EB4F8DA1BF7574B009BD030 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		0EB50E9E1BCFAA7A00616DFD /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB50EA11BCFAA7A00616DFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EB50EA31BCFAA7A00616DFD /* MovieListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 			isa = PBXGroup;
 			children = (
 				0EB50EA51BCFAA7A00616DFD /* Main.storyboard */,
+				0EB4F8DA1BF7574B009BD030 /* UserTableViewCell.swift */,
+				0EB4F8D81BF75626009BD030 /* MoreTableViewController.swift */,
 				0E20BE631BD32E6B00E87873 /* Movies-Bridging-Header.h */,
 				0EDF3EF71BF56EF5003A31B2 /* TabBar */,
 				0E40E9D71BD17B8B0038F893 /* Models */,
@@ -432,6 +438,7 @@
 				0EB50EA41BCFAA7A00616DFD /* MovieListViewController.swift in Sources */,
 				0E20BE611BD30F5A00E87873 /* MovieDataFetcher.swift in Sources */,
 				0EB50EC61BCFCEAA00616DFD /* MovieDetailViewController.swift in Sources */,
+				0EB4F8DB1BF7574B009BD030 /* UserTableViewCell.swift in Sources */,
 				0E3DBC911BF53D080045FE05 /* DoneHUD.swift in Sources */,
 				0E094D6B1BD3F989009994F0 /* SearchTableViewController.swift in Sources */,
 				0E20BE5F1BD2BF2500E87873 /* ClearMovieTableViewCell.swift in Sources */,
@@ -441,6 +448,7 @@
 				0E1E45811BF6977B00CF37C9 /* User.swift in Sources */,
 				0E20BE5D1BD2BEFD00E87873 /* HeadShotTableViewCell.swift in Sources */,
 				0EB50EC41BCFADD200616DFD /* MovieTableViewCell.swift in Sources */,
+				0EB4F8D91BF75626009BD030 /* MoreTableViewController.swift in Sources */,
 				0EB50EC21BCFAA9C00616DFD /* Movie.swift in Sources */,
 				0E20BE5A1BD2BBD700E87873 /* PersonViewController.swift in Sources */,
 				0E9F95FE1BCFEF530035CF98 /* DescriptionTableViewCell.swift in Sources */,
