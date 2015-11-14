@@ -8,6 +8,7 @@
 
 import UIKit
 import PZPullToRefresh
+import MCSwipeTableViewCell
 
 class MovieListViewController: UITableViewController, MovieDetailDataSource, MovieReceiverProtocol, PZPullToRefreshDelegate {
     
@@ -85,7 +86,36 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
         
         let dequeuedCell = tableView.dequeueReusableCellWithIdentifier("movie") as? MovieTableViewCell ?? MovieTableViewCell()
         dequeuedCell.movie = movies[indexPath.row]
+        var writeSwipes = { () in return }
+        let handler = { () -> () in
+            dequeuedCell.movie?.toggleMovieInWatchList()
+            writeSwipes()
+        }
+        writeSwipes = { () in
+            var image: UIImage?
+            var color = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
+            if dequeuedCell.movie?.isMovieInWatchList() ?? false {
+                image = UIImage(named: "heart-7")
+                color = UIColor.grayColor()
+            } else {
+                image = UIImage(named: "Like Filled-25")
+            }
+            dequeuedCell.firstTrigger = 0.3
+            dequeuedCell.defaultColor = color
+            dequeuedCell.setSwipeGestureWithView(self.viewWithImage(image), color: color, mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State1) { (void) in handler() }
+            dequeuedCell.setSwipeGestureWithView(self.viewWithImage(image), color: color, mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State2) { (void) in handler() }
+            dequeuedCell.setSwipeGestureWithView(self.viewWithImage(image), color: color, mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State3) { (void) in handler() }
+            dequeuedCell.setSwipeGestureWithView(self.viewWithImage(image), color: color, mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State4) { (void) in handler() }
+        }
+        writeSwipes()
         return dequeuedCell
+    }
+    
+    func viewWithImage(image: UIImage?) -> UIView {
+        let imageView = UIImageView(image: image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
+        imageView.tintColor = UIColor.whiteColor()
+        imageView.contentMode = UIViewContentMode.Center
+        return imageView
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

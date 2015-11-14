@@ -112,7 +112,7 @@ class WatchListTableViewController: UITableViewController, MovieReceiverProtocol
                         
                     }
                 }
-                cell.backgroundView?.backgroundColor = UIColor.clearColor()
+                cell.defaultColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
                 cell.setSwipeGestureWithView(UIView(), color: UIColor(red:0.82, green:0.44, blue:0.39, alpha:1), mode: MCSwipeTableViewCellMode.Exit, state: MCSwipeTableViewCellState.State1) { (void) in handler() }
                 cell.setSwipeGestureWithView(UIView(), color: UIColor(red:0.82, green:0.44, blue:0.39, alpha:1), mode: MCSwipeTableViewCellMode.Exit, state: MCSwipeTableViewCellState.State2) { (void) in handler() }
                 cell.setSwipeGestureWithView(UIView(), color: UIColor(red:0.82, green:0.44, blue:0.39, alpha:1), mode: MCSwipeTableViewCellMode.Exit, state: MCSwipeTableViewCellState.State3) { (void) in handler() }

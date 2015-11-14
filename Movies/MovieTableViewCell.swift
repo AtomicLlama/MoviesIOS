@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MCSwipeTableViewCell
 
-class MovieTableViewCell: UITableViewCell {
+class MovieTableViewCell: MCSwipeTableViewCell {
 
     var movie: Movie? {
         didSet {
@@ -34,6 +35,7 @@ class MovieTableViewCell: UITableViewCell {
             effectView.alpha = 0.7
             effectView.frame = posterImageView.bounds
             posterImageView.addSubview(effectView)
+            posterImageView.clipsToBounds = true
         }
     }
     

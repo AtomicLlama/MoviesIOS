@@ -135,10 +135,11 @@ class PersonViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        backgroundMovieView.clipsToBounds = true
         let effect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
         let effectView = UIVisualEffectView(effect: effect)
         effectView.alpha = 0.8
-        // effectView.frame = (backgroundMovieView.superview?.bounds)!
+        //effectView.frame = (backgroundMovieView.superview?.bounds)!
         effectView.frame = CGRectMake(backgroundMovieView.frame.origin.x, backgroundMovieView.frame.origin.y, backgroundMovieView.frame.width + 40, backgroundMovieView.frame.height + 100)
         backgroundMovieView.addSubview(effectView)
         if let moviePoster = delegate?.picture() {
