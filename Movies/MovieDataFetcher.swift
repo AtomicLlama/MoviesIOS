@@ -14,9 +14,15 @@ protocol MovieReceiverProtocol {
     func imageDownloaded()
 }
 
+protocol TicketReceiverProtocol {
+    func receiveTickets(tickets: [TicketEntity])
+}
+
 class MovieDataFetcher: MovieInfoDataSource {
     
     let defaults = NSUserDefaults.standardUserDefaults()
+    
+    var tickets = [TicketEntity]()
     
     var receiver: MovieReceiverProtocol?
     
@@ -76,6 +82,9 @@ class MovieDataFetcher: MovieInfoDataSource {
                                     let newMovie = Movie(title: title, year: Int(yearOnly[0])!, rating: rating, description: plot, id: id.description, posterURL: "https://image.tmdb.org/t/p/w500" + poster, handler: self.receiver, dataSource: self)
                                     self.knownMovies[id.description] = newMovie
                                     movies.append(newMovie)
+                                    if self.tickets.count < 3 {
+                                        self.tickets.append(Ticket(movie: newMovie))
+                                    }
                                 }
                             }
                         }
@@ -90,6 +99,10 @@ class MovieDataFetcher: MovieInfoDataSource {
             }
         }
         
+    }
+    
+    func fetchTickets(requestingView: TicketReceiverProtocol) {
+        requestingView.receiveTickets(tickets)
     }
     
     func addToWatchList(id: Int) {

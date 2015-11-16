@@ -14,7 +14,17 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         if FBSDKAccessToken.currentAccessToken() != nil {
-            performSegueWithIdentifier("loggedIn", sender: self)
+            
+            if presentingViewController != nil {
+                performSegueWithIdentifier("loggedIn", sender: self)
+            } else {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let appDelegate: AppDelegate = (UIApplication.sharedApplication().delegate as? AppDelegate)!
+                self.dismissViewControllerAnimated(true, completion: nil)
+                appDelegate.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("TabBar") as? MoviesTabBarController
+            }
+            
+            
         } else {
             self.loginButton?.alpha = 1.0
             self.welcomeLabel.alpha = 1.0
@@ -71,6 +81,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     
+    
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if isFirstLoad {
@@ -83,9 +95,5 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         } else {
             self.logoImageView.frame.origin.y -= 60
         }
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print("Performing Segue")
     }
 }
