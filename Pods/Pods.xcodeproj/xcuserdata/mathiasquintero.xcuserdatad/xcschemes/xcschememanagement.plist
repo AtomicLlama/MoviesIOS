@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Alamofire.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>JFMinimalNotifications.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -24,7 +19,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Movies-Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Movies.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Watch Extension-Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Watch Extension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,17 +52,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0B4DB1247D19D5F8D2A4228002BD1A13</key>
+		<key>0495FCD274168FEA1E3EA81A4F280B72</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3F196AF5309B48A10FFBF344CB1075EA</key>
+		<key>28A4B315EF5CAE2E06377FC09CB62CAA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>432ECC54282C84882B482CCB4CF227FC</key>
+		<key>54CA9E67D713378F1A796E54F7BF6EB8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,7 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B724C63D0520F9543FC02315FC238EF2</key>
+		<key>91F53E59CCE00DCA585E5C05724117B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AABC6734C2EB02D8BB18C1F58B9051BF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FEA6758DAC88B017A0988F83AD88E9F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

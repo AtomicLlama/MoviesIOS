@@ -67,6 +67,8 @@ class Actor {
                                     
                                     // Switch to the Main Queue to update the view with the cached movie
                                     
+                                    alreadyKnownMovie.subscribeToImage(receivingView.receiverOfImage()!)
+                                    
                                     dispatch_async(dispatch_get_main_queue()) {
                                         receivingView.receiveMoviesFromActor(alreadyKnownMovie)
                                     }
@@ -76,7 +78,7 @@ class Actor {
                                     // Create object and send to the View that asked for it.
                                     
                                     let yearOnly = year.componentsSeparatedByString("-")
-                                    let newMovie = Movie(title: title, year: Int(yearOnly[0]) ?? 1970, rating: rating, description: plot, id: movieID.description, posterURL: "https://image.tmdb.org/t/p/w500" + poster, handler: receivingView.receiverOfImage(), dataSource: self.delegate)
+                                    let newMovie = Movie(title: title, year: Int(yearOnly[0]) ?? 1970, rating: rating, description: plot, id: movieID.description, posterURL: poster, handler: receivingView.receiverOfImage(), dataSource: self.delegate)
                                     self.delegate?.learnMovie(movieID.description, movie: newMovie)
                                     
                                     // Switch to the Main Queue to update the view with the new movie

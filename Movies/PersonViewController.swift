@@ -130,6 +130,7 @@ class PersonViewController: UIViewController, UITableViewDataSource, UITableView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destiationViewController = segue.destinationViewController as? MovieDetailViewController {
             destiationViewController.movieDataSource = self
+            currentMovie?.subscribeToImage(destiationViewController)
         }
     }
     

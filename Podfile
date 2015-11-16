@@ -12,3 +12,9 @@ target "Movies" do
 	pod 'YouTubePlayer'
 	pod 'MCSwipeTableViewCell', '~> 2.1.4'
 end
+
+target "Watch Extension" do
+	platform :watchos, '2.0'
+	xcodeproj 'Movies.xcodeproj'
+	pod 'Alamofire', '~> 3.0'
+end

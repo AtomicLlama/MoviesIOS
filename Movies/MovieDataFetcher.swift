@@ -51,8 +51,7 @@ class MovieDataFetcher: MovieInfoDataSource {
         //Initialize empty array and make request for now in theatres
         
         var movies = [Movie]()
-        if let url = NSURL(string: newMoviesURLString) {
-            Alamofire.request(.GET, url).responseJSON() { (response) in
+            Alamofire.request(.GET, newMoviesURLString).responseJSON() { (response) in
                 
                 //Fetch Todays Movies and get the array of results on body.results
                 
@@ -79,7 +78,7 @@ class MovieDataFetcher: MovieInfoDataSource {
                                     //If movie is not cached create the object, download the image and add it to our cache.
                                     
                                     let yearOnly = year.componentsSeparatedByString("-")
-                                    let newMovie = Movie(title: title, year: Int(yearOnly[0])!, rating: rating, description: plot, id: id.description, posterURL: "https://image.tmdb.org/t/p/w500" + poster, handler: self.receiver, dataSource: self)
+                                    let newMovie = Movie(title: title, year: Int(yearOnly[0])!, rating: rating, description: plot, id: id.description, posterURL: poster, handler: self.receiver, dataSource: self)
                                     self.knownMovies[id.description] = newMovie
                                     movies.append(newMovie)
                                     if self.tickets.count < 3 {
@@ -97,7 +96,6 @@ class MovieDataFetcher: MovieInfoDataSource {
                     }
                 }
             }
-        }
         
     }
     
@@ -167,28 +165,26 @@ class MovieDataFetcher: MovieInfoDataSource {
                                 //Check if movie is cached
                                 
                                 if let alreadyKnownMovie = self.knownMovies[id.description] {
-                                    
+                                    alreadyKnownMovie.subscribeToImage(delegate)
                                     movies.append(alreadyKnownMovie)
-                                    
                                 } else {
                                     
                                     //Create Movie Object!
                                     
                                     let yearOnly = year.componentsSeparatedByString("-")
-                                    let newMovie = Movie(title: title, year: Int(yearOnly[0])!, rating: rating, description: plot, id: id.description, posterURL: "https://image.tmdb.org/t/p/w500" + poster, handler: self.receiver, dataSource: self)
+                                    let newMovie = Movie(title: title, year: Int(yearOnly[0])!, rating: rating, description: plot, id: id.description, posterURL: poster, handler: delegate, dataSource: self)
                                     self.knownMovies[id.description] = newMovie
                                     movies.append(newMovie)
                                 }
+                            }
+                            dispatch_async(dispatch_get_main_queue()) {
+                                delegate.moviesArrived(movies)
                             }
                         }
                         
                         //Send movie at the end to the receiving view!
                         
-                        dispatch_async(dispatch_get_main_queue()) {
-                            if iterator == ids.count - 1 {
-                                delegate.moviesArrived(movies)
-                            }
-                        }
+                        
                     }
                 }
                 

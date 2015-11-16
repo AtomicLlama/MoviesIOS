@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3F82BB1CF725DD55A0C90E15'
-               BlueprintName = 'MCSwipeTableViewCell'
+               BlueprintIdentifier = 'BD5E89D907CF4E34C6DBBF96'
+               BlueprintName = 'Pods-Watch Extension-Alamofire'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'MCSwipeTableViewCell.framework'>
+               BuildableName = 'Alamofire.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
