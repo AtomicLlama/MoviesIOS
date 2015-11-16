@@ -10,7 +10,6 @@
 		0E01AE781BF7F1F1006AB17C /* LanguagePreferenceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E01AE771BF7F1F1006AB17C /* LanguagePreferenceSelector.swift */; };
 		0E01AE7A1BF7F208006AB17C /* DistancePreferenceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E01AE791BF7F208006AB17C /* DistancePreferenceSelector.swift */; };
 		0E094D6B1BD3F989009994F0 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E094D6A1BD3F989009994F0 /* SearchTableViewController.swift */; };
-		0E0D9F4C1BE65C6300E63326 /* TrailerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D9F4B1BE65C6300E63326 /* TrailerViewCell.swift */; };
 		0E17A5C11BF66CCC009E7316 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5BE1BF66CCC009E7316 /* FBSDKCoreKit.framework */; };
 		0E17A5C21BF66CCC009E7316 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5BF1BF66CCC009E7316 /* FBSDKLoginKit.framework */; };
 		0E17A5C31BF66CCC009E7316 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5C01BF66CCC009E7316 /* FBSDKShareKit.framework */; };
@@ -32,6 +31,7 @@
 		0E3DBC961BF540DF0045FE05 /* MoviesTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DBC951BF540DF0045FE05 /* MoviesTabBarController.swift */; };
 		0E40E9D41BD1700E0038F893 /* ActorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40E9D31BD1700E0038F893 /* ActorTableViewCell.swift */; };
 		0E40E9DA1BD17BE10038F893 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40E9D91BD17BE10038F893 /* Actor.swift */; };
+		0E42DF811BF954C50082F543 /* TrailerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42DF801BF954C50082F543 /* TrailerViewCell.swift */; };
 		0E9682281BE15896004232B2 /* WatchListMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9682271BE15896004232B2 /* WatchListMovieCell.swift */; };
 		0E9F95FC1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F95FB1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift */; };
 		0E9F95FE1BCFEF530035CF98 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F95FD1BCFEF530035CF98 /* DescriptionTableViewCell.swift */; };
@@ -63,7 +63,6 @@
 		0E01AE771BF7F1F1006AB17C /* LanguagePreferenceSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagePreferenceSelector.swift; sourceTree = "<group>"; };
 		0E01AE791BF7F208006AB17C /* DistancePreferenceSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistancePreferenceSelector.swift; sourceTree = "<group>"; };
 		0E094D6A1BD3F989009994F0 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		0E0D9F4B1BE65C6300E63326 /* TrailerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrailerViewCell.swift; path = ../TrailerViewCell.swift; sourceTree = "<group>"; };
 		0E17A5BE1BF66CCC009E7316 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-20151111/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		0E17A5BF1BF66CCC009E7316 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-20151111/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		0E17A5C01BF66CCC009E7316 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-20151111/FBSDKShareKit.framework"; sourceTree = "<group>"; };
@@ -87,6 +86,7 @@
 		0E3DBC951BF540DF0045FE05 /* MoviesTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesTabBarController.swift; sourceTree = "<group>"; };
 		0E40E9D31BD1700E0038F893 /* ActorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorTableViewCell.swift; sourceTree = "<group>"; };
 		0E40E9D91BD17BE10038F893 /* Actor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
+		0E42DF801BF954C50082F543 /* TrailerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailerViewCell.swift; sourceTree = "<group>"; };
 		0E9682271BE15896004232B2 /* WatchListMovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListMovieCell.swift; sourceTree = "<group>"; };
 		0E9F95FB1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewTitleTableCell.swift; sourceTree = "<group>"; };
 		0E9F95FD1BCFEF530035CF98 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 		0E40E9D51BD17B4C0038F893 /* Movie Detail View */ = {
 			isa = PBXGroup;
 			children = (
-				0E0D9F4B1BE65C6300E63326 /* TrailerViewCell.swift */,
+				0E42DF801BF954C50082F543 /* TrailerViewCell.swift */,
 				0EB50EC51BCFCEAA00616DFD /* MovieDetailViewController.swift */,
 				0E9F95FB1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift */,
 				0E9F95FD1BCFEF530035CF98 /* DescriptionTableViewCell.swift */,
@@ -501,10 +501,10 @@
 				0E9682281BE15896004232B2 /* WatchListMovieCell.swift in Sources */,
 				0E40E9DA1BD17BE10038F893 /* Actor.swift in Sources */,
 				0E9F95FC1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift in Sources */,
-				0E0D9F4C1BE65C6300E63326 /* TrailerViewCell.swift in Sources */,
 				0E2BF5771BF7BE5E003FD75F /* Theatre.swift in Sources */,
 				0E2BF5801BF7C6D3003FD75F /* TicketTableViewCell.swift in Sources */,
 				0E3DBC921BF53D080045FE05 /* DoneView.swift in Sources */,
+				0E42DF811BF954C50082F543 /* TrailerViewCell.swift in Sources */,
 				0E40E9D41BD1700E0038F893 /* ActorTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
