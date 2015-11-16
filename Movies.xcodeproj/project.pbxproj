@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E01AE781BF7F1F1006AB17C /* LanguagePreferenceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E01AE771BF7F1F1006AB17C /* LanguagePreferenceSelector.swift */; };
+		0E01AE7A1BF7F208006AB17C /* DistancePreferenceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E01AE791BF7F208006AB17C /* DistancePreferenceSelector.swift */; };
 		0E094D6B1BD3F989009994F0 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E094D6A1BD3F989009994F0 /* SearchTableViewController.swift */; };
 		0E0D9F4C1BE65C6300E63326 /* TrailerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D9F4B1BE65C6300E63326 /* TrailerViewCell.swift */; };
 		0E17A5C11BF66CCC009E7316 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5BE1BF66CCC009E7316 /* FBSDKCoreKit.framework */; };
@@ -18,6 +20,12 @@
 		0E20BE5D1BD2BEFD00E87873 /* HeadShotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20BE5C1BD2BEFD00E87873 /* HeadShotTableViewCell.swift */; };
 		0E20BE5F1BD2BF2500E87873 /* ClearMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20BE5E1BD2BF2500E87873 /* ClearMovieTableViewCell.swift */; };
 		0E20BE611BD30F5A00E87873 /* MovieDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20BE601BD30F5A00E87873 /* MovieDataFetcher.swift */; };
+		0E2BF5751BF7BE47003FD75F /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BF5741BF7BE47003FD75F /* Ticket.swift */; };
+		0E2BF5771BF7BE5E003FD75F /* Theatre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BF5761BF7BE5E003FD75F /* Theatre.swift */; };
+		0E2BF5791BF7C075003FD75F /* TicketTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BF5781BF7C075003FD75F /* TicketTableViewController.swift */; };
+		0E2BF57B1BF7C0BB003FD75F /* TicketEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BF57A1BF7C0BB003FD75F /* TicketEntity.swift */; };
+		0E2BF57D1BF7C0DF003FD75F /* GroupTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BF57C1BF7C0DF003FD75F /* GroupTicket.swift */; };
+		0E2BF5801BF7C6D3003FD75F /* TicketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2BF57F1BF7C6D3003FD75F /* TicketTableViewCell.swift */; };
 		0E30F2D71BD6E4E1001EA2D0 /* WatchListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E30F2D61BD6E4E1001EA2D0 /* WatchListTableViewController.swift */; };
 		0E3DBC911BF53D080045FE05 /* DoneHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DBC8F1BF53D080045FE05 /* DoneHUD.swift */; };
 		0E3DBC921BF53D080045FE05 /* DoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3DBC901BF53D080045FE05 /* DoneView.swift */; };
@@ -52,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E01AE771BF7F1F1006AB17C /* LanguagePreferenceSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagePreferenceSelector.swift; sourceTree = "<group>"; };
+		0E01AE791BF7F208006AB17C /* DistancePreferenceSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistancePreferenceSelector.swift; sourceTree = "<group>"; };
 		0E094D6A1BD3F989009994F0 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		0E0D9F4B1BE65C6300E63326 /* TrailerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrailerViewCell.swift; path = ../TrailerViewCell.swift; sourceTree = "<group>"; };
 		0E17A5BE1BF66CCC009E7316 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-20151111/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
@@ -65,6 +75,12 @@
 		0E20BE601BD30F5A00E87873 /* MovieDataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDataFetcher.swift; sourceTree = "<group>"; };
 		0E20BE631BD32E6B00E87873 /* Movies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Movies-Bridging-Header.h"; sourceTree = "<group>"; };
 		0E20BE641BD331DA00E87873 /* PZPullToRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PZPullToRefresh.framework; path = "Pods/../build/Debug-iphoneos/PZPullToRefresh.framework"; sourceTree = "<group>"; };
+		0E2BF5741BF7BE47003FD75F /* Ticket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
+		0E2BF5761BF7BE5E003FD75F /* Theatre.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theatre.swift; sourceTree = "<group>"; };
+		0E2BF5781BF7C075003FD75F /* TicketTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketTableViewController.swift; sourceTree = "<group>"; };
+		0E2BF57A1BF7C0BB003FD75F /* TicketEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketEntity.swift; sourceTree = "<group>"; };
+		0E2BF57C1BF7C0DF003FD75F /* GroupTicket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTicket.swift; sourceTree = "<group>"; };
+		0E2BF57F1BF7C6D3003FD75F /* TicketTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketTableViewCell.swift; sourceTree = "<group>"; };
 		0E30F2D61BD6E4E1001EA2D0 /* WatchListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListTableViewController.swift; sourceTree = "<group>"; };
 		0E3DBC8F1BF53D080045FE05 /* DoneHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneHUD.swift; sourceTree = "<group>"; };
 		0E3DBC901BF53D080045FE05 /* DoneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneView.swift; sourceTree = "<group>"; };
@@ -142,9 +158,20 @@
 			isa = PBXGroup;
 			children = (
 				0EB4F8DA1BF7574B009BD030 /* UserTableViewCell.swift */,
+				0E01AE771BF7F1F1006AB17C /* LanguagePreferenceSelector.swift */,
+				0E01AE791BF7F208006AB17C /* DistancePreferenceSelector.swift */,
 				0EB4F8D81BF75626009BD030 /* MoreTableViewController.swift */,
 			);
 			name = MoreTab;
+			sourceTree = "<group>";
+		};
+		0E2BF57E1BF7C686003FD75F /* Tickets List View */ = {
+			isa = PBXGroup;
+			children = (
+				0E2BF5781BF7C075003FD75F /* TicketTableViewController.swift */,
+				0E2BF57F1BF7C6D3003FD75F /* TicketTableViewCell.swift */,
+			);
+			name = "Tickets List View";
 			sourceTree = "<group>";
 		};
 		0E30F2D51BD6E4C2001EA2D0 /* Search */ = {
@@ -189,6 +216,10 @@
 			isa = PBXGroup;
 			children = (
 				0E1E45801BF6977B00CF37C9 /* User.swift */,
+				0E2BF5741BF7BE47003FD75F /* Ticket.swift */,
+				0E2BF57A1BF7C0BB003FD75F /* TicketEntity.swift */,
+				0E2BF57C1BF7C0DF003FD75F /* GroupTicket.swift */,
+				0E2BF5761BF7BE5E003FD75F /* Theatre.swift */,
 				0EB50EC11BCFAA9C00616DFD /* Movie.swift */,
 				0E40E9D91BD17BE10038F893 /* Actor.swift */,
 				0E20BE601BD30F5A00E87873 /* MovieDataFetcher.swift */,
@@ -240,6 +271,7 @@
 				0E20BE5B1BD2BBE700E87873 /* Person View */,
 				0E30F2D81BD6E4EA001EA2D0 /* Watch List */,
 				0E2BF5731BF7678D003FD75F /* MoreTab */,
+				0E2BF57E1BF7C686003FD75F /* Tickets List View */,
 				0EDF3EF81BF56F08003A31B2 /* ThirdParty Classes */,
 				0E40E9D81BD17BA40038F893 /* Assisting Files And App Delegate */,
 			);
@@ -446,17 +478,23 @@
 				0EB50EA41BCFAA7A00616DFD /* MovieListViewController.swift in Sources */,
 				0E20BE611BD30F5A00E87873 /* MovieDataFetcher.swift in Sources */,
 				0EB50EC61BCFCEAA00616DFD /* MovieDetailViewController.swift in Sources */,
+				0E01AE781BF7F1F1006AB17C /* LanguagePreferenceSelector.swift in Sources */,
 				0EB4F8DB1BF7574B009BD030 /* UserTableViewCell.swift in Sources */,
 				0E3DBC911BF53D080045FE05 /* DoneHUD.swift in Sources */,
+				0E2BF5791BF7C075003FD75F /* TicketTableViewController.swift in Sources */,
 				0E094D6B1BD3F989009994F0 /* SearchTableViewController.swift in Sources */,
 				0E20BE5F1BD2BF2500E87873 /* ClearMovieTableViewCell.swift in Sources */,
 				0E3DBC961BF540DF0045FE05 /* MoviesTabBarController.swift in Sources */,
+				0E2BF57B1BF7C0BB003FD75F /* TicketEntity.swift in Sources */,
+				0E01AE7A1BF7F208006AB17C /* DistancePreferenceSelector.swift in Sources */,
 				0EB50EA21BCFAA7A00616DFD /* AppDelegate.swift in Sources */,
 				0E30F2D71BD6E4E1001EA2D0 /* WatchListTableViewController.swift in Sources */,
 				0E1E45811BF6977B00CF37C9 /* User.swift in Sources */,
+				0E2BF5751BF7BE47003FD75F /* Ticket.swift in Sources */,
 				0E20BE5D1BD2BEFD00E87873 /* HeadShotTableViewCell.swift in Sources */,
 				0EB50EC41BCFADD200616DFD /* MovieTableViewCell.swift in Sources */,
 				0EB4F8D91BF75626009BD030 /* MoreTableViewController.swift in Sources */,
+				0E2BF57D1BF7C0DF003FD75F /* GroupTicket.swift in Sources */,
 				0EB50EC21BCFAA9C00616DFD /* Movie.swift in Sources */,
 				0E20BE5A1BD2BBD700E87873 /* PersonViewController.swift in Sources */,
 				0E9F95FE1BCFEF530035CF98 /* DescriptionTableViewCell.swift in Sources */,
@@ -464,6 +502,8 @@
 				0E40E9DA1BD17BE10038F893 /* Actor.swift in Sources */,
 				0E9F95FC1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift in Sources */,
 				0E0D9F4C1BE65C6300E63326 /* TrailerViewCell.swift in Sources */,
+				0E2BF5771BF7BE5E003FD75F /* Theatre.swift in Sources */,
+				0E2BF5801BF7C6D3003FD75F /* TicketTableViewCell.swift in Sources */,
 				0E3DBC921BF53D080045FE05 /* DoneView.swift in Sources */,
 				0E40E9D41BD1700E0038F893 /* ActorTableViewCell.swift in Sources */,
 			);

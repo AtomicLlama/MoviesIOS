@@ -53,7 +53,6 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
-        tableView.tableFooterView = UIView(frame: CGRectZero)
         
     }
     

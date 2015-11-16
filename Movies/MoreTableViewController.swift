@@ -11,7 +11,20 @@ import FBSDKLoginKit
 
 class MoreTableViewController: UITableViewController {
     
-    var user: User?
+    var user: User? {
+        didSet {
+            loadSettings()
+        }
+    }
+    
+    func loadSettings() {
+        if let preference = user?.languagePreference.rawValue {
+            languageCell.detailTextLabel?.text = preference
+        }
+        if let distance = user?.distanceRange {
+            distanceCell.detailTextLabel?.text = distance.description + " km"
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +33,13 @@ class MoreTableViewController: UITableViewController {
             userTableViewCell.user = user
         }
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        loadSettings()
+    }
+    
+    @IBOutlet weak var distanceCell: UITableViewCell!
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -28,14 +48,33 @@ class MoreTableViewController: UITableViewController {
     @IBOutlet weak var userTableViewCell: UserTableViewCell!
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 1 {
+        if indexPath.section == 3 {
             FBSDKLoginManager().logOut()
             if let mvc = tabBarController as? MoviesTabBarController {
-                mvc.showLoginScreen(true)
+                mvc.showLoginScreen()
             }
         }
     }
     
+    @IBOutlet weak var watchListNotCell: UITableViewCell! {
+        didSet {
+            watchListNotCell.accessoryView = UISwitch()
+        }
+    }
+    @IBOutlet weak var artistCell: UITableViewCell! {
+        didSet {
+            artistCell.accessoryView = UISwitch()
+        }
+    }
     
+    @IBOutlet weak var languageCell: UITableViewCell!
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let languageController = segue.destinationViewController as? LanguagePreferenceSelector {
+            languageController.user = user
+        } else if let distanceController = segue.destinationViewController as? DistancePreferenceSelector {
+            distanceController.user = user
+        }
+    }
 
 }

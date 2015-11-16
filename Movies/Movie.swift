@@ -23,6 +23,7 @@ protocol MovieInfoDataSource {
     func isMovieInWatchList(id: Int) -> Bool
     func reArrangeWatchList(from: Int, to: Int)
     func deleteFromWatchList(index: Int)
+    func fetchTickets(requestingView: TicketReceiverProtocol)
     
 }
 
@@ -42,6 +43,7 @@ class Movie {
     var poster: UIImage?
     var trailerID: String?
     var netflixLink: String?
+    var detailImage: UIImage?
 
 
     init(title: String, year: Int, rating: Double, description: String, id: String, posterURL: String, handler: MovieReceiverProtocol?, dataSource: MovieInfoDataSource?) {
@@ -73,6 +75,38 @@ class Movie {
             }
         }
 
+    }
+    
+    func fetchDetailImage(subscriber: MovieReceiverProtocol) {
+        
+        if detailImage != nil {
+            return
+        }
+        
+        let url = "http://api.themoviedb.org/3/movie/" + id + "/images?api_key=18ec732ece653360e23d5835670c47a0"
+        
+        // Start request
+        
+        Alamofire.request(.GET, url).responseJSON() { (response) in
+            
+            if let body = response.result.value as? [String:AnyObject], backdrops = body["backdrops"] as? [AnyObject], firstImageObject = backdrops[0] as? [String:AnyObject], path = firstImageObject["file_path"] as? String {
+                
+                let imageURL = "https://image.tmdb.org/t/p/w500" + path
+                
+                dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
+                    if let url = NSURL(string: imageURL), dataFromImage = NSData(contentsOfURL: url), image = UIImage(data: dataFromImage) {
+                        self.detailImage = image
+                        dispatch_async(dispatch_get_main_queue()) {
+                            subscriber.imageDownloaded()
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+
+        
     }
     
     func isMovieInWatchList() -> Bool {
