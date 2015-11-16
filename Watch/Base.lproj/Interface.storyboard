@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
+    </dependencies>
+    <scenes>
+        <!--Tickets Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="TicketsInterfaceController" customModule="Watch_Extension">
+                    <items>
+                        <label alignment="left" text="My Tickets" id="uV3-d6-APl">
+                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                            <variation key="device=watch42mm" text="Tickets"/>
+                        </label>
+                        <table alignment="left" id="KHZ-5d-1Ay">
+                            <items>
+                                <tableRow identifier="ticket" id="VuD-fA-fEA" customClass="TicketRowController" customModule="Watch_Extension">
+                                    <group key="rootItem" width="1" height="68.5" alignment="left" id="1uM-Yv-Eu4">
+                                        <items>
+                                            <imageView width="46" height="1" alignment="left" image="pulp" id="HBN-3K-IOp"/>
+                                            <group width="77" height="90.5" alignment="left" layout="vertical" id="3DL-Ox-wu5">
+                                                <items>
+                                                    <label alignment="left" text="Pulp Fiction" id="Tt3-3Q-gO6"/>
+                                                    <label alignment="left" text="Cinema München" id="YhG-xA-Fma">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                    </label>
+                                                    <label alignment="left" text="22:00" id="Zfh-DL-rhG">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                    </label>
+                                                </items>
+                                                <variation key="device=watch42mm" width="98"/>
+                                            </group>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="imageView" destination="HBN-3K-IOp" id="LzF-Mk-V9U"/>
+                                        <outlet property="theatreLabel" destination="YhG-xA-Fma" id="7GV-Yo-lw0"/>
+                                        <outlet property="timeLabel" destination="Zfh-DL-rhG" id="UpP-82-2ZX"/>
+                                        <outlet property="titleLabel" destination="Tt3-3Q-gO6" id="Mbx-pX-dr1"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="table" destination="KHZ-5d-1Ay" id="iZy-nY-xan"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="219" y="344"/>
+        </scene>
+        <!--ticket-->
+        <scene sceneID="c0o-8o-FIg">
+            <objects>
+                <controller identifier="ticket" alwaysBounce="YES" id="KsB-yK-LyW" customClass="TicketDetailInterfaceController" customModule="Watch_Extension">
+                    <items>
+                        <label alignment="left" text="Pulp Fiction" id="pXK-Ha-YCC">
+                            <fontDescription key="font" style="UICTFontTextStyleTitle1"/>
+                        </label>
+                        <group width="1" height="73" alignment="left" id="FZN-9z-d1l">
+                            <items>
+                                <imageView width="53" height="1" alignment="left" image="pulp" id="JTH-nu-Ocj"/>
+                                <group width="72" height="1" alignment="left" layout="vertical" id="blU-0i-PN3">
+                                    <items>
+                                        <label alignment="left" text="1994" id="7WT-v9-h3B"/>
+                                        <label alignment="left" text="9.0" id="jbm-Rx-LHE"/>
+                                        <label alignment="left" text="Seat: 5H" id="skl-On-Rc4"/>
+                                    </items>
+                                </group>
+                            </items>
+                            <color key="backgroundColor" red="0.81960784310000001" green="0.43921568630000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                        <group width="1" height="55.5" alignment="left" id="Hia-nF-T90">
+                            <items>
+                                <label width="70.5" height="63.5" alignment="left" text="Cinema München" textAlignment="center" numberOfLines="0" id="J92-RZ-jpP"/>
+                                <label width="54.5" height="69.5" alignment="left" text="22:00" textAlignment="right" id="SRi-OQ-q9F"/>
+                            </items>
+                            <color key="backgroundColor" red="0.81960784310000001" green="0.43921568630000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                        <map height="100" alignment="left" id="sh1-SI-bsj"/>
+                    </items>
+                    <connections>
+                        <outlet property="imageView" destination="JTH-nu-Ocj" id="RDn-g1-vkv"/>
+                        <outlet property="map" destination="sh1-SI-bsj" id="s3v-Qc-nup"/>
+                        <outlet property="ratingLabel" destination="jbm-Rx-LHE" id="awy-Ol-wIw"/>
+                        <outlet property="seatLabel" destination="skl-On-Rc4" id="QVc-wl-7Mx"/>
+                        <outlet property="theatreLabel" destination="J92-RZ-jpP" id="E0r-PX-TRx"/>
+                        <outlet property="timeLabel" destination="SRi-OQ-q9F" id="uKk-fj-fPv"/>
+                        <outlet property="titleLabel" destination="pXK-Ha-YCC" id="IUO-LD-553"/>
+                        <outlet property="yearLabel" destination="7WT-v9-h3B" id="77z-fB-Nqw"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="468" y="343.5"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <color key="backgroundColor" red="0.81960784310000001" green="0.43921568630000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Watch" customModuleProvider="target">
+                    <color key="backgroundColor" red="0.81960784310000001" green="0.43921568630000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="468" y="643"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" red="0.81960784310000001" green="0.43921568630000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+</document>

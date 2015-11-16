@@ -51,8 +51,7 @@ class MovieDataFetcher: MovieInfoDataSource {
         //Initialize empty array and make request for now in theatres
         
         var movies = [Movie]()
-        if let url = NSURL(string: newMoviesURLString) {
-            Alamofire.request(.GET, url).responseJSON() { (response) in
+            Alamofire.request(.GET, newMoviesURLString).responseJSON() { (response) in
                 
                 //Fetch Todays Movies and get the array of results on body.results
                 
@@ -97,7 +96,6 @@ class MovieDataFetcher: MovieInfoDataSource {
                     }
                 }
             }
-        }
         
     }
     
