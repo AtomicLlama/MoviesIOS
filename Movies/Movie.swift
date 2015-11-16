@@ -62,7 +62,7 @@ class Movie {
         // Download Image on another queue
 
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
-            if let url = NSURL(string: posterURL), dataFromImage = NSData(contentsOfURL: url), image = UIImage(data: dataFromImage) {
+            if let url = NSURL(string: "https://image.tmdb.org/t/p/w300" + posterURL), dataFromImage = NSData(contentsOfURL: url), image = UIImage(data: dataFromImage) {
                 self.poster = image
                 dispatch_async(dispatch_get_main_queue()) {
 
