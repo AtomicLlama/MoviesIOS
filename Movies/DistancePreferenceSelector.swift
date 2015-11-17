@@ -33,6 +33,7 @@ class DistancePreferenceSelector: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        print(user?.distanceRange == preferences[indexPath.row])
         let cell = tableView.dequeueReusableCellWithIdentifier(user?.distanceRange == preferences[indexPath.row] ? "optionSelected": "option", forIndexPath: indexPath)
         cell.textLabel?.text = preferences[indexPath.row].description + " km"
         return cell

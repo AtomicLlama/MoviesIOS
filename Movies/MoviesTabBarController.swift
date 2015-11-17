@@ -12,8 +12,7 @@ import FBSDKLoginKit
 class MoviesTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     @IBAction func unwindToViewControllerNameHere(segue: UIStoryboardSegue) {
-        
-        print(FBSDKAccessToken.currentAccessToken())
+
     }
 
     let dataFetcher = MovieDataFetcher()
@@ -22,9 +21,9 @@ class MoviesTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataFetcher.getDefaultsFromMemory()
         if FBSDKAccessToken.currentAccessToken() != nil {
-            currentUser = User()
+            currentUser = User(fetcher: dataFetcher)
+            dataFetcher.user = currentUser
         }
     }
     
