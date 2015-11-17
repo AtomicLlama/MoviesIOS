@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import FBSDKLoginKit
+import Alamofire
 
 enum LanguagePreference: String {
     case OriginalLanguage = "Original Language"
@@ -39,19 +40,64 @@ enum LanguagePreference: String {
 class User {
     
     let defaults = NSUserDefaults.standardUserDefaults()
-    
+    var fetcher: MovieDataFetcher?
     var name: String
     var image: UIImage?
     var id: String
+    var notifyWatchlist = true {
+        didSet {
+            if let url = ("https://moviesbackend.herokuapp.com/notifyWatch?userid=" + id + "&pref=" + (notifyWatchlist ? "1" : "0")).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
+                Alamofire.request(.POST, url)
+            }
+        }
+    }
+    var notifyArtist = true {
+        didSet {
+            if let url = ("https://moviesbackend.herokuapp.com/notifySub?userid=" + id + "&pref=" + (notifyArtist ? "1" : "0")).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
+                Alamofire.request(.POST, url)
+            }
+        }
+    }
     var languagePreference: LanguagePreference {
         didSet {
-            defaults.setObject(languagePreference.rawValue, forKey: "languagePreference")
+            if let url = ("https://moviesbackend.herokuapp.com/language?userid=" + id + "&pref=" + languagePreference.rawValue).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
+                Alamofire.request(.POST, url)
+            }
         }
     }
     
     var distanceRange: Int {
         didSet {
-            defaults.setInteger(distanceRange, forKey: "distancePreference")
+            if let url = ("https://moviesbackend.herokuapp.com/distance?userid=" + id + "&pref=" + distanceRange.description).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
+                Alamofire.request(.POST, url)
+            }
+        }
+    }
+    
+    func getWatchList(handler: ([Int]) -> ()) {
+        let url = "https://moviesbackend.herokuapp.com/watchlist?userid=" + id
+        Alamofire.request(.GET, url).responseJSON() { (response) in
+            var movies = [Int]()
+            if let body = response.result.value as? [AnyObject] {
+                for item in body {
+                    if let movieID = item as? String, finalMovieID = Int(movieID) {
+                        movies.append(finalMovieID)
+                    }
+                }
+            }
+            handler(movies)
+        }
+    }
+    
+    func addToWatchList(movieID: Int) {
+        if let url = ("https://moviesbackend.herokuapp.com/watchlist?userid=" + id + "&movie=" + movieID.description).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
+            Alamofire.request(.POST, url)
+        }
+    }
+    
+    func removeFromWatchList(movieID: Int) {
+        if let url = ("https://moviesbackend.herokuapp.com/watchlist?userid=" + id + "&movie=" + movieID.description + "&remove=1").stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
+            Alamofire.request(.POST, url)
         }
     }
     
@@ -78,15 +124,10 @@ class User {
         self.name = name
         self.token = token
         self.id = id
-        let pref = defaults.stringForKey("languagePreference") ?? ""
-        let dist = defaults.integerForKey("distancePreference") ?? 10
-        distanceRange = dist
-        if dist == 0 {
-            distanceRange = 10
-        }
+        distanceRange = 10
         languagePreference = LanguagePreference.NotCare
-        languagePreference = getPref(pref)
         getProfilePic()
+        getPreferences()
     }
     
     init() {
@@ -94,22 +135,36 @@ class User {
         token = FBSDKAccessToken.currentAccessToken().tokenString ?? ""
         id = ""
         let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields:":"name,id"])
-        let pref = defaults.stringForKey("languagePreference") ?? ""
-        let dist = defaults.integerForKey("distancePreference") ?? 10
-        distanceRange = dist
-        if dist == 0 {
-            distanceRange = 10
-        }
         languagePreference = LanguagePreference.NotCare
-        languagePreference = getPref(pref)
+        distanceRange = 10
         request.startWithCompletionHandler() { (_,result,_) -> Void in
             print("Request Done!")
-            if let dictionary = result as? NSDictionary, username = dictionary["name"] as? String {
+            if let dictionary = result as? NSDictionary, username = dictionary["name"] as? String, userid = dictionary["id"] as? String {
                 self.name = username
+                self.id = userid
                 self.getProfilePic()
+                self.getPreferences()
+                self.fetcher?.getDefaultsFromMemory()
             }
         }
         
+    }
+    
+    convenience init(fetcher: MovieDataFetcher) {
+        self.init()
+        self.fetcher = fetcher
+    }
+    
+    func getPreferences() {
+        let url = "https://moviesbackend.herokuapp.com/user?userid=" + id
+        Alamofire.request(.GET, url).responseJSON() { (response) in
+            if let body = response.result.value as? [String:AnyObject], dist = body["maxDistanceForCinema"] as? String, pref = body["preferredLanguageSetting"] as? String, watchlistNot = body["notifyOnWatchList"] as? Bool, artistNot = body["notifyOnSubscription"] as? Bool {
+                self.languagePreference = self.getPref(pref)
+                self.distanceRange = Int(dist) ?? 10
+                self.notifyArtist = artistNot
+                self.notifyWatchlist = watchlistNot
+            }
+        }
     }
     
     func getProfilePic() {

@@ -24,6 +24,19 @@ class MoreTableViewController: UITableViewController {
         if let distance = user?.distanceRange {
             distanceCell.detailTextLabel?.text = distance.description + " km"
         }
+        if let watchlistToggle = user?.notifyWatchlist {
+            watchlistSwitch.setOn(watchlistToggle, animated: false)
+            watchlistSwitch.addTarget(self, action: Selector("updateUserOnBool"), forControlEvents: UIControlEvents.ValueChanged)
+        }
+        if let artistToggle = user?.notifyArtist {
+            artistSwitch.setOn(artistToggle, animated: false)
+            artistSwitch.addTarget(self, action: Selector("updateUserOnBool"), forControlEvents: UIControlEvents.ValueChanged)
+        }
+    }
+    
+    func updateUserOnBool() {
+        user?.notifyArtist = artistSwitch.on
+        user?.notifyWatchlist = watchlistSwitch.on
     }
 
     override func viewDidLoad() {
@@ -56,14 +69,18 @@ class MoreTableViewController: UITableViewController {
         }
     }
     
+    let watchlistSwitch = UISwitch()
+    
+    let artistSwitch = UISwitch()
+    
     @IBOutlet weak var watchListNotCell: UITableViewCell! {
         didSet {
-            watchListNotCell.accessoryView = UISwitch()
+            watchListNotCell.accessoryView = watchlistSwitch
         }
     }
     @IBOutlet weak var artistCell: UITableViewCell! {
         didSet {
-            artistCell.accessoryView = UISwitch()
+            artistCell.accessoryView = artistSwitch
         }
     }
     
