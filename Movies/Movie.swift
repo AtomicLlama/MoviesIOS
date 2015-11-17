@@ -22,7 +22,6 @@ protocol MovieInfoDataSource {
     func removeFromWatchList(id: Int)
     func isMovieInWatchList(id: Int) -> Bool
     func reArrangeWatchList(from: Int, to: Int)
-    func deleteFromWatchList(index: Int)
     func fetchTickets(requestingView: TicketReceiverProtocol)
     
 }

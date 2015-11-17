@@ -103,7 +103,7 @@ class WatchListTableViewController: UITableViewController, MovieReceiverProtocol
                 let handler = { () -> () in
                     if let path = self.tableView.indexPathForCell(cell) {
                         self.movies.removeAtIndex(path.row)
-                        self.list?.deleteFromWatchList(path.row)
+                        cell.movie?.toggleMovieInWatchList()
                         if !self.movies.isEmpty {
                             self.tableView.deleteRowsAtIndexPaths([path], withRowAnimation: UITableViewRowAnimation.Top)
                         } else {
