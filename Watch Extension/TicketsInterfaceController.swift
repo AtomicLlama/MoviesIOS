@@ -17,6 +17,9 @@ class TicketsInterfaceController: WKInterfaceController, TicketReceiverProtocol,
     
     func receiveTickets(tickets: [TicketEntity]) {
         self.tickets = tickets
+        for ticket in tickets {
+            ticket.movie.subscribeToImage(self)
+        }
         reloadTable()
     }
     

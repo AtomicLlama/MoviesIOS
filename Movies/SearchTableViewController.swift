@@ -52,8 +52,13 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
         //Make sure there are no white separator lines after the items
         
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        tableView.backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
+        tableView.backgroundColor = Constants.tintColor
         
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchTextField.resignFirstResponder()
     }
     
     @IBOutlet weak var searchTextField: UITextField!

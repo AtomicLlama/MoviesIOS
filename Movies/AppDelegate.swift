@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        UINavigationBar.appearance().barTintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: Constants.tintColor]
+        UINavigationBar.appearance().tintColor = Constants.tintColor
+        UITabBar.appearance().tintColor = Constants.tintColor
+        UITabBar.appearance().barTintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

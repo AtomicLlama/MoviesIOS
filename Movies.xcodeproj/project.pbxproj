@@ -14,7 +14,6 @@
 		0E17A5C21BF66CCC009E7316 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5BF1BF66CCC009E7316 /* FBSDKLoginKit.framework */; };
 		0E17A5C31BF66CCC009E7316 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5C01BF66CCC009E7316 /* FBSDKShareKit.framework */; };
 		0E17A5C51BF66F1A009E7316 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A5C41BF66F1A009E7316 /* LoginViewController.swift */; };
-		0E1E45811BF6977B00CF37C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E45801BF6977B00CF37C9 /* User.swift */; };
 		0E20BE5A1BD2BBD700E87873 /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20BE591BD2BBD700E87873 /* PersonViewController.swift */; };
 		0E20BE5D1BD2BEFD00E87873 /* HeadShotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20BE5C1BD2BEFD00E87873 /* HeadShotTableViewCell.swift */; };
 		0E20BE5F1BD2BF2500E87873 /* ClearMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20BE5E1BD2BF2500E87873 /* ClearMovieTableViewCell.swift */; };
@@ -34,6 +33,7 @@
 		0E4146851BFA52DC00112ED9 /* TicketDetailInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4146831BFA522F00112ED9 /* TicketDetailInterfaceController.swift */; };
 		0E42DF811BF954C50082F543 /* TrailerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42DF801BF954C50082F543 /* TrailerViewCell.swift */; };
 		0E4741241BFA3F50007FBC01 /* TicketRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4741231BFA3F50007FBC01 /* TicketRowController.swift */; };
+		0E4825C01C2DCBE900C756A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E45801BF6977B00CF37C9 /* User.swift */; };
 		0E9682281BE15896004232B2 /* WatchListMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9682271BE15896004232B2 /* WatchListMovieCell.swift */; };
 		0E9F95FC1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F95FB1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift */; };
 		0E9F95FE1BCFEF530035CF98 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F95FD1BCFEF530035CF98 /* DescriptionTableViewCell.swift */; };
@@ -62,6 +62,8 @@
 		0EECBFD21BFA36F700B7CA9A /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB50EC11BCFAA9C00616DFD /* Movie.swift */; };
 		0EECBFD31BFA36F700B7CA9A /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E40E9D91BD17BE10038F893 /* Actor.swift */; };
 		0EECBFD41BFA36F700B7CA9A /* MovieDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20BE601BD30F5A00E87873 /* MovieDataFetcher.swift */; };
+		0EF7A0821C2DD5DE0003A836 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 0EECBFA61BFA365200B7CA9A /* Watch.app */; };
+		0EFCF2841C2051510058C940 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFCF2831C2051510058C940 /* Contants.swift */; };
 		737682E87B46A2859A9ABDFD /* Pods_Movies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 420E2585622BAA43782CC26A /* Pods_Movies.framework */; };
 		F75CD1BE906EBE143A1C1147 /* Pods_Watch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B739AD0ABED6CC7BD5DD461 /* Pods_Watch_Extension.framework */; };
 /* End PBXBuildFile section */
@@ -81,9 +83,26 @@
 			remoteGlobalIDString = 0EECBFB11BFA365200B7CA9A;
 			remoteInfo = "Watch Extension";
 		};
+		0EF7A0801C2DD5870003A836 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0EB50E961BCFAA7A00616DFD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0EECBFA51BFA365200B7CA9A;
+			remoteInfo = Watch;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		0E4825BB1C2DCA5600C756A5 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0EECBFCA1BFA365200B7CA9A /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -101,6 +120,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
+				0EF7A0821C2DD5DE0003A836 /* Watch.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,6 +187,7 @@
 		0EECBFBF1BFA365200B7CA9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0EECBFC11BFA365200B7CA9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0EECBFD51BFA370D00B7CA9A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
+		0EFCF2831C2051510058C940 /* Contants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		420E2585622BAA43782CC26A /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4938DDAEA4E9F0ECB745AB26 /* Pods-Watch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Watch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension.release.xcconfig"; sourceTree = "<group>"; };
 		4B739AD0ABED6CC7BD5DD461 /* Pods_Watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,6 +326,7 @@
 		0E40E9D81BD17BA40038F893 /* Assisting Files And App Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				0EFCF2831C2051510058C940 /* Contants.swift */,
 				0EB50EA11BCFAA7A00616DFD /* AppDelegate.swift */,
 				0EB50EAA1BCFAA7A00616DFD /* LaunchScreen.storyboard */,
 				0EB50EA81BCFAA7A00616DFD /* Assets.xcassets */,
@@ -454,6 +476,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0EF7A0811C2DD5870003A836 /* PBXTargetDependency */,
 			);
 			name = Movies;
 			productName = Movies;
@@ -505,6 +528,7 @@
 				0EECBFB01BFA365200B7CA9A /* Resources */,
 				41DB0CE951759DE244A3EF3A /* Embed Pods Frameworks */,
 				BD62F7703E00F71EBA76C649 /* Copy Pods Resources */,
+				0E4825BB1C2DCA5600C756A5 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -714,11 +738,11 @@
 				0E01AE7A1BF7F208006AB17C /* DistancePreferenceSelector.swift in Sources */,
 				0EB50EA21BCFAA7A00616DFD /* AppDelegate.swift in Sources */,
 				0E30F2D71BD6E4E1001EA2D0 /* WatchListTableViewController.swift in Sources */,
-				0E1E45811BF6977B00CF37C9 /* User.swift in Sources */,
 				0E2BF5751BF7BE47003FD75F /* Ticket.swift in Sources */,
 				0E20BE5D1BD2BEFD00E87873 /* HeadShotTableViewCell.swift in Sources */,
 				0EB50EC41BCFADD200616DFD /* MovieTableViewCell.swift in Sources */,
 				0EB4F8D91BF75626009BD030 /* MoreTableViewController.swift in Sources */,
+				0EFCF2841C2051510058C940 /* Contants.swift in Sources */,
 				0E2BF57D1BF7C0DF003FD75F /* GroupTicket.swift in Sources */,
 				0EB50EC21BCFAA9C00616DFD /* Movie.swift in Sources */,
 				0E20BE5A1BD2BBD700E87873 /* PersonViewController.swift in Sources */,
@@ -731,6 +755,7 @@
 				0E3DBC921BF53D080045FE05 /* DoneView.swift in Sources */,
 				0E42DF811BF954C50082F543 /* TrailerViewCell.swift in Sources */,
 				0E40E9D41BD1700E0038F893 /* ActorTableViewCell.swift in Sources */,
+				0E4825C01C2DCBE900C756A5 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,6 +798,11 @@
 			isa = PBXTargetDependency;
 			target = 0EECBFB11BFA365200B7CA9A /* Watch Extension */;
 			targetProxy = 0EECBFB41BFA365200B7CA9A /* PBXContainerItemProxy */;
+		};
+		0EF7A0811C2DD5870003A836 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0EECBFA51BFA365200B7CA9A /* Watch */;
+			targetProxy = 0EF7A0801C2DD5870003A836 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -989,9 +1019,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DEE00C04EFDB06C0430B6E7C /* Pods-Watch Extension.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-20151111",
 				);
 				INFOPLIST_FILE = "Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1008,9 +1040,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4938DDAEA4E9F0ECB745AB26 /* Pods-Watch Extension.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/FacebookSDKs-iOS-20151111",
 				);
 				INFOPLIST_FILE = "Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

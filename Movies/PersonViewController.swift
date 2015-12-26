@@ -167,7 +167,7 @@ class PersonViewController: UIViewController, UITableViewDataSource, UITableView
                 cageNotification = JFMinimalNotification(style: JFMinimalNotificationStyle.Success, title: "Congratulations!", subTitle: "You've reached Nic Cage!!!", dismissalDelay: 4.0, touchHandler: self.dismissNotification)
                 cageNotification?.presentFromTop = true
                 cageNotification?.edgePadding = UIEdgeInsetsMake(60, 0, 0, 0)
-                cageNotification?.backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
+                cageNotification?.backgroundColor = Constants.tintColor
                 let cage = UIImageView(image: UIImage(named: "cage"))
                 cage.layer.masksToBounds = true
                 cageNotification?.setLeftAccessoryView(cage, animated: true)

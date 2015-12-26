@@ -29,7 +29,7 @@ class TicketTableViewController: UITableViewController, TicketReceiverProtocol, 
         tableView.rowHeight = UITableViewAutomaticDimension
         fetcher?.fetchTickets(self)
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        tableView.backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
+        tableView.backgroundColor = Constants.tintColor
         tableView.separatorColor = UIColor.clearColor()
     }
 

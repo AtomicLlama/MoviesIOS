@@ -23,7 +23,7 @@ class MoviesTabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         if FBSDKAccessToken.currentAccessToken() != nil {
             currentUser = User(fetcher: dataFetcher)
-            dataFetcher.user = currentUser
+            dataFetcher.getter = currentUser
         }
     }
     

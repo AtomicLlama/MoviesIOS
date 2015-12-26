@@ -23,10 +23,10 @@ class WatchListMovieCell: MCSwipeTableViewCell {
     
     @IBOutlet weak var moviePosterView: UIImageView! {
         didSet {
-            backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
+            backgroundColor = Constants.tintColor
             selectionStyle = UITableViewCellSelectionStyle.None
-            self.defaultColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
-            self.selectedBackgroundView?.backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
+            self.defaultColor = Constants.tintColor
+            self.selectedBackgroundView?.backgroundColor = Constants.tintColor
         }
     }
     

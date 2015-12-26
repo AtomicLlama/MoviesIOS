@@ -54,14 +54,15 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
         fetcher?.receiver = self
         
         //Set up basic UI
-        
-        tableView.backgroundColor = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
+        tableView.separatorColor = UIColor.clearColor()
+        tableView.backgroundColor = Constants.tintColor
         self.edgesForExtendedLayout = UIRectEdge.None
         if refreshHeaderView == nil {
             let view = PZPullToRefreshView(frame: CGRectMake(0, 0 - tableView.bounds.size.height, tableView.bounds.size.width, tableView.bounds.size.height))
             view.delegate = self
             self.tableView.addSubview(view)
             refreshHeaderView = view
+            refreshHeaderView?.backgroundColor = Constants.tintColor
         }
         
         //Fetch Movies immediatly
@@ -97,7 +98,7 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
         }
         writeSwipes = { () in
             var image: UIImage?
-            var color = UIColor(red:0.82, green:0.44, blue:0.39, alpha:1)
+            var color = Constants.tintColor
             if dequeuedCell.movie?.isMovieInWatchList() ?? false {
                 image = UIImage(named: "heart-7")
                 color = UIColor.grayColor()

@@ -59,21 +59,33 @@ class Movie {
         director = Actor(director: "Tarantino")
 
         // Download Image on another queue
-
-        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
-            if let url = NSURL(string: "https://image.tmdb.org/t/p/w300" + posterURL), dataFromImage = NSData(contentsOfURL: url), image = UIImage(data: dataFromImage) {
-                self.poster = image
-                dispatch_async(dispatch_get_main_queue()) {
-
-                    // Return to main queue to update view
-
-                    handler?.imageDownloaded()
-                    self.notifySubscribers()
+        
+//        let url = "https://image.tmdb.org/t/p/w300" + posterURL
+//        Alamofire.request(.GET, url).responseData() { (response) in
+//            if let data = response.result.value {
+//                if let imageFromData = UIImage(data: data) {
+//                    self.poster = imageFromData
+//                    handler?.imageDownloaded()
+//                    self.notifySubscribers()
+//                }
+//            }
+//        }
+        if let url = NSURL(string: "https://image.tmdb.org/t/p/w300" + posterURL) {
+            NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+                if let unwrappedData = data {
+                    if let image = UIImage(data: unwrappedData) {
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.poster = image
+                            handler?.imageDownloaded()
+                            self.notifySubscribers()
+                        }
+                        self.fetchActors()
+                    } else {
+                        print("could not load data from image URL: \(url)")
+                    }
                 }
-                self.fetchActors()
-            }
+            }).resume()
         }
-
     }
     
     func fetchDetailImage(subscriber: MovieReceiverProtocol) {

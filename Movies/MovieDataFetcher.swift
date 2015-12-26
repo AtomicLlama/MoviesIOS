@@ -18,11 +18,21 @@ protocol TicketReceiverProtocol {
     func receiveTickets(tickets: [TicketEntity])
 }
 
+protocol WatchListGetter {
+    func getWatchList(handler: ([Int]) -> ())
+    func addToWatchList(movieID: Int)
+    func removeFromWatchList(movieID: Int)
+}
+
+protocol MovieDataFetcherDelegate {
+    
+}
+
 class MovieDataFetcher: MovieInfoDataSource {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
-    var user: User?
+    var getter: WatchListGetter?
     
     var tickets = [TicketEntity]()
     
@@ -41,7 +51,7 @@ class MovieDataFetcher: MovieInfoDataSource {
     var watchList = [Int]()
     
     func getDefaultsFromMemory() {
-        self.user?.getWatchList() { (array) in
+        self.getter?.getWatchList() { (array) in
             self.watchList = array
             if let view = self.watchlistSubscriber {
                 self.getListOfMovies(view)
@@ -108,11 +118,11 @@ class MovieDataFetcher: MovieInfoDataSource {
     
     func addToWatchList(id: Int) {
         watchList.append(id)
-        user?.addToWatchList(id)
+        getter?.addToWatchList(id)
     }
     
     func removeFromWatchList(id: Int) {
-        user?.removeFromWatchList(id)
+        getter?.removeFromWatchList(id)
         for i in 0...watchList.count {
             if (watchList[i] == id) {
                 watchList.removeAtIndex(i)

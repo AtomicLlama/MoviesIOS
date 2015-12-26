@@ -37,7 +37,7 @@ enum LanguagePreference: String {
     }
 }
 
-class User {
+class User: WatchListGetter {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     var fetcher: MovieDataFetcher?
