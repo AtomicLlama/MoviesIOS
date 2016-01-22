@@ -11,39 +11,47 @@ import UIKit
 import FBSDKLoginKit
 import Alamofire
 
-enum LanguagePreference: String {
-    case OriginalLanguage = "Original Language"
-    case Subtitled = "Subtitled"
-    case Dubbed = "Dubbed"
-    case SubOrOriginal = "Subtitled Or Original Language"
-    case SubOrDub = "Subtitles or Original Language"
-    case NotCare = "Don't care"
-    
-    func getPref(input: String) -> LanguagePreference {
-        switch input {
-        case OriginalLanguage.rawValue:
-            return OriginalLanguage
-        case Subtitled.rawValue:
-            return Subtitled
-        case Dubbed.rawValue:
-            return Dubbed
-        case SubOrOriginal.rawValue:
-            return SubOrOriginal
-        case SubOrDub.rawValue:
-            return SubOrDub
-        default:
-            return NotCare
-        }
-    }
-}
-
 class User: WatchListGetter {
     
     let defaults = NSUserDefaults.standardUserDefaults()
+    let token: String
     var fetcher: MovieDataFetcher?
     var name: String
     var image: UIImage?
     var id: String
+    
+    init(load: Bool) {
+        name = ""
+        token = FBSDKAccessToken.currentAccessToken().tokenString ?? ""
+        id = ""
+        languagePreference = LanguagePreference.NotCare
+        distanceRange = 10
+        if load {
+            doRequest()
+        }
+    }
+    
+    convenience init(fetcher: MovieDataFetcher) {
+        self.init(load: false)
+        self.fetcher = fetcher
+        fetcher.getter = self
+        doRequest()
+    }
+    
+    func doRequest() {
+        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields:":"name,id"])
+        request.startWithCompletionHandler() { (_,result,_) -> Void in
+            print("Request Done!")
+            if let dictionary = result as? NSDictionary, username = dictionary["name"] as? String, userid = dictionary["id"] as? String {
+                self.name = username
+                self.id = userid
+                self.getProfilePic()
+                self.getPreferences()
+                self.fetcher?.getDefaultsFromMemory()
+            }
+        }
+    }
+    
     var notifyWatchlist = true {
         didSet {
             if let url = ("https://moviesbackend.herokuapp.com/notifyWatch?userid=" + id + "&pref=" + (notifyWatchlist ? "1" : "0")).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
@@ -51,6 +59,7 @@ class User: WatchListGetter {
             }
         }
     }
+    
     var notifyArtist = true {
         didSet {
             if let url = ("https://moviesbackend.herokuapp.com/notifySub?userid=" + id + "&pref=" + (notifyArtist ? "1" : "0")).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
@@ -58,6 +67,7 @@ class User: WatchListGetter {
             }
         }
     }
+    
     var languagePreference: LanguagePreference {
         didSet {
             if let url = ("https://moviesbackend.herokuapp.com/language?userid=" + id + "&pref=" + languagePreference.rawValue).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
@@ -101,65 +111,11 @@ class User: WatchListGetter {
         }
     }
     
-    private func getPref(input: String) -> LanguagePreference {
-        switch input {
-        case LanguagePreference.OriginalLanguage.rawValue:
-            return LanguagePreference.OriginalLanguage
-        case LanguagePreference.Subtitled.rawValue:
-            return LanguagePreference.Subtitled
-        case LanguagePreference.Dubbed.rawValue:
-            return LanguagePreference.Dubbed
-        case LanguagePreference.SubOrOriginal.rawValue:
-            return LanguagePreference.SubOrOriginal
-        case LanguagePreference.SubOrDub.rawValue:
-            return LanguagePreference.SubOrDub
-        default:
-            return LanguagePreference.NotCare
-        }
-    }
-    
-    let token: String
-    
-    init(name: String, token: String, id: String) {
-        self.name = name
-        self.token = token
-        self.id = id
-        distanceRange = 10
-        languagePreference = LanguagePreference.NotCare
-        getProfilePic()
-        getPreferences()
-    }
-    
-    init() {
-        name = ""
-        token = FBSDKAccessToken.currentAccessToken().tokenString ?? ""
-        id = ""
-        let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields:":"name,id"])
-        languagePreference = LanguagePreference.NotCare
-        distanceRange = 10
-        request.startWithCompletionHandler() { (_,result,_) -> Void in
-            print("Request Done!")
-            if let dictionary = result as? NSDictionary, username = dictionary["name"] as? String, userid = dictionary["id"] as? String {
-                self.name = username
-                self.id = userid
-                self.getProfilePic()
-                self.getPreferences()
-                self.fetcher?.getDefaultsFromMemory()
-            }
-        }
-        
-    }
-    
-    convenience init(fetcher: MovieDataFetcher) {
-        self.init()
-        self.fetcher = fetcher
-    }
-    
     func getPreferences() {
         let url = "https://moviesbackend.herokuapp.com/user?userid=" + id
         Alamofire.request(.GET, url).responseJSON() { (response) in
             if let body = response.result.value as? [String:AnyObject], dist = body["maxDistanceForCinema"] as? String, pref = body["preferredLanguageSetting"] as? String, watchlistNot = body["notifyOnWatchList"] as? Bool, artistNot = body["notifyOnSubscription"] as? Bool {
-                self.languagePreference = self.getPref(pref)
+                self.languagePreference = LanguagePreference.getPref(pref)
                 self.distanceRange = Int(dist) ?? 10
                 self.notifyArtist = artistNot
                 self.notifyWatchlist = watchlistNot

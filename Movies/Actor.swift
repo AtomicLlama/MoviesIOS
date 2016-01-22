@@ -9,11 +9,6 @@
 import UIKit
 import Alamofire
 
-protocol ActorFetchDataReceiver {
-    func receiveMoviesFromActor(movies: Movie)
-    func receiverOfImage() -> MovieReceiverProtocol?
-}
-
 class Actor {
     
     // Directors are also listed as Actors

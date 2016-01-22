@@ -1,8 +1,11 @@
 PODS:
   - Alamofire (3.0.0)
   - JFMinimalNotifications (0.0.5)
+  - KNSemiModalViewController_hons82 (0.4.4)
   - MCSwipeTableViewCell (2.1.4)
   - PZPullToRefresh (0.0.7)
+  - THCalendarDatePicker (1.2.5):
+    - KNSemiModalViewController_hons82 (~> 0.4.3)
   - YouTubePlayer (0.3.0)
 
 DEPENDENCIES:
@@ -10,13 +13,16 @@ DEPENDENCIES:
   - JFMinimalNotifications (~> 0.0.4)
   - MCSwipeTableViewCell (~> 2.1.4)
   - PZPullToRefresh
+  - THCalendarDatePicker (~> 1.2.5)
   - YouTubePlayer
 
 SPEC CHECKSUMS:
   Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
   JFMinimalNotifications: c0d1eba2b826c1599416880dd48059c9153a6d9a
+  KNSemiModalViewController_hons82: 22aead5ef5d8ca749bc1babb43fa7d6f14b030a3
   MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
   PZPullToRefresh: a596d42b90ca42f979f181b5f35c4820406c2136
+  THCalendarDatePicker: 65c63c1814d1a27defc89f4b72ec7a1d01d5503d
   YouTubePlayer: 88713a96c356f2c88da8925eb61438eda88bcd57
 
 COCOAPODS: 0.39.0

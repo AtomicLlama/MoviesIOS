@@ -11,6 +11,7 @@ target "Movies" do
 	pod 'JFMinimalNotifications', '~> 0.0.4'
 	pod 'YouTubePlayer'
 	pod 'MCSwipeTableViewCell', '~> 2.1.4'
+	pod 'THCalendarDatePicker', '~> 1.2.5'
 end
 
 target "Watch Extension" do

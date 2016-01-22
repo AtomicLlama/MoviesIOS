@@ -9,25 +9,6 @@
 import Foundation
 import Alamofire
 
-protocol MovieReceiverProtocol {
-    func moviesArrived(newMovies: [Movie])
-    func imageDownloaded()
-}
-
-protocol TicketReceiverProtocol {
-    func receiveTickets(tickets: [TicketEntity])
-}
-
-protocol WatchListGetter {
-    func getWatchList(handler: ([Int]) -> ())
-    func addToWatchList(movieID: Int)
-    func removeFromWatchList(movieID: Int)
-}
-
-protocol MovieDataFetcherDelegate {
-    
-}
-
 class MovieDataFetcher: MovieInfoDataSource {
     
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -45,8 +26,6 @@ class MovieDataFetcher: MovieInfoDataSource {
     var knownActors = [String:Actor]()
     
     var knownMovies = [String:Movie]()
-    
- //   var watchList = [1771, 286217,99861,206647,140607]
     
     var watchList = [Int]()
     
@@ -148,7 +127,18 @@ class MovieDataFetcher: MovieInfoDataSource {
     
     func getMoviesForWatchList(ids: [Int], delegate: MovieReceiverProtocol) {
         
+        if ids.count == 0 {
+            delegate.moviesArrived([])
+            return
+        }
+        
         // initialize empty array
+        
+        var order = [String:Int]()
+        
+        for i in 0...(ids.count-1) {
+            order[ids[i].description] = i
+        }
         
         watchlistSubscriber = delegate
         
@@ -188,6 +178,9 @@ class MovieDataFetcher: MovieInfoDataSource {
                                     let newMovie = Movie(title: title, year: Int(yearOnly[0])!, rating: rating, description: plot, id: id.description, posterURL: poster, handler: delegate, dataSource: self)
                                     self.knownMovies[id.description] = newMovie
                                     movies.append(newMovie)
+                                }
+                                movies.sortInPlace() { (a,b) in
+                                    return (order[a.id] ?? 0) <= (order[b.id] ?? 0)
                                 }
                             }
                             dispatch_async(dispatch_get_main_queue()) {

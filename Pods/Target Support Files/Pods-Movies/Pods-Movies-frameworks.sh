@@ -86,14 +86,18 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Movies/Alamofire.framework"
   install_framework "Pods-Movies/JFMinimalNotifications.framework"
+  install_framework "Pods-Movies/KNSemiModalViewController_hons82.framework"
   install_framework "Pods-Movies/MCSwipeTableViewCell.framework"
   install_framework "Pods-Movies/PZPullToRefresh.framework"
+  install_framework "Pods-Movies/THCalendarDatePicker.framework"
   install_framework "Pods-Movies/YouTubePlayer.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Movies/Alamofire.framework"
   install_framework "Pods-Movies/JFMinimalNotifications.framework"
+  install_framework "Pods-Movies/KNSemiModalViewController_hons82.framework"
   install_framework "Pods-Movies/MCSwipeTableViewCell.framework"
   install_framework "Pods-Movies/PZPullToRefresh.framework"
+  install_framework "Pods-Movies/THCalendarDatePicker.framework"
   install_framework "Pods-Movies/YouTubePlayer.framework"
 fi

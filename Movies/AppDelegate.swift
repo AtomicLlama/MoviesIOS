@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = Constants.tintColor
         UITabBar.appearance().tintColor = Constants.tintColor
         UITabBar.appearance().barTintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        UINavigationBar.appearance().opaque = true
+        UINavigationBar.appearance().translucent = false
+        UITabBar.appearance().opaque = true
+        UITabBar.appearance().translucent = false
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

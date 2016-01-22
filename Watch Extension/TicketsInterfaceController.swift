@@ -33,7 +33,7 @@ class TicketsInterfaceController: WKInterfaceController, TicketReceiverProtocol,
     @IBOutlet var table: WKInterfaceTable!
     
     override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        presentControllerWithName("ticket", context: tickets[rowIndex])
+        pushControllerWithName("ticket", context: tickets[rowIndex])
     }
     
     func reloadTable() {

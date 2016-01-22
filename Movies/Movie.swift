@@ -10,22 +10,6 @@ import Foundation
 import UIKit
 import Alamofire
 
-protocol MovieInfoDataSource {
-
-    // Protocol for the Object that will cache the Movies and Actors
-
-    func knownMovie(id: String) -> Movie?
-    func learnMovie(id:String, movie: Movie)
-    func knownPerson(id: String) -> Actor?
-    func learnPerson(id: String, actor: Actor)
-    func addToWatchList(id: Int)
-    func removeFromWatchList(id: Int)
-    func isMovieInWatchList(id: Int) -> Bool
-    func reArrangeWatchList(from: Int, to: Int)
-    func fetchTickets(requestingView: TicketReceiverProtocol)
-    
-}
-
 class Movie {
 
     var delegate: MovieInfoDataSource?
@@ -43,7 +27,24 @@ class Movie {
     var trailerID: String?
     var netflixLink: String?
     var detailImage: UIImage?
-
+    
+    var movieTimes = [String:[Showtime]]()
+    
+    func getTimesForDate(date: NSDate) -> [Showtime] {
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateFormat = "yyyy MM dd"
+        return movieTimes[dateformatter.stringFromDate(date)] ?? []
+    }
+    
+    func addTime(time: Showtime) {
+        let dateformatter = NSDateFormatter()
+        dateformatter.dateFormat = "yyyy MM dd"
+        if movieTimes[dateformatter.stringFromDate(time.time)] != nil {
+            movieTimes[dateformatter.stringFromDate(time.time)]?.append(time)
+        } else {
+            movieTimes[dateformatter.stringFromDate(time.time)] = [time]
+        }
+    }
 
     init(title: String, year: Int, rating: Double, description: String, id: String, posterURL: String, handler: MovieReceiverProtocol?, dataSource: MovieInfoDataSource?) {
 
@@ -60,16 +61,6 @@ class Movie {
 
         // Download Image on another queue
         
-//        let url = "https://image.tmdb.org/t/p/w300" + posterURL
-//        Alamofire.request(.GET, url).responseData() { (response) in
-//            if let data = response.result.value {
-//                if let imageFromData = UIImage(data: data) {
-//                    self.poster = imageFromData
-//                    handler?.imageDownloaded()
-//                    self.notifySubscribers()
-//                }
-//            }
-//        }
         if let url = NSURL(string: "https://image.tmdb.org/t/p/w300" + posterURL) {
             NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                 if let unwrappedData = data {

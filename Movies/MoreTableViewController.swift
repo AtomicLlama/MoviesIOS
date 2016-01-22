@@ -86,6 +86,15 @@ class MoreTableViewController: UITableViewController {
     
     @IBOutlet weak var languageCell: UITableViewCell!
     
+    override func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+        if section == 3 {
+            if let footer = view as? UITableViewHeaderFooterView, label = footer.textLabel {
+                label.textAlignment = .Center
+                footer.setNeedsDisplay()
+            }
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let languageController = segue.destinationViewController as? LanguagePreferenceSelector {
             languageController.user = user

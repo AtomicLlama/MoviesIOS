@@ -226,6 +226,9 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         if let personDetailViewController = segue.destinationViewController as? PersonViewController {
             personDetailViewController.delegate = self
         }
+        if let mvc = segue.destinationViewController as? MovieTimesDetailTableViewController {
+            mvc.movie = movieDataSource?.currentMovieForDetail()
+        }
     }
     
     func playerQualityChanged(videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {

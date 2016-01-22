@@ -10,6 +10,19 @@
 		0E01AE781BF7F1F1006AB17C /* LanguagePreferenceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E01AE771BF7F1F1006AB17C /* LanguagePreferenceSelector.swift */; };
 		0E01AE7A1BF7F208006AB17C /* DistancePreferenceSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E01AE791BF7F208006AB17C /* DistancePreferenceSelector.swift */; };
 		0E094D6B1BD3F989009994F0 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E094D6A1BD3F989009994F0 /* SearchTableViewController.swift */; };
+		0E0D164E1C3597ED00A09D7A /* LanguagePreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D164D1C3597ED00A09D7A /* LanguagePreferences.swift */; };
+		0E0D16501C3599AE00A09D7A /* MovieInfoDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D164F1C3599AE00A09D7A /* MovieInfoDatasource.swift */; };
+		0E0D16521C3599F200A09D7A /* ActorFetchDataReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D16511C3599F200A09D7A /* ActorFetchDataReceiver.swift */; };
+		0E0D16541C359A3A00A09D7A /* NullShowtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D16531C359A3A00A09D7A /* NullShowtime.swift */; };
+		0E0D16561C359A5200A09D7A /* MovieReceiverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D16551C359A5200A09D7A /* MovieReceiverProtocol.swift */; };
+		0E0D16581C359A6800A09D7A /* TicketReceiverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D16571C359A6800A09D7A /* TicketReceiverProtocol.swift */; };
+		0E0D165A1C359A7A00A09D7A /* WatchlistGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D16591C359A7A00A09D7A /* WatchlistGetter.swift */; };
+		0E0D165B1C359AE700A09D7A /* MovieInfoDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D164F1C3599AE00A09D7A /* MovieInfoDatasource.swift */; };
+		0E0D165C1C359AED00A09D7A /* ActorFetchDataReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D16511C3599F200A09D7A /* ActorFetchDataReceiver.swift */; };
+		0E0D165D1C359B0000A09D7A /* TicketReceiverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D16571C359A6800A09D7A /* TicketReceiverProtocol.swift */; };
+		0E0D165E1C359B0500A09D7A /* WatchlistGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D16591C359A7A00A09D7A /* WatchlistGetter.swift */; };
+		0E0D165F1C359B2E00A09D7A /* MovieReceiverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0D16551C359A5200A09D7A /* MovieReceiverProtocol.swift */; };
+		0E0D16621C359BAB00A09D7A /* Munich.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 0E0D16611C359BAB00A09D7A /* Munich.gpx */; };
 		0E17A5C11BF66CCC009E7316 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5BE1BF66CCC009E7316 /* FBSDKCoreKit.framework */; };
 		0E17A5C21BF66CCC009E7316 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5BF1BF66CCC009E7316 /* FBSDKLoginKit.framework */; };
 		0E17A5C31BF66CCC009E7316 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5C01BF66CCC009E7316 /* FBSDKShareKit.framework */; };
@@ -34,6 +47,9 @@
 		0E42DF811BF954C50082F543 /* TrailerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E42DF801BF954C50082F543 /* TrailerViewCell.swift */; };
 		0E4741241BFA3F50007FBC01 /* TicketRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4741231BFA3F50007FBC01 /* TicketRowController.swift */; };
 		0E4825C01C2DCBE900C756A5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E45801BF6977B00CF37C9 /* User.swift */; };
+		0E881D011C30FC4F0031A3FE /* Showtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E881D001C30FC4E0031A3FE /* Showtime.swift */; };
+		0E881D021C30FDF50031A3FE /* Showtime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E881D001C30FC4E0031A3FE /* Showtime.swift */; };
+		0E881D041C30FFD00031A3FE /* ShowtimesDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E881D031C30FFD00031A3FE /* ShowtimesDataFetcher.swift */; };
 		0E9682281BE15896004232B2 /* WatchListMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9682271BE15896004232B2 /* WatchListMovieCell.swift */; };
 		0E9F95FC1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F95FB1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift */; };
 		0E9F95FE1BCFEF530035CF98 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E9F95FD1BCFEF530035CF98 /* DescriptionTableViewCell.swift */; };
@@ -48,6 +64,8 @@
 		0EB50EC21BCFAA9C00616DFD /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB50EC11BCFAA9C00616DFD /* Movie.swift */; };
 		0EB50EC41BCFADD200616DFD /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB50EC31BCFADD200616DFD /* MovieTableViewCell.swift */; };
 		0EB50EC61BCFCEAA00616DFD /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB50EC51BCFCEAA00616DFD /* MovieDetailViewController.swift */; };
+		0ED4ECD81C31081100836951 /* MovieTimesDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED4ECD71C31081100836951 /* MovieTimesDetailTableViewController.swift */; };
+		0ED4ECDA1C31102F00836951 /* MovieTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ED4ECD91C31102F00836951 /* MovieTimeTableViewCell.swift */; };
 		0EECBFAA1BFA365200B7CA9A /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EECBFA81BFA365200B7CA9A /* Interface.storyboard */; };
 		0EECBFAC1BFA365200B7CA9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EECBFAB1BFA365200B7CA9A /* Assets.xcassets */; };
 		0EECBFB31BFA365200B7CA9A /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0EECBFB21BFA365200B7CA9A /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -131,6 +149,14 @@
 		0E01AE771BF7F1F1006AB17C /* LanguagePreferenceSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagePreferenceSelector.swift; sourceTree = "<group>"; };
 		0E01AE791BF7F208006AB17C /* DistancePreferenceSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistancePreferenceSelector.swift; sourceTree = "<group>"; };
 		0E094D6A1BD3F989009994F0 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		0E0D164D1C3597ED00A09D7A /* LanguagePreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagePreferences.swift; sourceTree = "<group>"; };
+		0E0D164F1C3599AE00A09D7A /* MovieInfoDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieInfoDatasource.swift; sourceTree = "<group>"; };
+		0E0D16511C3599F200A09D7A /* ActorFetchDataReceiver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorFetchDataReceiver.swift; sourceTree = "<group>"; };
+		0E0D16531C359A3A00A09D7A /* NullShowtime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullShowtime.swift; sourceTree = "<group>"; };
+		0E0D16551C359A5200A09D7A /* MovieReceiverProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieReceiverProtocol.swift; sourceTree = "<group>"; };
+		0E0D16571C359A6800A09D7A /* TicketReceiverProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketReceiverProtocol.swift; sourceTree = "<group>"; };
+		0E0D16591C359A7A00A09D7A /* WatchlistGetter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistGetter.swift; sourceTree = "<group>"; };
+		0E0D16611C359BAB00A09D7A /* Munich.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Munich.gpx; sourceTree = "<group>"; };
 		0E17A5BE1BF66CCC009E7316 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "FacebookSDKs-iOS-20151111/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
 		0E17A5BF1BF66CCC009E7316 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "FacebookSDKs-iOS-20151111/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		0E17A5C01BF66CCC009E7316 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-20151111/FBSDKShareKit.framework"; sourceTree = "<group>"; };
@@ -157,6 +183,8 @@
 		0E4146831BFA522F00112ED9 /* TicketDetailInterfaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TicketDetailInterfaceController.swift; path = ../Watch/TicketDetailInterfaceController.swift; sourceTree = "<group>"; };
 		0E42DF801BF954C50082F543 /* TrailerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailerViewCell.swift; sourceTree = "<group>"; };
 		0E4741231BFA3F50007FBC01 /* TicketRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketRowController.swift; sourceTree = "<group>"; };
+		0E881D001C30FC4E0031A3FE /* Showtime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Showtime.swift; path = ../Watch/Showtime.swift; sourceTree = "<group>"; };
+		0E881D031C30FFD00031A3FE /* ShowtimesDataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowtimesDataFetcher.swift; sourceTree = "<group>"; };
 		0E9682271BE15896004232B2 /* WatchListMovieCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchListMovieCell.swift; sourceTree = "<group>"; };
 		0E9F95FB1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewTitleTableCell.swift; sourceTree = "<group>"; };
 		0E9F95FD1BCFEF530035CF98 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
@@ -175,6 +203,8 @@
 		0EB50EC11BCFAA9C00616DFD /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		0EB50EC31BCFADD200616DFD /* MovieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		0EB50EC51BCFCEAA00616DFD /* MovieDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		0ED4ECD71C31081100836951 /* MovieTimesDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTimesDetailTableViewController.swift; sourceTree = "<group>"; };
+		0ED4ECD91C31102F00836951 /* MovieTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieTimeTableViewCell.swift; sourceTree = "<group>"; };
 		0EECBFA61BFA365200B7CA9A /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EECBFA91BFA365200B7CA9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		0EECBFAB1BFA365200B7CA9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -238,6 +268,15 @@
 				4B739AD0ABED6CC7BD5DD461 /* Pods_Watch_Extension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0E0D16601C359B7B00A09D7A /* Showtime View */ = {
+			isa = PBXGroup;
+			children = (
+				0ED4ECD91C31102F00836951 /* MovieTimeTableViewCell.swift */,
+				0ED4ECD71C31081100836951 /* MovieTimesDetailTableViewController.swift */,
+			);
+			name = "Showtime View";
 			sourceTree = "<group>";
 		};
 		0E20BE5B1BD2BBE700E87873 /* Person View */ = {
@@ -312,13 +351,22 @@
 			isa = PBXGroup;
 			children = (
 				0E1E45801BF6977B00CF37C9 /* User.swift */,
+				0E0D164D1C3597ED00A09D7A /* LanguagePreferences.swift */,
 				0E2BF5741BF7BE47003FD75F /* Ticket.swift */,
 				0E2BF57A1BF7C0BB003FD75F /* TicketEntity.swift */,
 				0E2BF57C1BF7C0DF003FD75F /* GroupTicket.swift */,
 				0E2BF5761BF7BE5E003FD75F /* Theatre.swift */,
 				0EB50EC11BCFAA9C00616DFD /* Movie.swift */,
+				0E0D164F1C3599AE00A09D7A /* MovieInfoDatasource.swift */,
 				0E40E9D91BD17BE10038F893 /* Actor.swift */,
+				0E0D16511C3599F200A09D7A /* ActorFetchDataReceiver.swift */,
+				0E0D16551C359A5200A09D7A /* MovieReceiverProtocol.swift */,
+				0E881D001C30FC4E0031A3FE /* Showtime.swift */,
+				0E0D16531C359A3A00A09D7A /* NullShowtime.swift */,
 				0E20BE601BD30F5A00E87873 /* MovieDataFetcher.swift */,
+				0E0D16591C359A7A00A09D7A /* WatchlistGetter.swift */,
+				0E0D16571C359A6800A09D7A /* TicketReceiverProtocol.swift */,
+				0E881D031C30FFD00031A3FE /* ShowtimesDataFetcher.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -326,6 +374,7 @@
 		0E40E9D81BD17BA40038F893 /* Assisting Files And App Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				0E0D16611C359BAB00A09D7A /* Munich.gpx */,
 				0EFCF2831C2051510058C940 /* Contants.swift */,
 				0EB50EA11BCFAA7A00616DFD /* AppDelegate.swift */,
 				0EB50EAA1BCFAA7A00616DFD /* LaunchScreen.storyboard */,
@@ -370,6 +419,7 @@
 				0E30F2D51BD6E4C2001EA2D0 /* Search */,
 				0E40E9D51BD17B4C0038F893 /* Movie Detail View */,
 				0E20BE5B1BD2BBE700E87873 /* Person View */,
+				0E0D16601C359B7B00A09D7A /* Showtime View */,
 				0E30F2D81BD6E4EA001EA2D0 /* Watch List */,
 				0E2BF57E1BF7C686003FD75F /* Tickets List View */,
 				0E2BF5731BF7678D003FD75F /* MoreTab */,
@@ -596,6 +646,7 @@
 				0EB50EAC1BCFAA7A00616DFD /* LaunchScreen.storyboard in Resources */,
 				0EB50EA91BCFAA7A00616DFD /* Assets.xcassets in Resources */,
 				0EB50EA71BCFAA7A00616DFD /* Main.storyboard in Resources */,
+				0E0D16621C359BAB00A09D7A /* Munich.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,25 +787,36 @@
 				0E3DBC961BF540DF0045FE05 /* MoviesTabBarController.swift in Sources */,
 				0E2BF57B1BF7C0BB003FD75F /* TicketEntity.swift in Sources */,
 				0E01AE7A1BF7F208006AB17C /* DistancePreferenceSelector.swift in Sources */,
+				0ED4ECDA1C31102F00836951 /* MovieTimeTableViewCell.swift in Sources */,
 				0EB50EA21BCFAA7A00616DFD /* AppDelegate.swift in Sources */,
 				0E30F2D71BD6E4E1001EA2D0 /* WatchListTableViewController.swift in Sources */,
 				0E2BF5751BF7BE47003FD75F /* Ticket.swift in Sources */,
 				0E20BE5D1BD2BEFD00E87873 /* HeadShotTableViewCell.swift in Sources */,
+				0E0D16581C359A6800A09D7A /* TicketReceiverProtocol.swift in Sources */,
+				0E0D164E1C3597ED00A09D7A /* LanguagePreferences.swift in Sources */,
+				0E0D16521C3599F200A09D7A /* ActorFetchDataReceiver.swift in Sources */,
 				0EB50EC41BCFADD200616DFD /* MovieTableViewCell.swift in Sources */,
 				0EB4F8D91BF75626009BD030 /* MoreTableViewController.swift in Sources */,
 				0EFCF2841C2051510058C940 /* Contants.swift in Sources */,
+				0ED4ECD81C31081100836951 /* MovieTimesDetailTableViewController.swift in Sources */,
 				0E2BF57D1BF7C0DF003FD75F /* GroupTicket.swift in Sources */,
 				0EB50EC21BCFAA9C00616DFD /* Movie.swift in Sources */,
 				0E20BE5A1BD2BBD700E87873 /* PersonViewController.swift in Sources */,
 				0E9F95FE1BCFEF530035CF98 /* DescriptionTableViewCell.swift in Sources */,
 				0E9682281BE15896004232B2 /* WatchListMovieCell.swift in Sources */,
+				0E881D011C30FC4F0031A3FE /* Showtime.swift in Sources */,
 				0E40E9DA1BD17BE10038F893 /* Actor.swift in Sources */,
 				0E9F95FC1BCFE49C0035CF98 /* DetailViewTitleTableCell.swift in Sources */,
 				0E2BF5771BF7BE5E003FD75F /* Theatre.swift in Sources */,
+				0E0D165A1C359A7A00A09D7A /* WatchlistGetter.swift in Sources */,
 				0E2BF5801BF7C6D3003FD75F /* TicketTableViewCell.swift in Sources */,
 				0E3DBC921BF53D080045FE05 /* DoneView.swift in Sources */,
 				0E42DF811BF954C50082F543 /* TrailerViewCell.swift in Sources */,
+				0E881D041C30FFD00031A3FE /* ShowtimesDataFetcher.swift in Sources */,
+				0E0D16541C359A3A00A09D7A /* NullShowtime.swift in Sources */,
 				0E40E9D41BD1700E0038F893 /* ActorTableViewCell.swift in Sources */,
+				0E0D16561C359A5200A09D7A /* MovieReceiverProtocol.swift in Sources */,
+				0E0D16501C3599AE00A09D7A /* MovieInfoDatasource.swift in Sources */,
 				0E4825C01C2DCBE900C756A5 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -771,10 +833,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E881D021C30FDF50031A3FE /* Showtime.swift in Sources */,
+				0E0D165B1C359AE700A09D7A /* MovieInfoDatasource.swift in Sources */,
+				0E0D165D1C359B0000A09D7A /* TicketReceiverProtocol.swift in Sources */,
 				0EECBFD41BFA36F700B7CA9A /* MovieDataFetcher.swift in Sources */,
 				0EECBFCF1BFA36F700B7CA9A /* TicketEntity.swift in Sources */,
+				0E0D165E1C359B0500A09D7A /* WatchlistGetter.swift in Sources */,
 				0EECBFD21BFA36F700B7CA9A /* Movie.swift in Sources */,
+				0E0D165C1C359AED00A09D7A /* ActorFetchDataReceiver.swift in Sources */,
 				0EECBFBE1BFA365200B7CA9A /* NotificationController.swift in Sources */,
+				0E0D165F1C359B2E00A09D7A /* MovieReceiverProtocol.swift in Sources */,
 				0EECBFD01BFA36F700B7CA9A /* GroupTicket.swift in Sources */,
 				0EECBFCE1BFA36F700B7CA9A /* Ticket.swift in Sources */,
 				0EECBFD11BFA36F700B7CA9A /* Theatre.swift in Sources */,

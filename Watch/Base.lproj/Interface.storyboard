@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9515"/>
     </dependencies>
     <scenes>
         <!--Tickets Interface Controller-->
@@ -17,10 +17,10 @@
                         <table alignment="left" id="KHZ-5d-1Ay">
                             <items>
                                 <tableRow identifier="ticket" id="VuD-fA-fEA" customClass="TicketRowController" customModule="Watch_Extension">
-                                    <group key="rootItem" width="1" height="68.5" alignment="left" id="1uM-Yv-Eu4">
+                                    <group key="rootItem" width="1" height="68.5" alignment="left" radius="6" id="1uM-Yv-Eu4">
                                         <items>
                                             <imageView width="46" height="1" alignment="left" image="pulp" id="HBN-3K-IOp"/>
-                                            <group width="77" height="90.5" alignment="left" layout="vertical" id="3DL-Ox-wu5">
+                                            <group width="81" height="90.5" alignment="left" layout="vertical" id="3DL-Ox-wu5">
                                                 <items>
                                                     <label alignment="left" text="Pulp Fiction" id="Tt3-3Q-gO6"/>
                                                     <label alignment="left" text="Cinema München" id="YhG-xA-Fma">
@@ -33,6 +33,8 @@
                                                 <variation key="device=watch42mm" width="98"/>
                                             </group>
                                         </items>
+                                        <color key="backgroundColor" red="0.81960784310000001" green="0.43921568630000002" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
                                         <outlet property="imageView" destination="HBN-3K-IOp" id="LzF-Mk-V9U"/>
@@ -62,7 +64,7 @@
                         <group width="1" height="73" alignment="left" id="FZN-9z-d1l">
                             <items>
                                 <imageView width="53" height="1" alignment="left" image="pulp" id="JTH-nu-Ocj"/>
-                                <group width="72" height="1" alignment="left" layout="vertical" id="blU-0i-PN3">
+                                <group width="78" height="1" alignment="left" layout="vertical" id="blU-0i-PN3">
                                     <items>
                                         <label alignment="left" text="1994" id="7WT-v9-h3B"/>
                                         <label alignment="left" text="9.0" id="jbm-Rx-LHE"/>
