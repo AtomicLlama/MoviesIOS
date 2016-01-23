@@ -19,6 +19,7 @@ class User: WatchListGetter {
     var name: String
     var image: UIImage?
     var id: String
+    var friends = [Person]()
     
     init(load: Bool) {
         name = ""
@@ -140,6 +141,41 @@ class User: WatchListGetter {
             }
             
         }
+    }
+    
+    func getFriends(handler: ([Person] -> ())) {
+        if friends.isEmpty {
+            let request = FBSDKGraphRequest(graphPath: "me/friends", parameters: ["fields":"name,picture.height(150)"])
+            request.startWithCompletionHandler() { (_,result,error) -> Void in
+                if error == nil {
+                    if let dictionary = result as? NSDictionary, friends = dictionary["data"] as? [AnyObject] {
+                        for friend in friends {
+                            if let data = friend as? [String:AnyObject], id = data["id"] as? String, name = data["name"] as? String, picture = data["picture"] as? [String:AnyObject], picturedata = picture["data"], url = picturedata["url"] as? String {
+                                dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue),0)) {
+                                    if let urlObject = NSURL(string: url), downloadedData = NSData(contentsOfURL: urlObject), downloadedImage = UIImage(data: downloadedData) {
+                                        let newFriend = Person(name: name, id: id, image: downloadedImage)
+                                        self.friends.append(newFriend)
+                                        self.friends.sortInPlace() { (first,second) in
+                                            return first.name < second.name
+                                        }
+                                        handler(self.friends)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    print("Error!!")
+                    print(error)
+                }
+            }
+        } else {
+            handler(friends)
+        }
+    }
+    
+    func toPerson() -> Person {
+        return Person(name: self.name, id: self.id, image: self.image)
     }
     
 }

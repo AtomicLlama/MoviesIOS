@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Movies/Alamofire.framework"
+  install_framework "Pods-Movies/GMStepper.framework"
   install_framework "Pods-Movies/JFMinimalNotifications.framework"
   install_framework "Pods-Movies/KNSemiModalViewController_hons82.framework"
   install_framework "Pods-Movies/MCSwipeTableViewCell.framework"
@@ -94,6 +95,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Movies/Alamofire.framework"
+  install_framework "Pods-Movies/GMStepper.framework"
   install_framework "Pods-Movies/JFMinimalNotifications.framework"
   install_framework "Pods-Movies/KNSemiModalViewController_hons82.framework"
   install_framework "Pods-Movies/MCSwipeTableViewCell.framework"

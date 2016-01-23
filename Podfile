@@ -12,6 +12,7 @@ target "Movies" do
 	pod 'YouTubePlayer'
 	pod 'MCSwipeTableViewCell', '~> 2.1.4'
 	pod 'THCalendarDatePicker', '~> 1.2.5'
+	pod "GMStepper"
 end
 
 target "Watch Extension" do
