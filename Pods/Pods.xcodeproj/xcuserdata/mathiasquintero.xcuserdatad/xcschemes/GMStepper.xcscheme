@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3DCA9BE24D79F2F00CAB59D2'
+               BlueprintIdentifier = '9046B9704587D619F32DD9B0'
                BlueprintName = 'GMStepper'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'GMStepper.framework'>

@@ -54,10 +54,10 @@ public class PZPullToRefreshView: UIView {
                 statusLabel?.text = "Pull down to refresh"
                 activityView?.stopAnimating()
                 refreshLastUpdatedDate()
-                rotateArrowImage(angle: 0)
+                rotateArrowImage(0)
             case .Pulling:
                 statusLabel?.text = "Release to refresh"
-                rotateArrowImage(angle: CGFloat(M_PI))
+                rotateArrowImage(CGFloat(M_PI))
             case .Loading:
                 statusLabel?.text = "Loading..."
                 activityView?.startAnimating()
@@ -70,7 +70,7 @@ public class PZPullToRefreshView: UIView {
         }
     }
     
-    public func rotateArrowImage(angle angle: CGFloat) {
+    public func rotateArrowImage(angle: CGFloat) {
         CATransaction.begin()
         CATransaction.setAnimationDuration(flipAnimatioDutation)
         arrowImage?.transform = CATransform3DMakeRotation(angle, 0.0, 0.0, 1.0)

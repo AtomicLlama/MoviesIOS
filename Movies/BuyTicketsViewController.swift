@@ -13,6 +13,7 @@ class BuyTicketsViewController: UIViewController, UITableViewDataSource, UITable
     @IBAction func returnToBuyTicketsView(segue:UIStoryboardSegue) {
         if let mvc = segue.sourceViewController as? FriendListTableViewController, friend = mvc.selectedFriend {
             people.append(friend)
+            stepper?.stepper.minimumValue = Double(people.count)
             tableView.reloadData()
         }
     }
@@ -38,6 +39,7 @@ class BuyTicketsViewController: UIViewController, UITableViewDataSource, UITable
         tableView.dataSource = self
         tableView.backgroundColor = Constants.tintColor
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.sectionOpen = 0
         if let mvc = tabBarController as? MoviesTabBarController, let user = mvc.currentUser {
             people.append(user.toPerson())
         }
@@ -116,7 +118,12 @@ class BuyTicketsViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let handler = { (action: UITableViewRowAction, indexPath: NSIndexPath) in
             self.people.removeAtIndex(indexPath.row)
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            if Int(self.tickets) == self.people.count+1 {
+                tableView.reloadData()
+            } else {
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            }
+            self.stepper?.stepper.minimumValue = Double(self.people.count)
         }
         let action = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Remove", handler: handler)
         return [action]
