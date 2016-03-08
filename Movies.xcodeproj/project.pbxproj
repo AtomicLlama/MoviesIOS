@@ -27,6 +27,7 @@
 		0E17A5C21BF66CCC009E7316 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5BF1BF66CCC009E7316 /* FBSDKLoginKit.framework */; };
 		0E17A5C31BF66CCC009E7316 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E17A5C01BF66CCC009E7316 /* FBSDKShareKit.framework */; };
 		0E17A5C51BF66F1A009E7316 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E17A5C41BF66F1A009E7316 /* LoginViewController.swift */; };
+		0E1E697A1C8E87CC004BD3E5 /* FollowingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E69791C8E87CC004BD3E5 /* FollowingTableViewController.swift */; };
 		0E20BE5A1BD2BBD700E87873 /* PersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20BE591BD2BBD700E87873 /* PersonViewController.swift */; };
 		0E20BE5D1BD2BEFD00E87873 /* HeadShotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20BE5C1BD2BEFD00E87873 /* HeadShotTableViewCell.swift */; };
 		0E20BE5F1BD2BF2500E87873 /* ClearMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E20BE5E1BD2BF2500E87873 /* ClearMovieTableViewCell.swift */; };
@@ -169,6 +170,7 @@
 		0E17A5C01BF66CCC009E7316 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "FacebookSDKs-iOS-20151111/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		0E17A5C41BF66F1A009E7316 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		0E1E45801BF6977B00CF37C9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0E1E69791C8E87CC004BD3E5 /* FollowingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingTableViewController.swift; sourceTree = "<group>"; };
 		0E20BE591BD2BBD700E87873 /* PersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonViewController.swift; sourceTree = "<group>"; };
 		0E20BE5C1BD2BEFD00E87873 /* HeadShotTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadShotTableViewCell.swift; sourceTree = "<group>"; };
 		0E20BE5E1BD2BF2500E87873 /* ClearMovieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearMovieTableViewCell.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				0EB50EA51BCFAA7A00616DFD /* Main.storyboard */,
+				0E1E69791C8E87CC004BD3E5 /* FollowingTableViewController.swift */,
 				0E20BE631BD32E6B00E87873 /* Movies-Bridging-Header.h */,
 				0EDF3EF71BF56EF5003A31B2 /* TabBar */,
 				0E40E9D71BD17B8B0038F893 /* Models */,
@@ -836,6 +839,7 @@
 				0E0D16581C359A6800A09D7A /* TicketReceiverProtocol.swift in Sources */,
 				0EF659C81C539D1600B3E446 /* StepperTableViewCell.swift in Sources */,
 				0E0D164E1C3597ED00A09D7A /* LanguagePreferences.swift in Sources */,
+				0E1E697A1C8E87CC004BD3E5 /* FollowingTableViewController.swift in Sources */,
 				0E0D16521C3599F200A09D7A /* ActorFetchDataReceiver.swift in Sources */,
 				0EB50EC41BCFADD200616DFD /* MovieTableViewCell.swift in Sources */,
 				0EB4F8D91BF75626009BD030 /* MoreTableViewController.swift in Sources */,

@@ -6,7 +6,7 @@ use_frameworks!
 
 target "Movies" do
 	xcodeproj 'Movies.xcodeproj'
-	pod 'Alamofire', '~> 3.0'
+	pod 'Alamofire'
 	pod 'PZPullToRefresh'
 	pod 'JFMinimalNotifications', '~> 0.0.4'
 	pod 'YouTubePlayer'
@@ -18,5 +18,5 @@ end
 target "Watch Extension" do
 	platform :watchos, '2.0'
 	xcodeproj 'Movies.xcodeproj'
-	pod 'Alamofire', '~> 3.0'
+	pod 'Alamofire'
 end

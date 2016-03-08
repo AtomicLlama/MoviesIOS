@@ -16,6 +16,17 @@ protocol PersonBioDataSource {
 
 class PersonViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MovieDetailDataSource, ActorFetchDataReceiver, MovieReceiverProtocol {
     
+    var likeButton: UIBarButtonItem?
+    
+    func likePerson(send: AnyObject?) {
+        if delegate?.currentPerson().toggleActorInSubscriptions() ?? false {
+            likeButton?.image = UIImage(named: "Like Filled-25")
+            DoneHUD.showInView(self.view, message: "Following " + (delegate?.currentPerson().name ?? ""))
+        } else {
+            likeButton?.image = UIImage(named: "heart-7")
+        }
+    }
+    
     var loadingForFirstTime = true
     
     var cageNotification: JFMinimalNotification?
@@ -146,6 +157,14 @@ class PersonViewController: UIViewController, UITableViewDataSource, UITableView
         if let moviePoster = delegate?.picture() {
             backgroundMovieView.image = moviePoster
         }
+        likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("likePerson:"))
+        navigationItem.rightBarButtonItem = likeButton
+        if let actorUnwrapped = delegate?.currentPerson() {
+            if actorUnwrapped.isActorInSubscriptions() {
+                likeButton?.image = UIImage(named: "Like Filled-25")
+            }
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {

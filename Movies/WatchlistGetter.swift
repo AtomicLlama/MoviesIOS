@@ -11,4 +11,7 @@ protocol WatchListGetter {
     func getWatchList(handler: ([Int]) -> ())
     func addToWatchList(movieID: Int)
     func removeFromWatchList(movieID: Int)
+    func getSubscriptions(handler: ([Int]) -> ())
+    func addSubscription(movieID: Int)
+    func removeSubscription(movieID: Int)
 }

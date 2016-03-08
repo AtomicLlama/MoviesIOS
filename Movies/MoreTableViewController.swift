@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKLoginKit
 
-class MoreTableViewController: UITableViewController {
+class MoreTableViewController: UITableViewController, ActorReceiverProtocol {
     
     var user: User? {
         didSet {
@@ -17,7 +17,20 @@ class MoreTableViewController: UITableViewController {
         }
     }
     
+    func receiveActors(actors: [Actor]) {
+        if actors.count == 1 {
+            followingLabel.text = "1 Person"
+        } else {
+            followingLabel.text = actors.count.description + " People"
+        }
+    }
+    
+    @IBOutlet weak var followingLabel: UILabel!
+    
     func loadSettings() {
+        if let mvc = tabBarController as? MoviesTabBarController {
+            mvc.dataFetcher.getActorsFromSubscriptions(self)
+        }
         if let preference = user?.languagePreference.rawValue {
             languageCell.detailTextLabel?.text = preference
         }
@@ -61,7 +74,7 @@ class MoreTableViewController: UITableViewController {
     @IBOutlet weak var userTableViewCell: UserTableViewCell!
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 3 {
+        if indexPath.section == 4 {
             FBSDKLoginManager().logOut()
             if let mvc = tabBarController as? MoviesTabBarController {
                 mvc.showLoginScreen()
@@ -87,7 +100,7 @@ class MoreTableViewController: UITableViewController {
     @IBOutlet weak var languageCell: UITableViewCell!
     
     override func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        if section == 3 {
+        if section == 4 {
             if let footer = view as? UITableViewHeaderFooterView, label = footer.textLabel {
                 label.textAlignment = .Center
                 footer.setNeedsDisplay()

@@ -89,6 +89,23 @@ class Actor {
             }
         }
     }
+    
+    func isActorInSubscriptions() -> Bool {
+        return delegate?.isActorInSubscriptions(Int(id) ?? -1) ?? false
+    }
+    
+    func toggleActorInSubscriptions() -> Bool {
+        if let itemID = Int(id) {
+            if (isActorInSubscriptions()) {
+                delegate?.removeFromSubscriptions(itemID)
+                return false
+            } else {
+                delegate?.addToSubscriptions(itemID)
+                return true
+            }
+        }
+        return false
+    }
 
     
     init(name: String, pic: String?, id: String, delegate: MovieInfoDataSource?) {

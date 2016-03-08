@@ -18,7 +18,10 @@ protocol MovieInfoDataSource {
     func learnPerson(id: String, actor: Actor)
     func addToWatchList(id: Int)
     func removeFromWatchList(id: Int)
+    func addToSubscriptions(id: Int)
+    func removeFromSubscriptions(id: Int)
     func isMovieInWatchList(id: Int) -> Bool
+    func isActorInSubscriptions(id: Int) -> Bool
     func reArrangeWatchList(from: Int, to: Int)
     func fetchTickets(requestingView: TicketReceiverProtocol)
     

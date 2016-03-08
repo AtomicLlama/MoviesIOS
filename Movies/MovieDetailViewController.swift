@@ -38,7 +38,6 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         } else {
             likeButton?.image = UIImage(named: "heart-7")
         }
-        
     }
     
     func imageDownloaded() {

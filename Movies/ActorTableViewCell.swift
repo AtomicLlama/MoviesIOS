@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MCSwipeTableViewCell
 
-class ActorTableViewCell: UITableViewCell {
+class ActorTableViewCell: MCSwipeTableViewCell {
     
     // MARK: Data
     
