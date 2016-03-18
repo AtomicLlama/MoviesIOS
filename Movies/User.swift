@@ -55,7 +55,7 @@ class User: WatchListGetter {
     var notifyWatchlist = true {
         didSet {
             if let url = ("https://moviesbackend.herokuapp.com/notifyWatch?pref=" + (notifyWatchlist ? "1" : "0")).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
-                Alamofire.request(.PUT, url).authenticate(user: id, password: id)
+                Alamofire.request(.PUT, url).authenticate(user: id, password: token)
             }
         }
     }
@@ -63,7 +63,7 @@ class User: WatchListGetter {
     var notifyArtist = true {
         didSet {
             if let url = ("https://moviesbackend.herokuapp.com/notifySub?pref=" + (notifyArtist ? "1" : "0")).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
-                Alamofire.request(.PUT, url).authenticate(user: id, password: id)
+                Alamofire.request(.PUT, url).authenticate(user: id, password: token)
             }
         }
     }
@@ -71,7 +71,7 @@ class User: WatchListGetter {
     var languagePreference: LanguagePreference {
         didSet {
             if let url = ("https://moviesbackend.herokuapp.com/language?pref=" + languagePreference.rawValue).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
-                Alamofire.request(.PUT, url).authenticate(user: id, password: id)
+                Alamofire.request(.PUT, url).authenticate(user: id, password: token)
             }
         }
     }
@@ -79,14 +79,14 @@ class User: WatchListGetter {
     var distanceRange: Int {
         didSet {
             if let url = ("https://moviesbackend.herokuapp.com/distance?userid=" + id + "&pref=" + distanceRange.description).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
-                Alamofire.request(.PUT, url).authenticate(user: id, password: id)
+                Alamofire.request(.PUT, url).authenticate(user: id, password: token)
             }
         }
     }
     
     func getSubscriptions(handler: ([Int]) -> ()) {
         let url = "https://moviesbackend.herokuapp.com/subs"
-        Alamofire.request(.GET, url).authenticate(user: id, password: id).responseJSON() { (response) in
+        Alamofire.request(.GET, url).authenticate(user: id, password: token).responseJSON() { (response) in
             var people = [Int]()
             if let body = response.result.value as? [AnyObject] {
                 for item in body {
@@ -101,19 +101,19 @@ class User: WatchListGetter {
     
     func addSubscription(personID: Int) {
         if let url = ("https://moviesbackend.herokuapp.com/subs?person=" + personID.description).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
-            Alamofire.request(.POST, url).authenticate(user: id, password: id)
+            Alamofire.request(.POST, url).authenticate(user: id, password: token)
         }
     }
     
     func removeSubscription(personID: Int) {
         if let url = ("https://moviesbackend.herokuapp.com/subs?person=" + personID.description).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
-            Alamofire.request(.DELETE, url).authenticate(user: id, password: id)
+            Alamofire.request(.DELETE, url).authenticate(user: id, password: token)
         }
     }
     
     func getWatchList(handler: ([Int]) -> ()) {
         let url = "https://moviesbackend.herokuapp.com/watchlist"
-        Alamofire.request(.GET, url).authenticate(user: id, password: id).responseJSON() { (response) in
+        Alamofire.request(.GET, url).authenticate(user: id, password: token).responseJSON() { (response) in
             var movies = [Int]()
             if let body = response.result.value as? [AnyObject] {
                 for item in body {
@@ -128,19 +128,19 @@ class User: WatchListGetter {
     
     func addToWatchList(movieID: Int) {
         if let url = ("https://moviesbackend.herokuapp.com/watchlist?movie=" + movieID.description).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
-            Alamofire.request(.POST, url).authenticate(user: id, password: id)
+            Alamofire.request(.POST, url).authenticate(user: id, password: token)
         }
     }
     
     func removeFromWatchList(movieID: Int) {
         if let url = ("https://moviesbackend.herokuapp.com/watchlist?movie=" + movieID.description).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
-            Alamofire.request(.DELETE, url).authenticate(user: id, password: id)
+            Alamofire.request(.DELETE, url).authenticate(user: id, password: token)
         }
     }
     
     func getPreferences() {
         let url = "https://moviesbackend.herokuapp.com/user"
-        Alamofire.request(.GET, url).authenticate(user: id, password: id).responseJSON() { (response) in
+        Alamofire.request(.GET, url).authenticate(user: id, password: token).responseJSON() { (response) in
             if let body = response.result.value as? [String:AnyObject], dist = body["maxDistanceForCinema"] as? String, pref = body["preferredLanguageSetting"] as? String, watchlistNot = body["notifyOnWatchList"] as? Bool, artistNot = body["notifyOnSubscription"] as? Bool {
                 self.languagePreference = LanguagePreference.getPref(pref)
                 self.distanceRange = Int(dist) ?? 10

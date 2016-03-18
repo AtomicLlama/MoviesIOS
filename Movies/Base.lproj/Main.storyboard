@@ -1919,7 +1919,7 @@
         <image name="ticket-filled" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Yff-Bd-mcC"/>
         <segue reference="E7m-O0-mSL"/>
+        <segue reference="3Rd-Zm-mc4"/>
     </inferredMetricsTieBreakers>
 </document>

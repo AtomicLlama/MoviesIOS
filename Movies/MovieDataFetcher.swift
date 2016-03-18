@@ -27,7 +27,7 @@ class MovieDataFetcher: MovieInfoDataSource {
     
     var subscriptionsSubscriber: ActorReceiverProtocol?
     
-    let newMoviesURLString = "https://api.themoviedb.org/3/movie/now_playing?api_key=18ec732ece653360e23d5835670c47a0"
+    let newMoviesURLString = "https://moviesbackend.herokuapp.com/featured"
     
     var knownActors = [String:Actor]()
     
@@ -61,7 +61,7 @@ class MovieDataFetcher: MovieInfoDataSource {
                 
                 //Fetch Todays Movies and get the array of results on body.results
                 
-                if let now = response.result.value as? [String:AnyObject], moviesAsJSON = now["results"] as? [AnyObject] {
+                if let moviesAsJSON = response.result.value as? [AnyObject] {
                     
                     //Iterate through the array
                     
