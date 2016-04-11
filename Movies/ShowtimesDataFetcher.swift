@@ -19,6 +19,8 @@ class ShowtimesDataFetcher:NSObject, CLLocationManagerDelegate {
     
     var handler: (() -> ())?
     
+    var user: User?
+    
     var date = NSDate() {
         didSet {
             request = nil
@@ -42,11 +44,9 @@ class ShowtimesDataFetcher:NSObject, CLLocationManagerDelegate {
         let location = ShowtimesDataFetcher.locationManager.location
         if let locationUnwrapped = location, unwrappedMovie = movie {
             let baseURL = "http://moviesbackend.herokuapp.com/showtimes?movie=" + unwrappedMovie.id
-            if let url = (baseURL + "&lon=" + locationUnwrapped.coordinate.longitude.description + "&lat=" + locationUnwrapped.coordinate.latitude.description + (getDaysFromNow() < 1 ? "" : "&date=" + getDaysFromNow().description)).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet())  {
-                print(url)
+            if let url = (baseURL + "&lon=" + locationUnwrapped.coordinate.longitude.description + "&lat=" + locationUnwrapped.coordinate.latitude.description + (getDaysFromNow() < 1 ? "" : "&date=" + getDaysFromNow().description)).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()), id = user?.id, token = user?.token  {
                 if request == nil {
-                    request = Alamofire.request(.GET, url).responseJSON() { (response) in
-                        print(response.result.error)
+                    request = Alamofire.request(.GET, url).authenticate(user: id, password: token).responseJSON() { (response) in
                         if let times = response.result.value as? [AnyObject] {
                             let dateformatter = NSDateFormatter()
                             dateformatter.dateFormat = "yyyy MM dd "
@@ -92,7 +92,7 @@ class ShowtimesDataFetcher:NSObject, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if let m = movie, h = handler {
-            fetchMovieTimes(m, handler: h, date: date)
+            fetchMovieTimes(m, handler: h, date: date, user: user)
         }
     }
     
@@ -102,11 +102,12 @@ class ShowtimesDataFetcher:NSObject, CLLocationManagerDelegate {
         manager.startUpdatingLocation()
     }
     
-    func fetchMovieTimes(movie: Movie, handler: () -> (), date: NSDate) {
+    func fetchMovieTimes(movie: Movie, handler: () -> (), date: NSDate, user: User?) {
         ShowtimesDataFetcher.locationManager.delegate = self
         self.movie = movie
         self.handler = handler
         self.date = date
+        self.user = user
         if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
             ShowtimesDataFetcher.locationManager.requestWhenInUseAuthorization()
         } else if CLLocationManager.authorizationStatus() != CLAuthorizationStatus.Denied && CLLocationManager.authorizationStatus() != CLAuthorizationStatus.NotDetermined {

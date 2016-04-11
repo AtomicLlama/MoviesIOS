@@ -32,7 +32,7 @@ class MovieTableViewCell: MCSwipeTableViewCell {
         didSet{
             let effect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
             let effectView = UIVisualEffectView(effect: effect)
-            effectView.alpha = 0.7
+            effectView.alpha = 0.8
             effectView.frame = posterImageView.bounds
             posterImageView.addSubview(effectView)
             posterImageView.clipsToBounds = true

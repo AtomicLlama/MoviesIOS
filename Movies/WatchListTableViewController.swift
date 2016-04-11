@@ -53,7 +53,7 @@ class WatchListTableViewController: UITableViewController, MovieReceiverProtocol
                 randomMovie = tuple.1
                 break;
             }
-            i++
+            i += 1
         }
         tableView.reloadData()
     }

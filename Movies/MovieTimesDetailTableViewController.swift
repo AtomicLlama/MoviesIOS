@@ -116,10 +116,10 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
     }
     
     func loadForDate() {
-        if let unwrappedMovie = movie {
+        if let unwrappedMovie = movie, mvc = self.tabBarController as? MoviesTabBarController, user = mvc.currentUser {
             if unwrappedMovie.getTimesForDate(currentDate).isEmpty {
                 spinner.startAnimating()
-                fetcher.fetchMovieTimes(unwrappedMovie, handler: self.reload, date: currentDate)
+                fetcher.fetchMovieTimes(unwrappedMovie, handler: self.reload, date: currentDate, user: user)
             } else {
                 reload()
             }

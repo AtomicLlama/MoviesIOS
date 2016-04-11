@@ -36,6 +36,7 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
@@ -86,9 +87,6 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        //Reuse already cached Cell from tableView or instanciate new Cell if nil and give value
-        
         let dequeuedCell = tableView.dequeueReusableCellWithIdentifier("movie") as? MovieTableViewCell ?? MovieTableViewCell()
         dequeuedCell.movie = movies[indexPath.row]
         var writeSwipes = { () in return }
