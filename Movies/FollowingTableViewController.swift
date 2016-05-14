@@ -34,6 +34,8 @@ class FollowingTableViewController: UITableViewController,ActorReceiverProtocol,
         super.viewDidLoad()
         tableView.backgroundColor = Constants.tintColor
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableViewAutomaticDimension
         if let mvc = tabBarController as? MoviesTabBarController {
             delegate = mvc.dataFetcher
         }
@@ -63,13 +65,13 @@ class FollowingTableViewController: UITableViewController,ActorReceiverProtocol,
             let cell = tableView.dequeueReusableCellWithIdentifier("not") ?? UITableViewCell()
             return cell
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("actor") as? ActorTableViewCell ?? ActorTableViewCell()
+        let cell = tableView.dequeueReusableCellWithIdentifier("actor") as? ActorFollowingTableViewCell ?? ActorFollowingTableViewCell()
         let actor = subs[indexPath.row]
-        cell.actor = (actor,actor.bio)
+        cell.actor = actor
         let handler = { () -> () in
             if let path = self.tableView.indexPathForCell(cell) {
                 self.subs.removeAtIndex(path.row)
-                cell.actor?.0.toggleActorInSubscriptions()
+                cell.actor?.toggleActorInSubscriptions()
                 if !self.subs.isEmpty {
                     self.tableView.deleteRowsAtIndexPaths([path], withRowAnimation: UITableViewRowAnimation.Top)
                 } else {

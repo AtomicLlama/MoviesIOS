@@ -28,7 +28,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>de.tum.in.www1.ios15.Movies</string>
+	<string>io.AtomicLlama.Movies</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>

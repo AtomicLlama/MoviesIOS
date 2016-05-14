@@ -61,7 +61,7 @@ class Movie {
 
         // Download Image on another queue
         
-        if let url = NSURL(string: "https://image.tmdb.org/t/p/w300" + posterURL) {
+        if let url = NSURL(string: "https://image.tmdb.org/t/p/w150" + posterURL) {
             NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {(data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                 if let unwrappedData = data {
                     if let image = UIImage(data: unwrappedData) {
@@ -70,7 +70,6 @@ class Movie {
                             handler?.imageDownloaded()
                             self.notifySubscribers()
                         }
-                        self.fetchActors()
                     } else {
                         print("could not load data from image URL: \(url)")
                     }
@@ -161,7 +160,12 @@ class Movie {
         }
     }
 
-    func fetchActors() {
+    func fetchActors(receiver: MovieActorsReceiver, all: Bool) {
+        
+        if !actors.isEmpty && !all {
+            receiver.actorsFetched()
+            return
+        }
 
         // Makes a request for all the Actors in the movie  and picks the 5 most important
 
@@ -180,8 +184,10 @@ class Movie {
                 if (cast.count != 0) {
 
                     // Only read the first 5
+                    
+                    let lastIndex = all ? cast.count-1 : (min(max(cast.count-1,0), 4))
 
-                    for actor in cast[0...(min(max(cast.count-1,0), 4))] {
+                    for actor in cast[0...lastIndex] {
 
                         // Get the actor as a dictionary to read the properties of the SubObject
 
@@ -246,7 +252,7 @@ class Movie {
 
                 if let data = response.result.value as? [String:AnyObject], status = data["status"] as? Int {
                     if status == 25 {
-                        self.fetchActors()
+                        self.fetchActors(receiver, all: all)
                     }
                 }
             }

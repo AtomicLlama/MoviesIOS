@@ -31,7 +31,12 @@ class DetailViewTitleTableCell: UITableViewCell {
     
     // MARK: UI Elements
     
-    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var posterImageView: UIImageView! {
+        didSet {
+            posterImageView.layer.shadowOpacity = 0.4
+            posterImageView.layer.shadowOffset = CGSize(width: 3.0, height: 2.0)
+        }
+    }
     
     @IBOutlet weak var titleLabel: UILabel!
     

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '2451EB4618D00A42568ABB4C'
-               BlueprintName = 'Pods-Movies-Alamofire'
+               BlueprintIdentifier = 'AE58340C183B963C900C9FF91F7C3E95'
+               BlueprintName = 'MXParallaxHeader'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Alamofire.framework'>
+               BuildableName = 'MXParallaxHeader.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

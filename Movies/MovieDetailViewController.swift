@@ -8,12 +8,13 @@
 
 import UIKit
 import YouTubePlayer
+import MXParallaxHeader
 
 protocol MovieDetailDataSource {
     func currentMovieForDetail() -> Movie?
 }
 
-class MovieDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PersonBioDataSource, MovieReceiverProtocol, YouTubePlayerDelegate {
+class MovieDetailViewController: UITableViewController, PersonBioDataSource, MovieReceiverProtocol, MovieActorsReceiver, YouTubePlayerDelegate {
     
     //MARK: Data
     
@@ -41,14 +42,22 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func imageDownloaded() {
-        tableView.reloadData()
-        if backgroundImageView.image == nil {
-            if let movieUnwrapped = movieDataSource?.currentMovieForDetail() {
-                if let posterImage = movieUnwrapped.poster {
-                    backgroundImageView.image = posterImage
+        if let movieUnwrapped = movieDataSource?.currentMovieForDetail() {
+            if tableView.parallaxHeader.view === nil {
+                if let detailImage = movieUnwrapped.detailImage {
+                    let imageView = UIImageView(image: detailImage)
+                    imageView.contentMode = UIViewContentMode.ScaleAspectFill
+                    tableView.parallaxHeader.view = imageView
+                    tableView.parallaxHeader.height = 250
+                    tableView.parallaxHeader.mode = MXParallaxHeaderMode.Fill
                 }
             }
         }
+        tableView.reloadData()
+    }
+    
+    func actorsFetched() {
+        tableView.reloadData()
     }
     
     func moviesArrived(newMovies: [Movie]) {
@@ -57,7 +66,7 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
     
     // MARK: Table View Stuff
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if movieDataSource?.currentMovieForDetail()?.trailerID != nil {
             return 6
         } else {
@@ -65,18 +74,18 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 3 {
             return min((movieDataSource?.currentMovieForDetail()?.actors.count) ?? 0, 5)
         }
         return 1
     }
     
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return indexPath.section >= 2
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0: return titleRow()
         case 1: return descriptionRow()
@@ -87,7 +96,7 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 3 {
             currentActor = movieDataSource?.currentMovieForDetail()?.actors[indexPath.row].0
         } else if indexPath.section == 2 {
@@ -169,38 +178,18 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
     
-    
-    // MARK: UI Misc. (Image, ...)
-    
-    @IBOutlet weak var backgroundImageView: UIImageView! {
-        didSet {
-            backgroundImageView.clipsToBounds = true
-            let effect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-            let effectView = UIVisualEffectView(effect: effect)
-            effectView.alpha = 0.8
-            effectView.frame = (backgroundImageView.superview?.bounds)!
-            backgroundImageView.addSubview(effectView)
-        }
-    }
-    
-    
-    @IBOutlet weak var tableView: UITableView! {
-        didSet {
-            tableView.backgroundColor = UIColor.clearColor()
-        }
-    }
-    
     // MARK: Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("likeMovie:"))
+        likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MovieDetailViewController.likeMovie(_:)))
         navigationItem.rightBarButtonItem = likeButton
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.estimatedRowHeight = 400
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         if let movieUnwrapped = movieDataSource?.currentMovieForDetail() {
             self.title = movieUnwrapped.title
             if movieUnwrapped.isMovieInWatchList() {
@@ -208,14 +197,21 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
             }
             movieUnwrapped.subscribeToImage(self)
             movieUnwrapped.getTrailerUrl(self)
-            if let posterImage = movieUnwrapped.poster {
-                backgroundImageView.image = posterImage
+            if let detailImage = movieUnwrapped.detailImage {
+                let imageView = UIImageView(image: detailImage)
+                imageView.contentMode = UIViewContentMode.ScaleAspectFill
+                tableView.parallaxHeader.view = imageView
+                tableView.parallaxHeader.height = 250
+                tableView.parallaxHeader.mode = MXParallaxHeaderMode.Fill
+                tableView.parallaxHeader.minimumHeight = 0
             }
         }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        movieDataSource?.currentMovieForDetail()?.fetchDetailImage(self)
+        movieDataSource?.currentMovieForDetail()?.fetchActors(self, all: false)
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
@@ -244,7 +240,6 @@ class MovieDetailViewController: UIViewController, UITableViewDataSource, UITabl
             self.view.setNeedsUpdateConstraints()
             self.navigationController?.view.setNeedsUpdateConstraints()
             self.navigationController?.view.setNeedsLayout()
-            // tableView.reloadData()
         }
     }
     

@@ -8,6 +8,7 @@ target "Movies" do
 	xcodeproj 'Movies.xcodeproj'
 	pod 'Alamofire'
 	pod 'PZPullToRefresh'
+	pod "MXParallaxHeader"
 	pod 'JFMinimalNotifications', '~> 0.0.4'
 	pod 'YouTubePlayer'
 	pod 'MCSwipeTableViewCell', '~> 2.1.4'

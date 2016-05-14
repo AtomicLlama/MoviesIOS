@@ -275,7 +275,9 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
             
             if let actor = elements[indexPath.row] as? Actor {
                 let cell = tableView.dequeueReusableCellWithIdentifier("actor") as? ActorTableViewCell ?? ActorTableViewCell()
+                cell.color = UIColor.whiteColor()
                 cell.actor = (actor, actor.bio)
+                cell.setUpImageView()
                 return cell
             } else if let movie = elements[indexPath.row] as? Movie {
                 let cell = tableView.dequeueReusableCellWithIdentifier("movie") as? ClearMovieTableViewCell ?? ClearMovieTableViewCell()

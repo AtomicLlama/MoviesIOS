@@ -4,6 +4,7 @@ PODS:
   - JFMinimalNotifications (0.0.5)
   - KNSemiModalViewController_hons82 (0.4.4)
   - MCSwipeTableViewCell (2.1.4)
+  - MXParallaxHeader (0.5.0)
   - PZPullToRefresh (0.0.7)
   - THCalendarDatePicker (1.2.5):
     - KNSemiModalViewController_hons82 (~> 0.4.3)
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - GMStepper
   - JFMinimalNotifications (~> 0.0.4)
   - MCSwipeTableViewCell (~> 2.1.4)
+  - MXParallaxHeader
   - PZPullToRefresh
   - THCalendarDatePicker (~> 1.2.5)
   - YouTubePlayer
@@ -24,8 +26,11 @@ SPEC CHECKSUMS:
   JFMinimalNotifications: c0d1eba2b826c1599416880dd48059c9153a6d9a
   KNSemiModalViewController_hons82: 22aead5ef5d8ca749bc1babb43fa7d6f14b030a3
   MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
+  MXParallaxHeader: c7dfdf8d769a8eb868a431ec3aeaf994a147b8bc
   PZPullToRefresh: a596d42b90ca42f979f181b5f35c4820406c2136
   THCalendarDatePicker: 65c63c1814d1a27defc89f4b72ec7a1d01d5503d
   YouTubePlayer: 88713a96c356f2c88da8925eb61438eda88bcd57
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 57f6251358723c8bcdf200532e0a3b4d98cd1b12
+
+COCOAPODS: 1.0.0

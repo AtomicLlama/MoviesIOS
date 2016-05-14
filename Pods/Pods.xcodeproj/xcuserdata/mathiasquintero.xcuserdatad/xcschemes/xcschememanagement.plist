@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Alamofire-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Alamofire-watchOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GMStepper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -24,22 +34,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MXParallaxHeader.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>PZPullToRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Movies-Alamofire.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-Movies.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-Watch Extension-Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -67,17 +72,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>00FA296290DADFF8409C0CEA2D09CB39</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>010CD781A0839D472710BAF5407C0484</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0FDD27FEFEA9160FA2538DD9E9BC11B6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1892213B8242D18974553DCC80A3C3FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2EC722DC45ED1F7204797DD110C6C00A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>54CA9E67D713378F1A796E54F7BF6EB8</key>
+		<key>313EF0E3732424619F7D685FC32D8C00</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,32 +102,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>630BE23E1EA11769B2D28773122A15FF</key>
+		<key>5E2BE80FB1FB2E61C9768E819461B62A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>91F53E59CCE00DCA585E5C05724117B3</key>
+		<key>AE58340C183B963C900C9FF91F7C3E95</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C5758B0C03F025B66A15100BF5D24C04</key>
+		<key>B26B9221909F9357A354EA1DC00B6068</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C3C86A5828BD7CD175A34061527B9F96</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>F8878A29900A25BDE9E2342E03BC8EAB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F993721A770FCE5F202DE960F46CE7BA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FC69981907922EB105293E5C2E07B29B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
