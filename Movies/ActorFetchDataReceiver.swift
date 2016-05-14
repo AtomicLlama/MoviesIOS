@@ -10,7 +10,7 @@ import Foundation
 
 protocol ActorFetchDataReceiver {
     
-    func receiveMoviesFromActor(movies: Movie)
+    func receiveMoviesFromActor(movies: [Movie]?)
     func receiverOfImage() -> MovieReceiverProtocol?
 
 }

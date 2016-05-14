@@ -90,7 +90,7 @@ class Movie {
         
         Alamofire.request(.GET, url).responseJSON() { (response) in
             
-            if let body = response.result.value as? [String:AnyObject], backdrops = body["backdrops"] as? [AnyObject], firstImageObject = backdrops[0] as? [String:AnyObject], path = firstImageObject["file_path"] as? String {
+            if let body = response.result.value as? [String:AnyObject], backdrops = body["backdrops"] as? [AnyObject], firstImageObject = backdrops.first as? [String:AnyObject], path = firstImageObject["file_path"] as? String {
                 
                 let imageURL = "https://image.tmdb.org/t/p/w500" + path
                 
@@ -222,6 +222,7 @@ class Movie {
                         }
                     }
                 }
+                receiver.actorsFetched()
                 if crew.count != 0 {
                     for member in crew {
                         if let crewMemberAsDictionary = member as? [String:AnyObject], jobTitle = crewMemberAsDictionary["job"] as? String {

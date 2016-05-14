@@ -17,12 +17,19 @@ class Actor {
     var headshot: UIImage?
     var bio: String
     let id: String
+    var movies: [Movie]?
     
     var delegate: MovieInfoDataSource?
     
     var receivingView: ActorFetchDataReceiver?
     
-    func fetchMovies(receivingView: ActorFetchDataReceiver) {
+    func fetchMovies(receivingView: ActorFetchDataReceiver, all: Bool) {
+        
+        if movies != nil && (movies?.count ?? 0 > 5 || !all) {
+            receivingView.receiveMoviesFromActor(movies)
+        }
+        
+        movies = []
         
         // Will fetch the movies of an actor (for now it's for the Actor Detail View)
         
@@ -40,7 +47,10 @@ class Actor {
                 } else {
                     arrayToIterate = cast
                 }
-                for role in arrayToIterate[0...(min(arrayToIterate.count-1, 9))] {
+                
+                let lastIndex = all ? arrayToIterate.count - 1 : (min(arrayToIterate.count-1, 4))
+                
+                for role in arrayToIterate[0...lastIndex] {
                     
                     
                     // Get ID of the movie to create a valid URL for the data of the movie
@@ -62,10 +72,12 @@ class Actor {
                                     
                                     // Switch to the Main Queue to update the view with the cached movie
                                     
-                                    alreadyKnownMovie.subscribeToImage(receivingView.receiverOfImage()!)
+                                    self.movies?.append(alreadyKnownMovie)
+                                    
+                                    // Switch to the Main Queue to update the view with the new movie
                                     
                                     dispatch_async(dispatch_get_main_queue()) {
-                                        receivingView.receiveMoviesFromActor(alreadyKnownMovie)
+                                        receivingView.receiveMoviesFromActor(self.movies)
                                     }
                                     
                                 } else {
@@ -76,10 +88,12 @@ class Actor {
                                     let newMovie = Movie(title: title, year: Int(yearOnly[0]) ?? 1970, rating: rating, description: plot, id: movieID.description, posterURL: poster, handler: receivingView.receiverOfImage(), dataSource: self.delegate)
                                     self.delegate?.learnMovie(movieID.description, movie: newMovie)
                                     
+                                    self.movies?.append(newMovie)
+                                    
                                     // Switch to the Main Queue to update the view with the new movie
                                     
                                     dispatch_async(dispatch_get_main_queue()) {
-                                        receivingView.receiveMoviesFromActor(newMovie)
+                                        receivingView.receiveMoviesFromActor(self.movies)
                                     }
                                 }
                             }

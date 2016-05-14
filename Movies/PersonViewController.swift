@@ -14,7 +14,7 @@ protocol PersonBioDataSource {
     func picture() -> UIImage?
 }
 
-class PersonViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MovieDetailDataSource, ActorFetchDataReceiver, MovieReceiverProtocol {
+class PersonViewController: UITableViewController, MovieDetailDataSource, ActorFetchDataReceiver, MovieReceiverProtocol {
     
     var likeButton: UIBarButtonItem?
     
@@ -45,75 +45,60 @@ class PersonViewController: UIViewController, UITableViewDataSource, UITableView
         return self
     }
     
-    func movieAlreadyReceived(id: String) -> Bool {
-        for movie in movies {
-            if movie?.id == id{
-                return  true
-            }
-        }
-        return false
-    }
-    
     func moviesArrived(newMovies: [Movie]) {
         self.movies = newMovies
         tableView.reloadData()
-    }
-    
-    @IBOutlet weak var backgroundMovieView: UIImageView!
-    
-    weak var tableView: UITableView! {
-        didSet {
-            tableView.backgroundColor = UIColor.clearColor()
-            tableView.delegate = self
-            tableView.dataSource = self
-            tableView.estimatedRowHeight = tableView.rowHeight
-            tableView.rowHeight = UITableViewAutomaticDimension
-            tableView.tableFooterView = UIView(frame: CGRectZero)
-        }
+        
     }
     
     var delegate: PersonBioDataSource?
     
-    func receiveMoviesFromActor(movies: Movie) {
-        if !movieAlreadyReceived(movies.id) {
-            self.movies.append(movies)
+    func receiveMoviesFromActor(movies: [Movie]?) {
+        if let unwrapped = movies {
+            self.movies = unwrapped
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
     
     
-    var movies = [Movie?]()
+    var movies = [Movie]()
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 2 {
-            return movies.count ?? 0
+            return (movies.count ?? 0) + 1
         } else {
             return 1
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         switch indexPath.section {
         case 0: return headerCell()
         case 1: return descriptionCell()
-        default: return movieCell(indexPath.row)
+        default:
+            if indexPath.row == movies.count ?? 0 {
+                let cell = tableView.dequeueReusableCellWithIdentifier("allmovies") ?? UITableViewCell()
+                return cell
+            } else {
+                return movieCell(indexPath.row)
+            }
         }
         
     }
     
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return indexPath.section == 2
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 2 {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 2 && indexPath.row != movies.count {
             currentMovie = movies[indexPath.row]
         }
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
     }
     
     func headerCell() -> UITableViewCell {
@@ -128,7 +113,7 @@ class PersonViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
-    func movieCell(movie: Int) -> UITableViewCell{
+    func movieCell(movie: Int) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("movie") as? ClearMovieTableViewCell ?? ClearMovieTableViewCell()
         cell.movie = movies[movie]
         return cell
@@ -143,21 +128,17 @@ class PersonViewController: UIViewController, UITableViewDataSource, UITableView
             destiationViewController.movieDataSource = self
             currentMovie?.subscribeToImage(destiationViewController)
         }
+        if let mvc = segue.destinationViewController as? AllMoviesFromActorTableViewController {
+            mvc.delegate = self.delegate
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        backgroundMovieView.clipsToBounds = true
-        let effect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-        let effectView = UIVisualEffectView(effect: effect)
-        effectView.alpha = 0.8
-        //effectView.frame = (backgroundMovieView.superview?.bounds)!
-        effectView.frame = CGRectMake(backgroundMovieView.frame.origin.x, backgroundMovieView.frame.origin.y, backgroundMovieView.frame.width + 40, backgroundMovieView.frame.height + 100)
-        backgroundMovieView.addSubview(effectView)
-        if let moviePoster = delegate?.picture() {
-            backgroundMovieView.image = moviePoster
-        }
-        likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.Plain, target: self, action: Selector("likePerson:"))
+        tableView.estimatedRowHeight = 400
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.tableFooterView = UIView(frame: CGRectZero)
+        likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PersonViewController.likePerson(_:)))
         navigationItem.rightBarButtonItem = likeButton
         if let actorUnwrapped = delegate?.currentPerson() {
             if actorUnwrapped.isActorInSubscriptions() {
@@ -173,7 +154,7 @@ class PersonViewController: UIViewController, UITableViewDataSource, UITableView
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         if movies.count == 0 {
-            delegate?.currentPerson().fetchMovies(self)
+            delegate?.currentPerson().fetchMovies(self, all: false)
         }
         title = delegate?.currentPerson().name
     }

@@ -15,6 +15,9 @@ class UserTableViewCell: UITableViewCell {
         didSet {
             avatarView.layer.cornerRadius = CGFloat (avatarView.frame.width / 2)
             avatarView.clipsToBounds = true
+            avatarView.layer.frame = CGRectInset(avatarView.layer.frame, 20, 20)
+            avatarView.layer.borderColor = Constants.tintColor.CGColor
+            avatarView.layer.borderWidth = 2.0
         }
     }
     

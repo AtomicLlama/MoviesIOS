@@ -26,9 +26,11 @@ class HeadShotTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var headShotView: UIImageView! {
         didSet {
-            backgroundColor = UIColor.clearColor()
             headShotView.layer.cornerRadius = CGFloat (headShotView.frame.width / 2)
             headShotView.clipsToBounds = true
+            headShotView.layer.frame = CGRectInset(headShotView.layer.frame, 20, 20)
+            headShotView.layer.borderColor = Constants.tintColor.CGColor
+            headShotView.layer.borderWidth = 2.0
         }
     }
     

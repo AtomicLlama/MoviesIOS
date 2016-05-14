@@ -76,7 +76,7 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 3 {
-            return min((movieDataSource?.currentMovieForDetail()?.actors.count) ?? 0, 5)
+            return min((movieDataSource?.currentMovieForDetail()?.actors.count) ?? 0, 5) + 1
         }
         return 1
     }
@@ -90,14 +90,20 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
         case 0: return titleRow()
         case 1: return descriptionRow()
         case 2: return directorRow()
-        case 3: return actorRow(indexPath.row)
+        case 3:
+            if (indexPath.row == min((movieDataSource?.currentMovieForDetail()?.actors.count) ?? 0, 5)) {
+                let cell = tableView.dequeueReusableCellWithIdentifier("allcast") ?? UITableViewCell()
+                return cell
+            }
+            return actorRow(indexPath.row)
         case 4: return movieDataSource?.currentMovieForDetail()?.trailerID != nil ? trailerRow() : bookingRow()
         default: return bookingRow()
         }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 3 {
+        if indexPath.section == 3 &&
+            indexPath.row != min((movieDataSource?.currentMovieForDetail()?.actors.count) ?? 0, 5) {
             currentActor = movieDataSource?.currentMovieForDetail()?.actors[indexPath.row].0
         } else if indexPath.section == 2 {
             currentActor = movieDataSource?.currentMovieForDetail()?.director
@@ -184,8 +190,6 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
         super.viewDidLoad()
         likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MovieDetailViewController.likeMovie(_:)))
         navigationItem.rightBarButtonItem = likeButton
-        tableView.delegate = self
-        tableView.dataSource = self
         tableView.estimatedRowHeight = 400
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView(frame: CGRectZero)
@@ -223,6 +227,9 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
         }
         if let mvc = segue.destinationViewController as? MovieTimesDetailTableViewController {
             mvc.movie = movieDataSource?.currentMovieForDetail()
+        }
+        if let mvc = segue.destinationViewController as? AllCastTableViewController {
+            mvc.delegate = movieDataSource
         }
     }
     
