@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '6931F5D176B6D5984C27E4D95A89F8C0'
-               BlueprintName = 'PZPullToRefresh'
+               BlueprintIdentifier = 'FA083E4D073196110B39F3C38616EA95'
+               BlueprintName = 'SFFocusViewLayout'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'PZPullToRefresh.framework'>
+               BuildableName = 'SFFocusViewLayout.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

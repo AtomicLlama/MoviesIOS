@@ -8,9 +8,9 @@
 
 import UIKit
 import PZPullToRefresh
-import MCSwipeTableViewCell
+import SFFocusViewLayout
 
-class MovieListViewController: UITableViewController, MovieDetailDataSource, MovieReceiverProtocol, PZPullToRefreshDelegate {
+class MovieListViewController: UICollectionViewController, MovieDetailDataSource, MovieReceiverProtocol, PZPullToRefreshDelegate {
     
     var refreshHeaderView: PZPullToRefreshView?
     
@@ -22,29 +22,30 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
     
     func moviesArrived(newMovies: [Movie]) {
         
+        for movie in newMovies {
+            movie.fetchDetailImage(self)
+        }
+        
         //Get the movie objects and refresh the view.
         
         movies = newMovies
-        tableView.reloadData()
+        collectionView!.reloadData()
         if refreshHeaderView != nil {
             
             //Stop refreshing animation
             
             self.refreshHeaderView?.isLoading = false
-            self.refreshHeaderView?.refreshScrollViewDataSourceDidFinishedLoading(self.tableView)
+            self.refreshHeaderView?.refreshScrollViewDataSourceDidFinishedLoading(self.collectionView!)
         }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        collectionView!.reloadData()
     }
     
     func imageDownloaded() {
-        
-        //Reload tables if the image has been downloaded.
-        
-        tableView.reloadData()
+        collectionView!.reloadData()
     }
 
     override func viewDidLoad() {
@@ -55,16 +56,21 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
         fetcher?.receiver = self
         
         //Set up basic UI
-        tableView.separatorColor = UIColor.clearColor()
-        tableView.backgroundColor = Constants.tintColor
+        collectionView!.backgroundColor = Constants.tintColor
         self.edgesForExtendedLayout = UIRectEdge.None
         if refreshHeaderView == nil {
-            let view = PZPullToRefreshView(frame: CGRectMake(0, 0 - tableView.bounds.size.height, tableView.bounds.size.width, tableView.bounds.size.height))
+            let view = PZPullToRefreshView(frame: CGRectMake(0, 0 - collectionView!.bounds.size.height, collectionView!.bounds.size.width, collectionView!.bounds.size.height))
             view.delegate = self
-            self.tableView.addSubview(view)
+            self.collectionView!.addSubview(view)
             refreshHeaderView = view
             refreshHeaderView?.backgroundColor = Constants.tintColor
         }
+        
+        
+        collectionView!.register(CollectionViewCell)
+        
+        collectionView!.decelerationRate = UIScrollViewDecelerationRateFast
+        collectionView!.backgroundColor = UIColor(red: 51/255, green: 55/255, blue: 61/255, alpha: 1)
         
         //Fetch Movies immediatly
         
@@ -78,39 +84,17 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
         // Dispose of any resources that can be recreated.
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let dequeuedCell = tableView.dequeueReusableCellWithIdentifier("movie") as? MovieTableViewCell ?? MovieTableViewCell()
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let dequeuedCell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as CollectionViewCell
         dequeuedCell.movie = movies[indexPath.row]
-        var writeSwipes = { () in return }
-        let handler = { () -> () in
-            dequeuedCell.movie?.toggleMovieInWatchList()
-            writeSwipes()
-        }
-        writeSwipes = { () in
-            var image: UIImage?
-            var color = Constants.tintColor
-            if dequeuedCell.movie?.isMovieInWatchList() ?? false {
-                image = UIImage(named: "heart-7")
-                color = UIColor.grayColor()
-            } else {
-                image = UIImage(named: "Like Filled-25")
-            }
-            dequeuedCell.firstTrigger = 0.3
-            dequeuedCell.defaultColor = color
-            dequeuedCell.setSwipeGestureWithView(self.viewWithImage(image), color: color, mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State1) { (void) in handler() }
-            dequeuedCell.setSwipeGestureWithView(self.viewWithImage(image), color: color, mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State2) { (void) in handler() }
-            dequeuedCell.setSwipeGestureWithView(self.viewWithImage(image), color: color, mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State3) { (void) in handler() }
-            dequeuedCell.setSwipeGestureWithView(self.viewWithImage(image), color: color, mode: MCSwipeTableViewCellMode.Switch, state: MCSwipeTableViewCellState.State4) { (void) in handler() }
-        }
-        writeSwipes()
         return dequeuedCell
     }
     
@@ -121,8 +105,9 @@ class MovieListViewController: UITableViewController, MovieDetailDataSource, Mov
         return imageView
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         currentMovie = indexPath.row
+        performSegueWithIdentifier("showMovie", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

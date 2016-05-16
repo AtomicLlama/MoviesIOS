@@ -14,6 +14,7 @@ target "Movies" do
 	pod 'MCSwipeTableViewCell', '~> 2.1.4'
 	pod 'THCalendarDatePicker', '~> 1.2.5'
 	pod 'GMStepper'
+	pod 'SFFocusViewLayout'
 end
 
 target "Watch Extension" do

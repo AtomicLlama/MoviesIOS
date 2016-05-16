@@ -91,6 +91,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/MCSwipeTableViewCell/MCSwipeTableViewCell.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MXParallaxHeader/MXParallaxHeader.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PZPullToRefresh/PZPullToRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SFFocusViewLayout/SFFocusViewLayout.framework"
   install_framework "$BUILT_PRODUCTS_DIR/THCalendarDatePicker/THCalendarDatePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YouTubePlayer/YouTubePlayer.framework"
 fi
@@ -102,6 +103,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/MCSwipeTableViewCell/MCSwipeTableViewCell.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MXParallaxHeader/MXParallaxHeader.framework"
   install_framework "$BUILT_PRODUCTS_DIR/PZPullToRefresh/PZPullToRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SFFocusViewLayout/SFFocusViewLayout.framework"
   install_framework "$BUILT_PRODUCTS_DIR/THCalendarDatePicker/THCalendarDatePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YouTubePlayer/YouTubePlayer.framework"
 fi

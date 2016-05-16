@@ -6,6 +6,7 @@ PODS:
   - MCSwipeTableViewCell (2.1.4)
   - MXParallaxHeader (0.5.0)
   - PZPullToRefresh (0.0.7)
+  - SFFocusViewLayout (3.0.0)
   - THCalendarDatePicker (1.2.5):
     - KNSemiModalViewController_hons82 (~> 0.4.3)
   - YouTubePlayer (0.3.0)
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - MCSwipeTableViewCell (~> 2.1.4)
   - MXParallaxHeader
   - PZPullToRefresh
+  - SFFocusViewLayout
   - THCalendarDatePicker (~> 1.2.5)
   - YouTubePlayer
 
@@ -28,9 +30,10 @@ SPEC CHECKSUMS:
   MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
   MXParallaxHeader: c7dfdf8d769a8eb868a431ec3aeaf994a147b8bc
   PZPullToRefresh: a596d42b90ca42f979f181b5f35c4820406c2136
+  SFFocusViewLayout: 4766bec5d2214038526d5e03d08405f1f126688d
   THCalendarDatePicker: 65c63c1814d1a27defc89f4b72ec7a1d01d5503d
   YouTubePlayer: 88713a96c356f2c88da8925eb61438eda88bcd57
 
-PODFILE CHECKSUM: 57f6251358723c8bcdf200532e0a3b4d98cd1b12
+PODFILE CHECKSUM: e8e938db6c86d8c549a8cfa840d627cfbcd0594f
 
 COCOAPODS: 1.0.0
