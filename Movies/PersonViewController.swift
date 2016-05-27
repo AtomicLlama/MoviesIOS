@@ -8,6 +8,7 @@
 
 import UIKit
 import JFMinimalNotifications
+import DoneHUD
 
 protocol PersonBioDataSource {
     func currentPerson() -> Actor
@@ -21,7 +22,7 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, ActorF
     func likePerson(send: AnyObject?) {
         if delegate?.currentPerson().toggleActorInSubscriptions() ?? false {
             likeButton?.image = UIImage(named: "Like Filled-25")
-            DoneHUD.showInView(self.view, message: "Following " + (delegate?.currentPerson().name ?? ""))
+            DoneHUD.showInView(self.view.superview ?? self.view, message: "Following " + (delegate?.currentPerson().name ?? ""))
         } else {
             likeButton?.image = UIImage(named: "heart-7")
         }

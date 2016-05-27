@@ -17,6 +17,8 @@ protocol CollectionViewCellRender {
 
 class CollectionViewCell: UICollectionViewCell {
 
+    var blurEffectView: UIVisualEffectView?
+
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var overlayView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -27,16 +29,26 @@ class CollectionViewCell: UICollectionViewCell {
             if let movieUnwrapped = movie {
                 setTitle(movieUnwrapped.title)
                 setDescription(movieUnwrapped.description)
-                if let image = movieUnwrapped.detailImage {
-                    setBackgroundImage(image)
-                }
+                setBackgroundImage(movieUnwrapped.detailImage ?? movieUnwrapped.poster ?? UIImage())
             }
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        let blurView = UIBlurEffect(style: .Dark)
+        overlayView.backgroundColor = UIColor.clearColor()
+        blurEffectView = UIVisualEffectView(effect: blurView)
+        blurEffectView?.frame = (backgroundImageView.superview?.bounds)!
+        if let blur = blurEffectView {
+            backgroundImageView.addSubview(blur)
+        }
+        let vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurView)
+        let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
+        vibrancyView.frame = (backgroundImageView.superview?.bounds)!
+        overlayView.addSubview(vibrancyView)
+        vibrancyView.addSubview(titleLabel)
+        vibrancyView.addSubview(descriptionLabel)
     }
 
     override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
@@ -51,7 +63,7 @@ class CollectionViewCell: UICollectionViewCell {
         let maxAlpha: CGFloat = Constant.maxAlpha
 
         let alpha = maxAlpha - (delta * (maxAlpha - minAlpha))
-        overlayView.alpha = alpha
+        blurEffectView?.alpha = alpha
 
         let scale = max(delta, 0.5)
         titleLabel.transform = CGAffineTransformMakeScale(scale, scale)
@@ -81,8 +93,8 @@ extension CollectionViewCell {
         static let featuredHeight: CGFloat = 280
         static let standardHegiht: CGFloat = 100
 
-        static let minAlpha: CGFloat = 0.45
-        static let maxAlpha: CGFloat = 0.75
+        static let minAlpha: CGFloat = 0.5
+        static let maxAlpha: CGFloat = 0.85
     }
 }
 

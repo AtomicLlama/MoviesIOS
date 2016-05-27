@@ -6,7 +6,6 @@
 //  Copyright © 2015 LS1 TUM. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import FBSDKLoginKit
 import Alamofire

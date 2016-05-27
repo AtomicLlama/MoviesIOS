@@ -110,12 +110,15 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView(frame: CGRectZero)
         tableView.backgroundColor = Constants.tintColor
-        barButton = UIBarButtonItem(title: "Today", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("selectDate:"))
+        barButton = UIBarButtonItem(title: "Today", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MovieTimesDetailTableViewController.selectDate(_:)))
         navigationItem.rightBarButtonItem = barButton
         loadForDate()
     }
     
     func loadForDate() {
+        movie?.fetchStreamingLinks() { () in
+            self.tableView.reloadData()
+        }
         if let unwrappedMovie = movie, mvc = self.tabBarController as? MoviesTabBarController, user = mvc.currentUser {
             if unwrappedMovie.getTimesForDate(currentDate).isEmpty {
                 spinner.startAnimating()
@@ -137,7 +140,7 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         spinner.stopAnimating()
         if let _  = movie?.getTimesForDate(currentDate).first as? NullShowtime {
             timesForTheatre = []
-            noTimes = true
+            noTimes = true && (movie?.linksLoaded ?? false && movie?.streamingLinks.isEmpty ?? false)
         } else {
             noTimes = false
             timesForTheatre = (movie?.getTimesForDate(currentDate).reduce([Theatre]()) { (array,item) in
@@ -187,6 +190,11 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         if noTimes {
             return 1
         }
+        if movie?.linksLoaded ?? false {
+            if !(movie?.streamingLinks.isEmpty ?? true) {
+                return timesForTheatre.count + 1
+            }
+        }
         return timesForTheatre.count
     }
 
@@ -194,12 +202,28 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         if noTimes {
             return 1
         }
+        if movie?.linksLoaded ?? false {
+            if !(movie?.streamingLinks.isEmpty ?? true) {
+                if section == 0 {
+                    return movie?.streamingLinks.count ?? 0
+                }
+            }
+        }
         return timesForTheatre[section].1.count
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if noTimes {
             return nil
+        }
+        if movie?.linksLoaded ?? false {
+            if !(movie?.streamingLinks.isEmpty ?? true) {
+                if section == 0 {
+                    return "Streaming Now"
+                } else {
+                    return timesForTheatre[section-1].0.name
+                }
+            }
         }
         return timesForTheatre[section].0.name
     }
@@ -209,10 +233,37 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
             let cell = tableView.dequeueReusableCellWithIdentifier("error") ?? UITableViewCell()
             return cell
         }
+        if movie?.linksLoaded ?? false {
+            if !(movie?.streamingLinks.isEmpty ?? true) {
+                if indexPath.section == 0 {
+                    let cell = tableView.dequeueReusableCellWithIdentifier("link") as? StreamingItemTableViewCell ?? StreamingItemTableViewCell()
+                    cell.service = movie?.streamingLinks[indexPath.row].0
+                    cell.posterView.image = movie?.poster
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCellWithIdentifier("time") as? MovieTimeTableViewCell ?? MovieTimeTableViewCell()
+                    cell.posterImage.image = movie?.poster
+                    cell.item = timesForTheatre[indexPath.section-1].1[indexPath.row]
+                    return cell
+                }
+            }
+        }
         let cell = tableView.dequeueReusableCellWithIdentifier("time") as? MovieTimeTableViewCell ?? MovieTimeTableViewCell()
-        cell.item = timesForTheatre[indexPath.section].1[indexPath.row]
         cell.posterImage.image = movie?.poster
+        cell.item = timesForTheatre[indexPath.section].1[indexPath.row]
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if movie?.linksLoaded ?? false {
+            if !(movie?.streamingLinks.isEmpty ?? true) {
+                if indexPath.section == 0 {
+                    if let link = movie?.streamingLinks[indexPath.row].1, url = NSURL(string: link) {
+                        UIApplication.sharedApplication().openURL(url)
+                    }
+                }
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

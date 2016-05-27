@@ -9,6 +9,7 @@
 import UIKit
 import YouTubePlayer
 import MXParallaxHeader
+import DoneHUD
 
 protocol MovieDetailDataSource {
     func currentMovieForDetail() -> Movie?
@@ -35,7 +36,7 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
     func likeMovie(send: AnyObject?) {
         if movieDataSource?.currentMovieForDetail()?.toggleMovieInWatchList() ?? false {
             likeButton?.image = UIImage(named: "Like Filled-25")
-            DoneHUD.showInView(self.view, message: "Added To Watch List")
+            DoneHUD.showInView(self.view.superview ?? self.view, message: "Added To Watch List")
         } else {
             likeButton?.image = UIImage(named: "heart-7")
         }
@@ -109,9 +110,6 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
             currentActor = movieDataSource?.currentMovieForDetail()?.director
         }
     }
-    
-    
-    // MARK: Table View Cells by functionality
     
     func titleRow() -> UITableViewCell {
         if let cell = tableView.dequeueReusableCellWithIdentifier("title") as? DetailViewTitleTableCell {
@@ -231,6 +229,9 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
         if let mvc = segue.destinationViewController as? AllCastTableViewController {
             mvc.delegate = movieDataSource
         }
+        if let mvc = segue.destinationViewController as? StreamingTableViewController {
+            mvc.delegate = movieDataSource
+        }
     }
     
     func playerQualityChanged(videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
@@ -242,12 +243,15 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
     }
     
     func playerStateChanged(videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
-        if videoPlayer.playerState == YouTubePlayerState.Paused || videoPlayer.playerState == YouTubePlayerState.Ended {
-            self.view.setNeedsLayout()
-            self.view.setNeedsUpdateConstraints()
-            self.navigationController?.view.setNeedsUpdateConstraints()
-            self.navigationController?.view.setNeedsLayout()
-        }
+//        if playerState == YouTubePlayerState.Playing {
+//            viewWillDisappear(true)
+//            viewDidDisappear(true)
+//        }
+//        if videoPlayer.playerState == YouTubePlayerState.Paused || videoPlayer.playerState == YouTubePlayerState.Ended {
+//            viewWillAppear(true)
+//            viewDidAppear(true)
+//            viewDidLoad()
+//        }
     }
     
 }

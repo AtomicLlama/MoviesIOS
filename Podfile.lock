@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (3.0.0)
+  - DoneHUD (1.0.0)
   - GMStepper (1.1.0)
   - JFMinimalNotifications (0.0.5)
   - KNSemiModalViewController_hons82 (0.4.4)
@@ -13,6 +14,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - DoneHUD
   - GMStepper
   - JFMinimalNotifications (~> 0.0.4)
   - MCSwipeTableViewCell (~> 2.1.4)
@@ -20,10 +22,11 @@ DEPENDENCIES:
   - PZPullToRefresh
   - SFFocusViewLayout
   - THCalendarDatePicker (~> 1.2.5)
-  - YouTubePlayer
+  - YouTubePlayer (~> 0.2)
 
 SPEC CHECKSUMS:
   Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
+  DoneHUD: e3717eefe0ed8a977153024400693e100a3bc0e9
   GMStepper: 3b7922778a80e0eab89a55003ca36b25fc2393b7
   JFMinimalNotifications: c0d1eba2b826c1599416880dd48059c9153a6d9a
   KNSemiModalViewController_hons82: 22aead5ef5d8ca749bc1babb43fa7d6f14b030a3
@@ -34,6 +37,4 @@ SPEC CHECKSUMS:
   THCalendarDatePicker: 65c63c1814d1a27defc89f4b72ec7a1d01d5503d
   YouTubePlayer: 88713a96c356f2c88da8925eb61438eda88bcd57
 
-PODFILE CHECKSUM: e8e938db6c86d8c549a8cfa840d627cfbcd0594f
-
-COCOAPODS: 1.0.0
+COCOAPODS: 0.39.0

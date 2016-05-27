@@ -1,6 +1,6 @@
 //
 //  DoneView.swift
-//  DoneAnimation
+//  DoneHUD
 //
 //  Created by Ryuta Kibe on 2015/08/22.
 //  Copyright (c) 2015 blk. All rights reserved.
@@ -109,7 +109,13 @@ public class DoneView: UIView {
         self.lineLayer.strokeColor = UIColor.blackColor().CGColor
         
         // Generate blur view
-        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+        var blurView: UIView
+        if #available(iOS 8.0, *) {
+            blurView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+        } else {
+            blurView = UIView()
+            blurView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        }
         self.blurView = blurView
         self.insertSubview(blurView, atIndex: 0)
         blurView.frame = self.bounds

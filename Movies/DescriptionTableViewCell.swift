@@ -10,7 +10,7 @@ import UIKit
 
 class DescriptionTableViewCell: UITableViewCell {
     
-    // Yeah, I'm not commenting this.
+    // Yeah, I'm not commenting this. Wait...
     
     var descriptionText: String? {
         didSet {

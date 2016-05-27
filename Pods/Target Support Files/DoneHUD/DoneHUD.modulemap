@@ -1,0 +1,6 @@
+framework module DoneHUD {
+  umbrella header "DoneHUD-umbrella.h"
+
+  export *
+  module * { export * }
+}

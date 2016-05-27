@@ -1,6 +1,6 @@
 //
 //  DoneHUD.swift
-//  DoneAnimation
+//  DoneHUD
 //
 //  Created by Ryuta Kibe on 2015/08/23.
 //  Copyright (c) 2015 blk. All rights reserved.

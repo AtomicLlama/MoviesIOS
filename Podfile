@@ -10,11 +10,12 @@ target "Movies" do
 	pod 'PZPullToRefresh'
 	pod "MXParallaxHeader"
 	pod 'JFMinimalNotifications', '~> 0.0.4'
-	pod 'YouTubePlayer'
+	pod 'YouTubePlayer','~> 0.2'
 	pod 'MCSwipeTableViewCell', '~> 2.1.4'
 	pod 'THCalendarDatePicker', '~> 1.2.5'
 	pod 'GMStepper'
 	pod 'SFFocusViewLayout'
+    pod 'DoneHUD'
 end
 
 target "Watch Extension" do

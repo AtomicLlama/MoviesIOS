@@ -28,6 +28,9 @@ class Movie {
     var netflixLink: String?
     var detailImage: UIImage?
     
+    var streamingLinks = [(String, String)]()
+    var linksLoaded = false
+    
     var movieTimes = [String:[Showtime]]()
     
     func getTimesForDate(date: NSDate) -> [Showtime] {
@@ -84,6 +87,8 @@ class Movie {
             return
         }
         
+        
+        
         let url = "http://api.themoviedb.org/3/movie/" + id + "/images?api_key=18ec732ece653360e23d5835670c47a0"
         
         // Start request
@@ -106,8 +111,25 @@ class Movie {
             }
             
         }
-
-        
+    }
+    
+    func fetchStreamingLinks(handler: () -> ()) {
+        if !linksLoaded {
+            let url = "https://moviesbackend.herokuapp.com/streaming/" + id
+            Alamofire.request(.GET, url).responseJSON() { (response) in
+                if let links = response.result.value as? [AnyObject] {
+                    for item in links {
+                        if let data = item as? [String:AnyObject], service = data["service"] as? String, link = data["link"] as? String {
+                            self.streamingLinks.append((service, link))
+                        }
+                    }
+                }
+                self.linksLoaded = true
+                handler()
+            }
+        } else {
+            handler()
+        }
     }
     
     func isMovieInWatchList() -> Bool {
