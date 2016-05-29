@@ -50,6 +50,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     var loginButton: FBSDKLoginButton?
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+        let effect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let effectView = UIVisualEffectView(effect: effect)
+        let frameForEffect = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.width, imageView.frame.height + 100)
+        effectView.frame = frameForEffect
+        imageView.addSubview(effectView)
+        let vibrancyEffect = UIVibrancyEffect(forBlurEffect: effect)
+        let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
+        vibrancyView.addSubview(welcomeLabel)
+        effectView.addSubview(vibrancyView)
         let frame = CGRectMake(view.center.x, view.center.y, view.frame.width - 80, (view.frame.width - 80)/4.5)
         loginButton = FBSDKLoginButton(frame: frame)
         loginButton!.center = CGPoint(x: view.center.x, y: view.center.y + 70)
@@ -59,16 +69,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         view.addSubview(loginButton!)
     }
     @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var imageView: UIImageView! {
-        didSet {
-            let effect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
-            let effectView = UIVisualEffectView(effect: effect)
-            effectView.alpha = 0.5
-            let frame = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.width, imageView.frame.height + 100)
-            effectView.frame = frame
-            imageView.addSubview(effectView)
-        }
-    }
+    @IBOutlet weak var imageView: UIImageView!
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllMoviesFromActorTableViewController: UITableViewController, ActorFetchDataReceiver, MovieDetailDataSource {
+class AllMoviesFromActorTableViewController: UITableViewController, MovieDetailDataSource, MovieReceiverProtocol {
 
     var delegate: PersonBioDataSource?
     
@@ -22,12 +22,12 @@ class AllMoviesFromActorTableViewController: UITableViewController, ActorFetchDa
         tableView.reloadData()
     }
     
-    func receiveMoviesFromActor(movies: [Movie]?) {
+    func imageDownloaded() {
         tableView.reloadData()
     }
     
-    func receiverOfImage() -> MovieReceiverProtocol? {
-        return nil
+    func moviesArrived(newMovies: [Movie]) {
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {

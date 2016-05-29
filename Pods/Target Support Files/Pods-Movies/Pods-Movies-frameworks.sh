@@ -85,12 +85,14 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-Movies/Alamofire.framework"
+  install_framework "Pods-Movies/AlamofireObjectMapper.framework"
   install_framework "Pods-Movies/DoneHUD.framework"
   install_framework "Pods-Movies/GMStepper.framework"
   install_framework "Pods-Movies/JFMinimalNotifications.framework"
   install_framework "Pods-Movies/KNSemiModalViewController_hons82.framework"
   install_framework "Pods-Movies/MCSwipeTableViewCell.framework"
   install_framework "Pods-Movies/MXParallaxHeader.framework"
+  install_framework "Pods-Movies/ObjectMapper.framework"
   install_framework "Pods-Movies/PZPullToRefresh.framework"
   install_framework "Pods-Movies/SFFocusViewLayout.framework"
   install_framework "Pods-Movies/THCalendarDatePicker.framework"
@@ -98,12 +100,14 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-Movies/Alamofire.framework"
+  install_framework "Pods-Movies/AlamofireObjectMapper.framework"
   install_framework "Pods-Movies/DoneHUD.framework"
   install_framework "Pods-Movies/GMStepper.framework"
   install_framework "Pods-Movies/JFMinimalNotifications.framework"
   install_framework "Pods-Movies/KNSemiModalViewController_hons82.framework"
   install_framework "Pods-Movies/MCSwipeTableViewCell.framework"
   install_framework "Pods-Movies/MXParallaxHeader.framework"
+  install_framework "Pods-Movies/ObjectMapper.framework"
   install_framework "Pods-Movies/PZPullToRefresh.framework"
   install_framework "Pods-Movies/SFFocusViewLayout.framework"
   install_framework "Pods-Movies/THCalendarDatePicker.framework"

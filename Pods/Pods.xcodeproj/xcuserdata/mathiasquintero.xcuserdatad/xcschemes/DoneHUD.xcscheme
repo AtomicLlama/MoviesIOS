@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '8467F4BBCCB564F531E15A99'
+               BlueprintIdentifier = 'FEA66C049F350535E31479A9'
                BlueprintName = 'DoneHUD'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'DoneHUD.framework'>

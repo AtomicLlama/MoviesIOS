@@ -43,8 +43,8 @@ class ShowtimesDataFetcher:NSObject, CLLocationManagerDelegate {
     func updated() {
         let location = ShowtimesDataFetcher.locationManager.location
         if let locationUnwrapped = location, unwrappedMovie = movie {
-            let baseURL = "http://moviesbackend.herokuapp.com/showtimes?movie=" + unwrappedMovie.id
-            if let url = (baseURL + "&lon=" + locationUnwrapped.coordinate.longitude.description + "&lat=" + locationUnwrapped.coordinate.latitude.description + (getDaysFromNow() < 1 ? "" : "&date=" + getDaysFromNow().description)).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()), id = user?.id, token = user?.token  {
+            let baseURL = "http://moviesbackend.herokuapp.com/showtimes/" + unwrappedMovie.id.description
+            if let url = (baseURL + "?lon=" + locationUnwrapped.coordinate.longitude.description + "&lat=" + locationUnwrapped.coordinate.latitude.description + (getDaysFromNow() < 1 ? "" : "&date=" + getDaysFromNow().description)).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()), id = user?.id, token = user?.token  {
                 if request == nil {
                     request = Alamofire.request(.GET, url).authenticate(user: id, password: token).responseJSON() { (response) in
                         if let times = response.result.value as? [AnyObject] {

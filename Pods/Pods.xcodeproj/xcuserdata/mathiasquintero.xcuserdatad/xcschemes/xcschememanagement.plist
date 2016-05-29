@@ -44,12 +44,32 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Movies-AlamofireObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Movies-ObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Movies.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-Watch Extension-Alamofire.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Watch Extension-AlamofireObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Watch Extension-ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -82,7 +102,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>067E9810F3B5961439BFAAD0A644F34F</key>
+		<key>041F372229DA02B12533FBE044F71377</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0B7C441B8EE22E1E5446C265F1414C07</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0D634FC14AF37280A873C41CBEA96518</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,12 +122,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2CCAB59198AA70E11E732F46BD63ED28</key>
+		<key>4DA35E1A15DB83797E13B07E86142770</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>54CA9E67D713378F1A796E54F7BF6EB8</key>
+		<key>522C881014040EB462B8316C90807EE8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,22 +142,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>72973F6ABD0AE3E267460DD3CE96F08E</key>
+		<key>6D7302818E94A9EB6090095A4143DA86</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>88D4C7E2AF2C33BED61FC29D0D277DD4</key>
+		<key>7E5C6EFB8C5B3E8E03A17DA7C2FA60E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>917C5E0C136C12540077F8717590C9D0</key>
+		<key>9BFC664ACF55CB81BED1970551DC84FE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>91F53E59CCE00DCA585E5C05724117B3</key>
+		<key>A37B1DF4C894069B75368598C348CD30</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,7 +167,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DC1807BEEC88F08A49A77B40438C7977</key>
+		<key>C881AC603B900BAB55BD4884473F1502</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CF96002912F473CF5A41DA91FDCC7245</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EBAC8BBD29417A8FC7F1C782C9533506</key>
 		<dict>
 			<key>primary</key>
 			<true/>

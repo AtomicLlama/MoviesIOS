@@ -15,7 +15,7 @@ protocol PersonBioDataSource {
     func picture() -> UIImage?
 }
 
-class PersonViewController: UITableViewController, MovieDetailDataSource, ActorFetchDataReceiver, MovieReceiverProtocol {
+class PersonViewController: UITableViewController, MovieDetailDataSource, MovieReceiverProtocol {
     
     var likeButton: UIBarButtonItem?
     
@@ -42,25 +42,16 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, ActorF
         tableView.reloadData()
     }
     
-    func receiverOfImage() -> MovieReceiverProtocol? {
-        return self
-    }
-    
     func moviesArrived(newMovies: [Movie]) {
         self.movies = newMovies
+        for movie in newMovies {
+            movie.subscribeToImage(self)
+        }
         tableView.reloadData()
         
     }
     
     var delegate: PersonBioDataSource?
-    
-    func receiveMoviesFromActor(movies: [Movie]?) {
-        if let unwrapped = movies {
-            self.movies = unwrapped
-            tableView.reloadData()
-        }
-    }
-    
     
     var movies = [Movie]()
     
@@ -163,7 +154,7 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, ActorF
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if let actor = delegate?.currentPerson() {
-            if actor.id == "2963" && loadingForFirstTime {
+            if actor.id == 2963 && loadingForFirstTime {
                 cageNotification = JFMinimalNotification(style: JFMinimalNotificationStyle.Success, title: "Congratulations!", subTitle: "You've reached Nic Cage!!!", dismissalDelay: 4.0)
                 cageNotification = JFMinimalNotification(style: JFMinimalNotificationStyle.Success, title: "Congratulations!", subTitle: "You've reached Nic Cage!!!", dismissalDelay: 4.0, touchHandler: self.dismissNotification)
                 cageNotification?.presentFromTop = true

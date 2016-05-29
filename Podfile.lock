@@ -1,11 +1,15 @@
 PODS:
-  - Alamofire (3.0.0)
+  - Alamofire (3.4.0)
+  - AlamofireObjectMapper (3.0.0):
+    - Alamofire (~> 3.2)
+    - ObjectMapper (~> 1.0)
   - DoneHUD (1.0.0)
   - GMStepper (1.1.0)
   - JFMinimalNotifications (0.0.5)
   - KNSemiModalViewController_hons82 (0.4.4)
   - MCSwipeTableViewCell (2.1.4)
   - MXParallaxHeader (0.5.0)
+  - ObjectMapper (1.3.0)
   - PZPullToRefresh (0.0.7)
   - SFFocusViewLayout (3.0.0)
   - THCalendarDatePicker (1.2.5):
@@ -13,25 +17,29 @@ PODS:
   - YouTubePlayer (0.3.0)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (~> 3.2)
+  - AlamofireObjectMapper (~> 3.0)
   - DoneHUD
   - GMStepper
   - JFMinimalNotifications (~> 0.0.4)
   - MCSwipeTableViewCell (~> 2.1.4)
   - MXParallaxHeader
+  - ObjectMapper (~> 1.1)
   - PZPullToRefresh
   - SFFocusViewLayout
   - THCalendarDatePicker (~> 1.2.5)
   - YouTubePlayer (~> 0.2)
 
 SPEC CHECKSUMS:
-  Alamofire: b61782387f81bcc538a0284cf2bb5d7995cd0a80
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  AlamofireObjectMapper: 2d16585d06177be0116d76de73497e77437798af
   DoneHUD: e3717eefe0ed8a977153024400693e100a3bc0e9
   GMStepper: 3b7922778a80e0eab89a55003ca36b25fc2393b7
   JFMinimalNotifications: c0d1eba2b826c1599416880dd48059c9153a6d9a
   KNSemiModalViewController_hons82: 22aead5ef5d8ca749bc1babb43fa7d6f14b030a3
   MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
   MXParallaxHeader: c7dfdf8d769a8eb868a431ec3aeaf994a147b8bc
+  ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
   PZPullToRefresh: a596d42b90ca42f979f181b5f35c4820406c2136
   SFFocusViewLayout: 4766bec5d2214038526d5e03d08405f1f126688d
   THCalendarDatePicker: 65c63c1814d1a27defc89f4b72ec7a1d01d5503d

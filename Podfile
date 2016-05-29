@@ -6,7 +6,7 @@ use_frameworks!
 
 target "Movies" do
 	xcodeproj 'Movies.xcodeproj'
-	pod 'Alamofire'
+	pod 'Alamofire', '~> 3.2'
 	pod 'PZPullToRefresh'
 	pod "MXParallaxHeader"
 	pod 'JFMinimalNotifications', '~> 0.0.4'
@@ -15,11 +15,15 @@ target "Movies" do
 	pod 'THCalendarDatePicker', '~> 1.2.5'
 	pod 'GMStepper'
 	pod 'SFFocusViewLayout'
-    pod 'DoneHUD'
+  pod 'DoneHUD'
+	pod 'ObjectMapper', '~> 1.1'
+	pod 'AlamofireObjectMapper', '~> 3.0'
 end
 
 target "Watch Extension" do
 	platform :watchos, '2.0'
 	xcodeproj 'Movies.xcodeproj'
-	pod 'Alamofire'
+	pod 'Alamofire', '~> 3.2'
+	pod 'ObjectMapper', '~> 1.1'
+	pod 'AlamofireObjectMapper', '~> 3.0'
 end

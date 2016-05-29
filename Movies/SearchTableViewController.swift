@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import ObjectMapper
 
 class SearchTableViewController: UITableViewController, UITextFieldDelegate, MovieReceiverProtocol, MovieDetailDataSource, PersonBioDataSource {
     
@@ -104,69 +105,32 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                             
                             //Cast item as JSON Object and get media type to create the proper object
                             
-                            if let parsedItem = results[i] as? [String:AnyObject], medium = parsedItem["media_type"] as? String {
+                            if let parsedItem = results[i] as? [String:AnyObject], medium = parsedItem["media_type"] as? String, id = parsedItem["id"] as? Int {
                                 
                                 //Check if it's a movie or a person
                                 
                                 if medium == "movie" {
-                                    let movieAsDictionary = parsedItem
-                                    
-                                    //Get Movie Data
-                                    
-                                    if let id = movieAsDictionary["id"] as? Int, title = movieAsDictionary["title"] as? String, plot = movieAsDictionary["overview"] as? String, year = movieAsDictionary["release_date"] as? String, rating = movieAsDictionary["vote_average"] as? Double, poster = movieAsDictionary["poster_path"] as? String {
-                                        
-                                        //Check if movie was cached
-                                        
-                                        if let alreadyKnownMovie = self.delegate?.knownMovie(id.description) {
-                                            self.elements.append(alreadyKnownMovie)
-                                            self.tableView.reloadData()
-                                        } else {
-                                            
-                                            //Create object
-                                            
-                                            let yearOnly: [String]
-                                            if year == "" {
-                                                yearOnly = [1970.description]
-                                            } else {
-                                                yearOnly = year.componentsSeparatedByString("-")
-                                            }
-                                            let newMovie = Movie(title: title, year: Int(yearOnly[0])!, rating: rating, description: plot, id: id.description, posterURL: "https://image.tmdb.org/t/p/w500" + poster, handler: self, dataSource: self.delegate)
-                                            self.delegate?.learnMovie(id.description, movie: newMovie)
-                                            self.elements.append(newMovie)
+                                    if let alreadyKnownMovie = self.delegate?.knownMovie(id.description) {
+                                        self.elements.append(alreadyKnownMovie)
+                                        self.tableView.reloadData()
+                                    } else {
+                                        if let movie = Mapper<Movie>().map(parsedItem) {
+                                            self.delegate?.learnMovie(id.description, movie: movie)
+                                            self.elements.append(movie)
                                             self.tableView.reloadData()
                                         }
                                     }
                                 } else if medium == "person" {
-                                    
-                                    //Get person data
-                                    
-                                    if let actorID = parsedItem["id"] as? Int, name = parsedItem["name"] as? String {
-                                        
-                                        //Check if person was cached
-                                        
-                                        if let knownPerson = self.delegate?.knownPerson(actorID.description) {
-                                            self.elements.append(knownPerson)
-                                            if i == min(results.count-1,5) {
-                                                self.results[searchString!] = self.elements
-                                            }
-                                        } else {
-                                            
-                                            //Create object
-                                            
-                                            let actorAsObject: Actor
-                                            if let pic = parsedItem["profile_path"] as? String {
-                                                actorAsObject = Actor(name: name, pic: "https://image.tmdb.org/t/p/w185" + pic, id: actorID.description, delegate: self.delegate)
-                                            } else {
-                                                actorAsObject = Actor(name: name, pic: nil, id: actorID.description, delegate: self.delegate)
-                                            }
-                                            self.elements.append(actorAsObject)
-                                            self.delegate?.learnPerson(actorID.description, actor: actorAsObject)
+                                    if let knownPerson = self.delegate?.knownPerson(id.description) {
+                                        self.elements.append(knownPerson)
+                                        self.tableView.reloadData()
+                                    } else {
+                                        if let actor = Mapper<Actor>().map(parsedItem) {
+                                            self.elements.append(actor)
+                                            self.delegate?.learnPerson(id.description, actor: actor)
                                         }
                                     }
                                 }
-                                
-                                //Cache Results to minimize damage on network when deleting characters
-                                
                                 if i == min(results.count-1,9) {
                                     self.results[searchString!] = self.elements
                                 }
