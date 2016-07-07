@@ -88,7 +88,7 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
     func datePickerCancelPressed(datePicker: THDatePickerViewController!) {
         dismissSemiModalView()
     }
-    
+    w
     func convertCfTypeToString(cfValue: Unmanaged<NSString>!) -> String?{
         /* Coded by Vandad Nahavandipoor */
         let value = Unmanaged<CFStringRef>.fromOpaque(
@@ -207,6 +207,7 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
                 if section == 0 {
                     return movie?.streamingLinks.count ?? 0
                 }
+                return timesForTheatre[section - 1].1.count
             }
         }
         return timesForTheatre[section].1.count

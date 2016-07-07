@@ -15,7 +15,7 @@ target "Movies" do
 	pod 'THCalendarDatePicker', '~> 1.2.5'
 	pod 'GMStepper'
 	pod 'SFFocusViewLayout'
-  pod 'DoneHUD'
+        pod 'DoneHUD'
 	pod 'ObjectMapper', '~> 1.1'
 	pod 'AlamofireObjectMapper', '~> 3.0'
 end
