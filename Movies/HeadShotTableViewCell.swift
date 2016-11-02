@@ -28,8 +28,8 @@ class HeadShotTableViewCell: UITableViewCell {
         didSet {
             headShotView.layer.cornerRadius = CGFloat (headShotView.frame.width / 2)
             headShotView.clipsToBounds = true
-            headShotView.layer.frame = CGRectInset(headShotView.layer.frame, 20, 20)
-            headShotView.layer.borderColor = Constants.tintColor.CGColor
+            headShotView.layer.frame = headShotView.layer.frame.insetBy(dx: 20, dy: 20)
+            headShotView.layer.borderColor = Constants.tintColor.cgColor
             headShotView.layer.borderWidth = 2.0
         }
     }

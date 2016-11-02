@@ -20,7 +20,7 @@ class DescriptionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var descriptionLabel: UILabel! {
         didSet {
-            backgroundColor = UIColor.clearColor()
+            backgroundColor = UIColor.clear
         }
     }
     

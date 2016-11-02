@@ -11,7 +11,7 @@ import FBSDKLoginKit
 
 class MoviesTabBarController: UITabBarController, UITabBarControllerDelegate {
     
-    @IBAction func unwindToViewControllerNameHere(segue: UIStoryboardSegue) {
+    @IBAction func unwindToViewControllerNameHere(_ segue: UIStoryboardSegue) {
 
     }
 
@@ -21,16 +21,16 @@ class MoviesTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if FBSDKAccessToken.currentAccessToken() != nil {
+        if FBSDKAccessToken.current() != nil {
             currentUser = User(fetcher: dataFetcher)
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
     func showLoginScreen() {
-        performSegueWithIdentifier("loginAnimated", sender: self)
+        performSegue(withIdentifier: "loginAnimated", sender: self)
     }
 }

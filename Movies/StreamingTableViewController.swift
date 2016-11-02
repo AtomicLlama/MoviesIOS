@@ -10,7 +10,7 @@ import UIKit
 
 class StreamingTableViewController: UITableViewController {
     
-    let spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    let spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     
     var delegate: MovieDetailDataSource?
 
@@ -20,7 +20,7 @@ class StreamingTableViewController: UITableViewController {
         view.addSubview(spinner)
         spinner.startAnimating()
         title = "Streaming Options"
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         delegate?.currentMovieForDetail()?.fetchStreamingLinks() { () in
             self.tableView.reloadData()
             self.spinner.stopAnimating()
@@ -34,11 +34,11 @@ class StreamingTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if delegate?.currentMovieForDetail()?.linksLoaded ?? false {
             if delegate?.currentMovieForDetail()?.streamingLinks.isEmpty ?? false {
                 return 1
@@ -48,22 +48,22 @@ class StreamingTableViewController: UITableViewController {
         return delegate?.currentMovieForDetail()?.streamingLinks.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if delegate?.currentMovieForDetail()?.linksLoaded ?? true && delegate?.currentMovieForDetail()?.streamingLinks.isEmpty ?? false {
-            let cell = tableView.dequeueReusableCellWithIdentifier("error", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "error", for: indexPath)
             return cell
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("link", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "link", for: indexPath)
         cell.textLabel?.text = delegate?.currentMovieForDetail()?.streamingLinks[indexPath.row].0
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if delegate?.currentMovieForDetail()?.streamingLinks.isEmpty ?? true {
             return
         }
-        if let link = delegate?.currentMovieForDetail()?.streamingLinks[indexPath.row].1, url = NSURL(string: link) {
-            UIApplication.sharedApplication().openURL(url)
+        if let link = delegate?.currentMovieForDetail()?.streamingLinks[indexPath.row].1, let url = URL(string: link) {
+            UIApplication.shared.openURL(url)
         }
     }
 

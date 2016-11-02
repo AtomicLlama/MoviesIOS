@@ -20,49 +20,49 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
     
     var noTimes = false
     
-    func getDaysFromNow(date: NSDate) -> Int {
-        let calendar = NSCalendar.currentCalendar()
-        let difference = calendar.components(.Day, fromDate: NSDate(), toDate: date, options: [])
-        return difference.day
+    func getDaysFromNow(_ date: Date) -> Int {
+        let calendar = Calendar.current
+        let difference = (calendar as NSCalendar).components(.day, from: Date(), to: date, options: [])
+        return difference.day!
     }
     
-    var currentDate = NSDate() {
+    var currentDate = Date() {
         didSet {
             let days = getDaysFromNow(currentDate)
-            let formatter = NSDateFormatter()
+            let formatter = DateFormatter()
             formatter.dateFormat = "EEEE"
             if days == 0 {
                 barButton?.title = "Today"
             } else if days < 7 {
-                barButton?.title = formatter.stringFromDate(currentDate)
+                barButton?.title = formatter.string(from: currentDate)
             } else {
                 formatter.dateFormat = "EEE dd MMM"
-                barButton?.title = formatter.stringFromDate(currentDate)
+                barButton?.title = formatter.string(from: currentDate)
             }
         }
     }
     
-    let spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.WhiteLarge)
+    let spinner = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
     
-    lazy var datePicker:THDatePickerViewController = {
+    lazy var datePicker:THDatePickerViewController? = {
         var dp = THDatePickerViewController.datePicker()
-        dp.delegate = self
-        dp.setAllowClearDate(false)
-        dp.setClearAsToday(true)
-        dp.setAutoCloseOnSelectDate(false)
-        dp.setAllowSelectionOfSelectedDate(true)
-        dp.setDisableHistorySelection(true)
-        dp.setDisableFutureSelection(false)
-        dp.selectedBackgroundColor = Constants.tintColor
-        dp.currentDateColor = Constants.tintColor
-        dp.currentDateColorSelected = UIColor.whiteColor()
+        dp?.delegate = self
+        dp?.setAllowClearDate(false)
+        dp?.setClearAsToday(true)
+        dp?.setAutoCloseOnSelectDate(false)
+        dp?.setAllowSelectionOfSelectedDate(true)
+        dp?.setDisableHistorySelection(true)
+        dp?.setDisableFutureSelection(false)
+        dp?.selectedBackgroundColor = Constants.tintColor
+        dp?.currentDateColor = Constants.tintColor
+        dp?.currentDateColorSelected = UIColor.white
         return dp
     }()
     
-    func selectDate(sender: AnyObject?) {
-        datePicker.date = currentDate
-        datePicker.setDateHasItemsCallback() { (date: NSDate!) -> Bool in
-            return self.getDaysFromNow(date) >= 0
+    func selectDate(_ sender: AnyObject?) {
+        datePicker?.date = currentDate
+        datePicker?.setDateHasItemsCallback() { (date: Date?) -> Bool in
+            return self.getDaysFromNow(date ?? Date()) >= 0
         }
         presentSemiViewController(datePicker, withOptions: [
             convertCfTypeToString(KNSemiModalOptionKeys.shadowOpacity) as String! : 0.3 as Float,
@@ -72,11 +72,11 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         
     }
     
-    func datePickerDonePressed(datePicker: THDatePickerViewController!) {
+    func datePickerDonePressed(_ datePicker: THDatePickerViewController!) {
         dismissSemiModalView()
     }
     
-    func datePicker(datePicker: THDatePickerViewController!, selectedDate: NSDate!) {
+    func datePicker(_ datePicker: THDatePickerViewController!, selectedDate: Date!) {
         if getDaysFromNow(selectedDate) >= 0 {
             currentDate = selectedDate
             reload()
@@ -85,14 +85,14 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         }
     }
     
-    func datePickerCancelPressed(datePicker: THDatePickerViewController!) {
+    func datePickerCancelPressed(_ datePicker: THDatePickerViewController!) {
         dismissSemiModalView()
     }
-    w
-    func convertCfTypeToString(cfValue: Unmanaged<NSString>!) -> String?{
+    
+    func convertCfTypeToString(_ cfValue: Unmanaged<NSString>!) -> String?{
         /* Coded by Vandad Nahavandipoor */
-        let value = Unmanaged<CFStringRef>.fromOpaque(
-            cfValue.toOpaque()).takeUnretainedValue() as CFStringRef
+        let value = Unmanaged<CFString>.fromOpaque(
+            cfValue.toOpaque()).takeUnretainedValue() as CFString
         if CFGetTypeID(value) == CFStringGetTypeID(){
             return value as String
         } else {
@@ -108,9 +108,9 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         view.addSubview(spinner)
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.backgroundColor = Constants.tintColor
-        barButton = UIBarButtonItem(title: "Today", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MovieTimesDetailTableViewController.selectDate(_:)))
+        barButton = UIBarButtonItem(title: "Today", style: UIBarButtonItemStyle.plain, target: self, action: #selector(MovieTimesDetailTableViewController.selectDate(_:)))
         navigationItem.rightBarButtonItem = barButton
         loadForDate()
     }
@@ -119,7 +119,7 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         movie?.fetchStreamingLinks() { () in
             self.tableView.reloadData()
         }
-        if let unwrappedMovie = movie, mvc = self.tabBarController as? MoviesTabBarController, user = mvc.currentUser {
+        if let unwrappedMovie = movie, let mvc = self.tabBarController as? MoviesTabBarController, let user = mvc.currentUser {
             if unwrappedMovie.getTimesForDate(currentDate).isEmpty {
                 spinner.startAnimating()
                 fetcher.fetchMovieTimes(unwrappedMovie, handler: self.reload, date: currentDate, user: user)
@@ -131,7 +131,7 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         }
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
         reOrder()
     }
@@ -163,14 +163,14 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
             }
             locationManager.startUpdatingLocation()
         }
-        tableView.separatorColor = noTimes ? UIColor.clearColor() : UIColor.whiteColor()
+        tableView.separatorColor = noTimes ? UIColor.clear : UIColor.white
         tableView.reloadData()
     }
     
     func reOrder() {
         if let location = locationManager.location {
-            timesForTheatre.sortInPlace() { (a,b) in
-                return a.0.location.distanceFromLocation(location) < b.0.location.distanceFromLocation(location)
+            timesForTheatre.sort() { (a,b) in
+                return a.0.location.distance(from: location) < b.0.location.distance(from: location)
             }
         }
         tableView.reloadData()
@@ -186,7 +186,7 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         if noTimes {
             return 1
         }
@@ -198,7 +198,7 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         return timesForTheatre.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if noTimes {
             return 1
         }
@@ -213,7 +213,7 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         return timesForTheatre[section].1.count
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if noTimes {
             return nil
         }
@@ -229,52 +229,52 @@ class MovieTimesDetailTableViewController: UITableViewController, CLLocationMana
         return timesForTheatre[section].0.name
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if noTimes {
-            let cell = tableView.dequeueReusableCellWithIdentifier("error") ?? UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "error") ?? UITableViewCell()
             return cell
         }
         if movie?.linksLoaded ?? false {
             if !(movie?.streamingLinks.isEmpty ?? true) {
                 if indexPath.section == 0 {
-                    let cell = tableView.dequeueReusableCellWithIdentifier("link") as? StreamingItemTableViewCell ?? StreamingItemTableViewCell()
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "link") as? StreamingItemTableViewCell ?? StreamingItemTableViewCell()
                     cell.service = movie?.streamingLinks[indexPath.row].0
                     cell.posterView.image = movie?.poster
                     return cell
                 } else {
-                    let cell = tableView.dequeueReusableCellWithIdentifier("time") as? MovieTimeTableViewCell ?? MovieTimeTableViewCell()
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "time") as? MovieTimeTableViewCell ?? MovieTimeTableViewCell()
                     cell.posterImage.image = movie?.poster
                     cell.item = timesForTheatre[indexPath.section-1].1[indexPath.row]
                     return cell
                 }
             }
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("time") as? MovieTimeTableViewCell ?? MovieTimeTableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "time") as? MovieTimeTableViewCell ?? MovieTimeTableViewCell()
         cell.posterImage.image = movie?.poster
         cell.item = timesForTheatre[indexPath.section].1[indexPath.row]
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if movie?.linksLoaded ?? false {
             if !(movie?.streamingLinks.isEmpty ?? true) {
                 if indexPath.section == 0 {
-                    if let link = movie?.streamingLinks[indexPath.row].1, url = NSURL(string: link) {
-                        UIApplication.sharedApplication().openURL(url)
+                    if let link = movie?.streamingLinks[indexPath.row].1, let url = URL(string: link) {
+                        UIApplication.shared.openURL(url)
                     }
                 }
             }
         }
     }
     
-    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
             header.contentView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
             header.textLabel?.textColor = Constants.tintColor
         }
     }
     
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return !noTimes
     }
 

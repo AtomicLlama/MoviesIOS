@@ -8,7 +8,7 @@
 
 import Foundation
 class NullShowtime: Showtime {
-    init(time: NSDate) {
+    init(time: Date) {
         super.init(name: "", time: time, theatre: Theatre())
     }
 }

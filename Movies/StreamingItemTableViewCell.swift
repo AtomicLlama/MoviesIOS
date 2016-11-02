@@ -13,7 +13,7 @@ class StreamingItemTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var posterView: UIImageView! {
         didSet {
-            self.backgroundColor = UIColor.clearColor()
+            self.backgroundColor = UIColor.clear
             posterView.clipsToBounds = true
         }
     }
@@ -29,7 +29,7 @@ class StreamingItemTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

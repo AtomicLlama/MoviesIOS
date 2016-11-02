@@ -8,10 +8,10 @@
 
 import Foundation
 protocol WatchListGetter {
-    func getWatchList(handler: ([Int]) -> ())
-    func addToWatchList(movieID: Int)
-    func removeFromWatchList(movieID: Int)
-    func getSubscriptions(handler: ([Int]) -> ())
-    func addSubscription(movieID: Int)
-    func removeSubscription(movieID: Int)
+    func getWatchList(_ handler: @escaping ([Int]) -> ())
+    func addToWatchList(_ movieID: Int)
+    func removeFromWatchList(_ movieID: Int)
+    func getSubscriptions(_ handler: @escaping ([Int]) -> ())
+    func addSubscription(_ movieID: Int)
+    func removeSubscription(_ movieID: Int)
 }

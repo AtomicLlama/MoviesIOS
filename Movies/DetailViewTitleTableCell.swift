@@ -44,7 +44,7 @@ class DetailViewTitleTableCell: UITableViewCell {
     
     @IBOutlet weak var yearLabel: UILabel! {
         didSet {
-            backgroundColor = UIColor.clearColor()
+            backgroundColor = UIColor.clear
         }
     }
     

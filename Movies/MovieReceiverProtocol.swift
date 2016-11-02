@@ -8,6 +8,6 @@
 
 import Foundation
 protocol MovieReceiverProtocol {
-    func moviesArrived(newMovies: [Movie])
+    func moviesArrived(_ newMovies: [Movie])
     func imageDownloaded()
 }

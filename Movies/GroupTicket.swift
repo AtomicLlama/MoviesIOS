@@ -12,7 +12,7 @@ class GroupTicket: TicketEntity {
     
     var tickets = [Ticket]()
     
-    func addTicket(ticket: Ticket) {
+    func addTicket(_ ticket: Ticket) {
         tickets.append(ticket)
     }
     

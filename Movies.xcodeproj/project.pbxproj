@@ -98,8 +98,8 @@
 		0EF659CC1C53BF5500B3E446 /* FriendListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF659CB1C53BF5500B3E446 /* FriendListTableViewController.swift */; };
 		0EF7A0821C2DD5DE0003A836 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 0EECBFA61BFA365200B7CA9A /* Watch.app */; };
 		0EFCF2841C2051510058C940 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EFCF2831C2051510058C940 /* Contants.swift */; };
-		D0D41EA42392CED3AB0FA314 /* Pods_Movies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8AAD5DEA76F2E6BA05990F0 /* Pods_Movies.framework */; };
-		FD7961A820E3B12DB2CA7189 /* Pods_Watch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C8C449B6A7C480E5218CBCB /* Pods_Watch_Extension.framework */; };
+		99179E6578383AF7AA35917F /* Pods_Movies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ED9E03E7F033C34ADA0CE8D /* Pods_Movies.framework */; };
+		FAB4AB947AB54707DD0622B1 /* Pods_Watch_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00EC9328C655B1CD8E63E9C4 /* Pods_Watch_Extension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +162,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00EC9328C655B1CD8E63E9C4 /* Pods_Watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E01AE771BF7F1F1006AB17C /* LanguagePreferenceSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagePreferenceSelector.swift; sourceTree = "<group>"; };
 		0E01AE791BF7F208006AB17C /* DistancePreferenceSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistancePreferenceSelector.swift; sourceTree = "<group>"; };
 		0E0715051CE77BAD00B57F02 /* AllCastTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllCastTableViewController.swift; sourceTree = "<group>"; };
@@ -249,12 +250,11 @@
 		0EF659C91C53A2D000B3E446 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		0EF659CB1C53BF5500B3E446 /* FriendListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendListTableViewController.swift; sourceTree = "<group>"; };
 		0EFCF2831C2051510058C940 /* Contants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
-		2C8C449B6A7C480E5218CBCB /* Pods_Watch_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Watch_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D712A6E502E358FA3BB0F32 /* Pods-Watch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Watch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension.release.xcconfig"; sourceTree = "<group>"; };
-		751FC8FFA0320E07CB97CA65 /* Pods-Watch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Watch Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension.debug.xcconfig"; sourceTree = "<group>"; };
-		CA80018F40DEC6FC392E8C5B /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
-		F8AAD5DEA76F2E6BA05990F0 /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9F9683BBB60E065F5213DAC /* Pods-Movies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.release.xcconfig"; sourceTree = "<group>"; };
+		15BF36F78A3795D26F8A2605 /* Pods-Watch Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Watch Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension.release.xcconfig"; sourceTree = "<group>"; };
+		1ED9E03E7F033C34ADA0CE8D /* Pods_Movies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Movies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45AF2939D93754C479CF3AFD /* Pods-Movies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.release.xcconfig"; sourceTree = "<group>"; };
+		6A0DBC1E6061529FA348CCE5 /* Pods-Movies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Movies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Movies/Pods-Movies.debug.xcconfig"; sourceTree = "<group>"; };
+		C041FD4F3CA9533B90925D21 /* Pods-Watch Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Watch Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,7 +265,7 @@
 				0E17A5C31BF66CCC009E7316 /* FBSDKShareKit.framework in Frameworks */,
 				0E17A5C11BF66CCC009E7316 /* FBSDKCoreKit.framework in Frameworks */,
 				0E17A5C21BF66CCC009E7316 /* FBSDKLoginKit.framework in Frameworks */,
-				D0D41EA42392CED3AB0FA314 /* Pods_Movies.framework in Frameworks */,
+				99179E6578383AF7AA35917F /* Pods_Movies.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +280,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD7961A820E3B12DB2CA7189 /* Pods_Watch_Extension.framework in Frameworks */,
+				FAB4AB947AB54707DD0622B1 /* Pods_Watch_Extension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,8 +302,8 @@
 				0E17A5BF1BF66CCC009E7316 /* FBSDKLoginKit.framework */,
 				0E17A5C01BF66CCC009E7316 /* FBSDKShareKit.framework */,
 				0E20BE641BD331DA00E87873 /* PZPullToRefresh.framework */,
-				F8AAD5DEA76F2E6BA05990F0 /* Pods_Movies.framework */,
-				2C8C449B6A7C480E5218CBCB /* Pods_Watch_Extension.framework */,
+				1ED9E03E7F033C34ADA0CE8D /* Pods_Movies.framework */,
+				00EC9328C655B1CD8E63E9C4 /* Pods_Watch_Extension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -440,7 +440,7 @@
 				0EECBFB61BFA365200B7CA9A /* Watch Extension */,
 				0EB50E9F1BCFAA7A00616DFD /* Products */,
 				029E702D0337169AE81C915D /* Frameworks */,
-				2C5F249E9F7F6E5A0536F0CA /* Pods */,
+				2DFBA4A32306D9B5AE0217FB /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -558,13 +558,13 @@
 			name = "Buy Tickets View";
 			sourceTree = "<group>";
 		};
-		2C5F249E9F7F6E5A0536F0CA /* Pods */ = {
+		2DFBA4A32306D9B5AE0217FB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CA80018F40DEC6FC392E8C5B /* Pods-Movies.debug.xcconfig */,
-				F9F9683BBB60E065F5213DAC /* Pods-Movies.release.xcconfig */,
-				751FC8FFA0320E07CB97CA65 /* Pods-Watch Extension.debug.xcconfig */,
-				6D712A6E502E358FA3BB0F32 /* Pods-Watch Extension.release.xcconfig */,
+				6A0DBC1E6061529FA348CCE5 /* Pods-Movies.debug.xcconfig */,
+				45AF2939D93754C479CF3AFD /* Pods-Movies.release.xcconfig */,
+				C041FD4F3CA9533B90925D21 /* Pods-Watch Extension.debug.xcconfig */,
+				15BF36F78A3795D26F8A2605 /* Pods-Watch Extension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -576,14 +576,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0EB50EBB1BCFAA7A00616DFD /* Build configuration list for PBXNativeTarget "Movies" */;
 			buildPhases = (
-				047F91E35E096D55AF661602 /* 📦 Check Pods Manifest.lock */,
+				35251A33B83776FB6C92357A /* [CP] Check Pods Manifest.lock */,
 				0EB50E9A1BCFAA7A00616DFD /* Sources */,
 				0EB50E9B1BCFAA7A00616DFD /* Frameworks */,
 				0EB50E9C1BCFAA7A00616DFD /* Resources */,
 				0EECBFCC1BFA365200B7CA9A /* Embed Watch Content */,
-				4A966146B36C8BB2ABB18822 /* 📦 Embed Pods Frameworks */,
-				FC7F576D77E3C5A7DB6426CC /* 📦 Copy Pods Resources */,
-				7B2281992ABA7D651F9C464C /* Embed Pods Frameworks */,
+				03AE43F5458F8C9383826F61 /* [CP] Embed Pods Frameworks */,
+				1346416AA645A7031F6410C4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -635,14 +634,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0EECBFC91BFA365200B7CA9A /* Build configuration list for PBXNativeTarget "Watch Extension" */;
 			buildPhases = (
-				5CAEE62C57791F4367BAC972 /* 📦 Check Pods Manifest.lock */,
+				33EE57DDC93A14E80B192F77 /* [CP] Check Pods Manifest.lock */,
 				0EECBFAE1BFA365200B7CA9A /* Sources */,
 				0EECBFAF1BFA365200B7CA9A /* Frameworks */,
 				0EECBFB01BFA365200B7CA9A /* Resources */,
 				0E4825BB1C2DCA5600C756A5 /* Embed Watch Content */,
-				3A35C80DDC3BE6E13A83A8A1 /* 📦 Embed Pods Frameworks */,
-				65174C4AA53C179A82235CE5 /* 📦 Copy Pods Resources */,
-				6917377B2BA10EB1BEEE97EE /* Embed Pods Frameworks */,
+				882D88AFB09403CE9AF077FF /* [CP] Embed Pods Frameworks */,
+				A3E21DBA4FE3676AC2EAA163 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -660,24 +658,28 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "LS1 TUM";
 				TargetAttributes = {
 					0EB50E9D1BCFAA7A00616DFD = {
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = ZGV2PY25EN;
+						LastSwiftMigration = 0810;
 					};
 					0EB50EB11BCFAA7A00616DFD = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = 0EB50E9D1BCFAA7A00616DFD;
 					};
 					0EECBFA51BFA365200B7CA9A = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = ZGV2PY25EN;
+						LastSwiftMigration = 0810;
 					};
 					0EECBFB11BFA365200B7CA9A = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = ZGV2PY25EN;
+						LastSwiftMigration = 0810;
 					};
 				};
 			};
@@ -742,44 +744,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		047F91E35E096D55AF661602 /* 📦 Check Pods Manifest.lock */ = {
+		03AE43F5458F8C9383826F61 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		3A35C80DDC3BE6E13A83A8A1 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4A966146B36C8BB2ABB18822 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -787,79 +759,79 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Movies/Pods-Movies-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5CAEE62C57791F4367BAC972 /* 📦 Check Pods Manifest.lock */ = {
+		1346416AA645A7031F6410C4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		65174C4AA53C179A82235CE5 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6917377B2BA10EB1BEEE97EE /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7B2281992ABA7D651F9C464C /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Movies/Pods-Movies-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FC7F576D77E3C5A7DB6426CC /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Movies/Pods-Movies-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		33EE57DDC93A14E80B192F77 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		35251A33B83776FB6C92357A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		882D88AFB09403CE9AF077FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3E21DBA4FE3676AC2EAA163 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Watch Extension/Pods-Watch Extension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1025,8 +997,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1048,11 +1022,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -1069,8 +1044,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1086,50 +1063,58 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		0EB50EBC1BCFAA7A00616DFD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA80018F40DEC6FC392E8C5B /* Pods-Movies.debug.xcconfig */;
+			baseConfigurationReference = 6A0DBC1E6061529FA348CCE5 /* Pods-Movies.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = ZGV2PY25EN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-20151111",
 				);
 				INFOPLIST_FILE = Movies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.AtomicLlama.Movies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Movies/Movies-Bridging-Header.h";
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Debug;
 		};
 		0EB50EBD1BCFAA7A00616DFD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9F9683BBB60E065F5213DAC /* Pods-Movies.release.xcconfig */;
+			baseConfigurationReference = 45AF2939D93754C479CF3AFD /* Pods-Movies.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = ZGV2PY25EN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/FacebookSDKs-iOS-20151111",
 				);
 				INFOPLIST_FILE = Movies/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.AtomicLlama.Movies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Movies/Movies-Bridging-Header.h";
+				SWIFT_VERSION = 3.0.1;
 			};
 			name = Release;
 		};
@@ -1140,6 +1125,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.tum.in.www1.ios15.MoviesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0.1;
 				TEST_TARGET_NAME = Movies;
 				USES_XCTRUNNER = YES;
 			};
@@ -1152,6 +1138,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = de.tum.in.www1.ios15.MoviesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0.1;
 				TEST_TARGET_NAME = Movies;
 				USES_XCTRUNNER = YES;
 			};
@@ -1160,42 +1147,48 @@
 		0EECBFC51BFA365200B7CA9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				DEVELOPMENT_TEAM = ZGV2PY25EN;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = io.AtomicLlama.Movies.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
 		0EECBFC61BFA365200B7CA9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				DEVELOPMENT_TEAM = ZGV2PY25EN;
 				IBSC_MODULE = Watch_Extension;
 				INFOPLIST_FILE = Watch/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = io.AtomicLlama.Movies.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};
 		0EECBFC71BFA365200B7CA9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 751FC8FFA0320E07CB97CA65 /* Pods-Watch Extension.debug.xcconfig */;
+			baseConfigurationReference = C041FD4F3CA9533B90925D21 /* Pods-Watch Extension.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = ZGV2PY25EN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -1207,16 +1200,19 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Debug;
 		};
 		0EECBFC81BFA365200B7CA9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6D712A6E502E358FA3BB0F32 /* Pods-Watch Extension.release.xcconfig */;
+			baseConfigurationReference = 15BF36F78A3795D26F8A2605 /* Pods-Watch Extension.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = ZGV2PY25EN;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -1228,8 +1224,9 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0.1;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
 			};
 			name = Release;
 		};

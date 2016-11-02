@@ -8,5 +8,5 @@
 
 import Foundation
 protocol TicketReceiverProtocol {
-    func receiveTickets(tickets: [TicketEntity])
+    func receiveTickets(_ tickets: [TicketEntity])
 }

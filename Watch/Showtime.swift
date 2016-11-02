@@ -10,11 +10,11 @@ import Foundation
 
 class Showtime {
     
-    let time: NSDate
+    let time: Date
     let name: String
     let theatre: Theatre
     
-    init(name: String, time: NSDate, theatre: Theatre) {
+    init(name: String, time: Date, theatre: Theatre) {
         self.name = name
         self.time = time
         self.theatre = theatre

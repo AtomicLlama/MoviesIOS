@@ -19,7 +19,7 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, MovieR
     
     var likeButton: UIBarButtonItem?
     
-    func likePerson(send: AnyObject?) {
+    func likePerson(_ send: AnyObject?) {
         if delegate?.currentPerson().toggleActorInSubscriptions() ?? false {
             likeButton?.image = UIImage(named: "Like Filled-25")
             DoneHUD.showInView(self.view.superview ?? self.view, message: "Following " + (delegate?.currentPerson().name ?? ""))
@@ -42,7 +42,7 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, MovieR
         tableView.reloadData()
     }
     
-    func moviesArrived(newMovies: [Movie]) {
+    func moviesArrived(_ newMovies: [Movie]) {
         self.movies = newMovies
         for movie in newMovies {
             movie.subscribeToImage(self)
@@ -55,7 +55,7 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, MovieR
     
     var movies = [Movie]()
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 2 {
             return (movies.count ?? 0) + 1
         } else {
@@ -63,14 +63,14 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, MovieR
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
         case 0: return headerCell()
         case 1: return descriptionCell()
         default:
             if indexPath.row == movies.count ?? 0 {
-                let cell = tableView.dequeueReusableCellWithIdentifier("allmovies") ?? UITableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: "allmovies") ?? UITableViewCell()
                 return cell
             } else {
                 return movieCell(indexPath.row)
@@ -79,34 +79,34 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, MovieR
         
     }
     
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section == 2
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2 && indexPath.row != movies.count {
             currentMovie = movies[indexPath.row]
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
     func headerCell() -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("person") as? HeadShotTableViewCell ?? HeadShotTableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "person") as? HeadShotTableViewCell ?? HeadShotTableViewCell()
         cell.person = delegate?.currentPerson()
         return cell
     }
     
     func descriptionCell() -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("description") as? DescriptionTableViewCell ?? DescriptionTableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "description") as? DescriptionTableViewCell ?? DescriptionTableViewCell()
         cell.descriptionText = delegate?.currentPerson().bio
         return cell
     }
     
-    func movieCell(movie: Int) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("movie") as? ClearMovieTableViewCell ?? ClearMovieTableViewCell()
+    func movieCell(_ movie: Int) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movie") as? ClearMovieTableViewCell ?? ClearMovieTableViewCell()
         cell.movie = movies[movie]
         return cell
     }
@@ -115,12 +115,12 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, MovieR
         return currentMovie
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destiationViewController = segue.destinationViewController as? MovieDetailViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destiationViewController = segue.destination as? MovieDetailViewController {
             destiationViewController.movieDataSource = self
             currentMovie?.subscribeToImage(destiationViewController)
         }
-        if let mvc = segue.destinationViewController as? AllMoviesFromActorTableViewController {
+        if let mvc = segue.destination as? AllMoviesFromActorTableViewController {
             mvc.delegate = self.delegate
         }
     }
@@ -129,8 +129,8 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, MovieR
         super.viewDidLoad()
         tableView.estimatedRowHeight = 400
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.tableFooterView = UIView(frame: CGRectZero)
-        likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PersonViewController.likePerson(_:)))
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(PersonViewController.likePerson(_:)))
         navigationItem.rightBarButtonItem = likeButton
         if let actorUnwrapped = delegate?.currentPerson() {
             if actorUnwrapped.isActorInSubscriptions() {
@@ -140,10 +140,10 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, MovieR
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
         if movies.count == 0 {
             delegate?.currentPerson().fetchMovies(self, all: false)
@@ -151,12 +151,12 @@ class PersonViewController: UITableViewController, MovieDetailDataSource, MovieR
         title = delegate?.currentPerson().name
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let actor = delegate?.currentPerson() {
             if actor.id == 2963 && loadingForFirstTime {
-                cageNotification = JFMinimalNotification(style: JFMinimalNotificationStyle.Success, title: "Congratulations!", subTitle: "You've reached Nic Cage!!!", dismissalDelay: 4.0)
-                cageNotification = JFMinimalNotification(style: JFMinimalNotificationStyle.Success, title: "Congratulations!", subTitle: "You've reached Nic Cage!!!", dismissalDelay: 4.0, touchHandler: self.dismissNotification)
+                cageNotification = JFMinimalNotification(style: JFMinimalNotificationStyle.success, title: "Congratulations!", subTitle: "You've reached Nic Cage!!!", dismissalDelay: 4.0)
+                cageNotification = JFMinimalNotification(style: JFMinimalNotificationStyle.success, title: "Congratulations!", subTitle: "You've reached Nic Cage!!!", dismissalDelay: 4.0, touchHandler: self.dismissNotification)
                 cageNotification?.presentFromTop = true
                 cageNotification?.edgePadding = UIEdgeInsetsMake(60, 0, 0, 0)
                 cageNotification?.backgroundColor = Constants.tintColor

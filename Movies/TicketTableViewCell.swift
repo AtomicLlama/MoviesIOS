@@ -7,6 +7,19 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class TicketTableViewCell: UITableViewCell {
 
@@ -24,8 +37,8 @@ class TicketTableViewCell: UITableViewCell {
                 } else if let groupTicket = ticketObject as? GroupTicket {
                     ticketTypeImageView.image = UIImage(named: "group")
                     ticketTypeLabel.text = "Group"
-                    let sortedTickets = groupTicket.tickets.sort() { return $0.0.seat < $0.1.seat }
-                    if let firstSeat = sortedTickets.first?.seat, lastSeat = sortedTickets.last?.seat {
+                    let sortedTickets = groupTicket.tickets.sorted() { return $0.0.seat < $0.1.seat }
+                    if let firstSeat = sortedTickets.first?.seat, let lastSeat = sortedTickets.last?.seat {
                         SeatLabel.text = firstSeat + " - " + lastSeat
                     }
                 }
@@ -36,7 +49,7 @@ class TicketTableViewCell: UITableViewCell {
     @IBOutlet weak var movieImageView: UIImageView! {
         didSet {
             movieImageView.clipsToBounds = true
-            backgroundColor = UIColor.clearColor()
+            backgroundColor = UIColor.clear
         }
     }
     @IBOutlet weak var ticketTypeImageView: UIImageView!
@@ -49,7 +62,7 @@ class TicketTableViewCell: UITableViewCell {
         didSet {
             cardBackgroundView.layer.shadowOpacity = 0.4
             cardBackgroundView.layer.shadowOffset = CGSize(width: 3.0, height: 2.0)
-            selectionStyle = UITableViewCellSelectionStyle.None
+            selectionStyle = UITableViewCellSelectionStyle.none
         }
     }
     

@@ -17,7 +17,7 @@ class ActorTableViewCell: MCSwipeTableViewCell {
     
     var actor: (Actor, String)? {
         didSet {
-            if let unwrappedActor = actor?.0, role = actor?.1{
+            if let unwrappedActor = actor?.0, let role = actor?.1{
                 nameLabel.text = unwrappedActor.name
                 roleLabel.text = role
                 if let imageOfActor = unwrappedActor.headshot {
@@ -35,7 +35,7 @@ class ActorTableViewCell: MCSwipeTableViewCell {
     @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var headshotImageView: UIImageView! {
         didSet {
-            backgroundColor = UIColor.clearColor()
+            backgroundColor = UIColor.clear
             setUpImageView()
         }
     }
@@ -43,8 +43,8 @@ class ActorTableViewCell: MCSwipeTableViewCell {
     func setUpImageView() {
         headshotImageView.layer.cornerRadius = CGFloat (headshotImageView.frame.width / 2)
         headshotImageView.clipsToBounds = true
-        headshotImageView.layer.frame = CGRectInset(headshotImageView.layer.frame, 20, 20)
-        headshotImageView.layer.borderColor = color.CGColor
+        headshotImageView.layer.frame = headshotImageView.layer.frame.insetBy(dx: 20, dy: 20)
+        headshotImageView.layer.borderColor = color.cgColor
         headshotImageView.layer.borderWidth = 2.0
     }
 }

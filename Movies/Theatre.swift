@@ -22,10 +22,10 @@ class Theatre {
     init(name: String, location: String) {
         self.name = name
         self.location = CLLocation(latitude: 0, longitude: 0)
-        if let url = ("http://maps.google.com/maps/api/geocode/json?sensor=false&address=" + location).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
-            Alamofire.request(.GET, url).responseJSON() { (response) in
-                if let data = response.result.value as? [String:AnyObject], results = data["results"] as? [AnyObject], result = results.first as? [String:AnyObject], geo = result["geometry"] as? [String:AnyObject], loc = geo["location"] as? [String:AnyObject] {
-                    if let lat = loc["lat"] as? Double, lon = loc["lng"] as? Double {
+        if let url = ("http://maps.google.com/maps/api/geocode/json?sensor=false&address=" + location).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlFragmentAllowed) {
+            Alamofire.request(url).responseJSON() { (response) in
+                if let data = response.result.value as? [String:AnyObject], let results = data["results"] as? [AnyObject], let result = results.first as? [String:AnyObject], let geo = result["geometry"] as? [String:AnyObject], let loc = geo["location"] as? [String:AnyObject] {
+                    if let lat = loc["lat"] as? Double, let lon = loc["lng"] as? Double {
                         self.location = CLLocation(latitude: lat, longitude: lon)
                     }
                 }

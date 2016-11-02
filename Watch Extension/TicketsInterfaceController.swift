@@ -15,7 +15,7 @@ class TicketsInterfaceController: WKInterfaceController, TicketReceiverProtocol,
     
     let fetcher = MovieDataFetcher()
     
-    func receiveTickets(tickets: [TicketEntity]) {
+    func receiveTickets(_ tickets: [TicketEntity]) {
         self.tickets = tickets
         for ticket in tickets {
             ticket.movie.subscribeToImage(self)
@@ -32,29 +32,29 @@ class TicketsInterfaceController: WKInterfaceController, TicketReceiverProtocol,
     
     @IBOutlet var table: WKInterfaceTable!
     
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
-        pushControllerWithName("ticket", context: tickets[rowIndex])
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
+        pushController(withName: "ticket", context: tickets[rowIndex])
     }
     
     func reloadTable() {
         table.setNumberOfRows(tickets.count, withRowType: "ticket")
         if tickets.count > 0 {
             for i in 0...tickets.count-1 {
-                let row = table.rowControllerAtIndex(i) as? TicketRowController
+                let row = table.rowController(at: i) as? TicketRowController
                 row?.ticket = tickets[i]
             }
         }
     }
     
-    func moviesArrived(newMovies: [Movie]) {
+    func moviesArrived(_ newMovies: [Movie]) {
         fetcher.fetchTickets(self)
         reloadTable()
     }
     
     var tickets = [TicketEntity]()
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         
         // Configure interface objects here.
     }

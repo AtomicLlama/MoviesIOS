@@ -17,7 +17,7 @@ enum LanguagePreference: String {
     case SubOrDub = "Subtitles or Original Language"
     case NotCare = "Don't care"
     
-    static func getPref(input: String) -> LanguagePreference {
+    static func getPref(_ input: String) -> LanguagePreference {
         switch input {
         case OriginalLanguage.rawValue:
             return OriginalLanguage

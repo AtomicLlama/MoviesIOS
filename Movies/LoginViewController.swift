@@ -12,16 +12,16 @@ import FBSDKCoreKit
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        if FBSDKAccessToken.currentAccessToken() != nil {
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if FBSDKAccessToken.current() != nil {
             
             if presentingViewController != nil {
-                performSegueWithIdentifier("loggedIn", sender: self)
+                performSegue(withIdentifier: "loggedIn", sender: self)
             } else {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let appDelegate: AppDelegate = (UIApplication.sharedApplication().delegate as? AppDelegate)!
-                self.dismissViewControllerAnimated(true, completion: nil)
-                appDelegate.window?.rootViewController = storyboard.instantiateViewControllerWithIdentifier("TabBar") as? MoviesTabBarController
+                let appDelegate: AppDelegate = (UIApplication.shared.delegate as? AppDelegate)!
+                self.dismiss(animated: true, completion: nil)
+                appDelegate.window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "TabBar") as? MoviesTabBarController
             }
             
             
@@ -33,11 +33,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
     }
     
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         
     }
     
-    func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool {
+    func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
         print("Will Log In")
         self.loginButton?.alpha = 0.0
         self.welcomeLabel.alpha = 0.0
@@ -51,16 +51,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let effect = UIBlurEffect(style: UIBlurEffectStyle.Light)
+        let effect = UIBlurEffect(style: UIBlurEffectStyle.light)
         let effectView = UIVisualEffectView(effect: effect)
-        let frameForEffect = CGRectMake(imageView.frame.origin.x, imageView.frame.origin.y, imageView.frame.width, imageView.frame.height + 100)
+        let frameForEffect = CGRect(x: imageView.frame.origin.x, y: imageView.frame.origin.y, width: imageView.frame.width, height: imageView.frame.height + 100)
         effectView.frame = frameForEffect
         imageView.addSubview(effectView)
-        let vibrancyEffect = UIVibrancyEffect(forBlurEffect: effect)
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: effect)
         let vibrancyView = UIVisualEffectView(effect: vibrancyEffect)
         vibrancyView.addSubview(welcomeLabel)
         effectView.addSubview(vibrancyView)
-        let frame = CGRectMake(view.center.x, view.center.y, view.frame.width - 80, (view.frame.width - 80)/4.5)
+        let frame = CGRect(x: view.center.x, y: view.center.y, width: view.frame.width - 80, height: (view.frame.width - 80)/4.5)
         loginButton = FBSDKLoginButton(frame: frame)
         loginButton!.center = CGPoint(x: view.center.x, y: view.center.y + 70)
         loginButton!.alpha = 0.0
@@ -71,8 +71,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var imageView: UIImageView!
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
     }
     
     @IBOutlet weak var welcomeLabel: UILabel! {
@@ -84,10 +84,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if isFirstLoad {
-            UIView.animateWithDuration(1.0, delay: 0.5, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
+            UIView.animate(withDuration: 1.0, delay: 0.5, options: UIViewAnimationOptions(), animations: {
                 self.loginButton?.alpha = 1.0
                 self.welcomeLabel.alpha = 1.0
                 self.logoImageView.frame.origin.y -= 60

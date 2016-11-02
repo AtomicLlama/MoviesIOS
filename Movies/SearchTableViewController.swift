@@ -52,19 +52,19 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
         
         //Make sure there are no white separator lines after the items
         
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.backgroundColor = Constants.tintColor
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchTextField.resignFirstResponder()
     }
     
     @IBOutlet weak var searchTextField: UITextField!
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
@@ -74,17 +74,17 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
     
     var elements = [AnyObject]()    //Actors and Movies returned by search
     
-    func parseData(searchString: String?) {
+    func parseData(_ searchString: String?) {
         
         //Safely making url for the request
         
-        if let searchQuery =  searchString?.stringByReplacingOccurrencesOfString(" ", withString: "+").stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
+        if let searchQuery =  searchString?.replacingOccurrences(of: " ", with: "+").addingPercentEncoding(withAllowedCharacters: CharacterSet.urlFragmentAllowed) {
             
             let url = "http://api.themoviedb.org/3/search/multi?api_key=18ec732ece653360e23d5835670c47a0&query=" + searchQuery
             
             // Make request
             
-            Alamofire.request(.GET, url).responseJSON() { (response) in
+            Alamofire.request(url).responseJSON() { (response) in
                 
                 //Don't suggest a new Movie to search if it previously wasn't showing anything.
                 
@@ -96,7 +96,7 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                 
                 //Cast results as array
                 
-                if let body = response.result.value as? [String:AnyObject], results = body["results"] as? [AnyObject] {
+                if let body = response.result.value as? [String:AnyObject], let results = body["results"] as? [AnyObject] {
                     if results.count != 0 {
                         
                         //Iterate through the first 10 items in the array
@@ -105,7 +105,7 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                             
                             //Cast item as JSON Object and get media type to create the proper object
                             
-                            if let parsedItem = results[i] as? [String:AnyObject], medium = parsedItem["media_type"] as? String, id = parsedItem["id"] as? Int {
+                            if let parsedItem = results[i] as? [String:AnyObject], let medium = parsedItem["media_type"] as? String, let id = parsedItem["id"] as? Int {
                                 
                                 //Check if it's a movie or a person
                                 
@@ -114,7 +114,7 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                                         self.elements.append(alreadyKnownMovie)
                                         self.tableView.reloadData()
                                     } else {
-                                        if let movie = Mapper<Movie>().map(parsedItem) {
+                                        if let movie = Mapper<Movie>().map(JSON: parsedItem) {
                                             self.delegate?.learnMovie(id.description, movie: movie)
                                             self.elements.append(movie)
                                             self.tableView.reloadData()
@@ -125,7 +125,7 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                                         self.elements.append(knownPerson)
                                         self.tableView.reloadData()
                                     } else {
-                                        if let actor = Mapper<Actor>().map(parsedItem) {
+                                        if let actor = Mapper<Actor>().map(JSON: parsedItem) {
                                             self.elements.append(actor)
                                             self.delegate?.learnPerson(id.description, actor: actor)
                                         }
@@ -140,8 +140,8 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
                     self.tableView.reloadData()
                     refresh = false
                 } else {
-                    print("Error Unwrapping Results m" + (response.result.value?.description ?? "Nothing!"))
-                    if let body = response.result.value as? [String:AnyObject], status = body["status_code"] as? Int {
+                    print("Error Unwrapping Results m" + ((response.result.value as AnyObject).description ?? "Nothing!"))
+                    if let body = response.result.value as? [String:AnyObject], let status = body["status_code"] as? Int {
                         if status == 25 && searchString == self.searchTextField.text {
                             refresh = false
                             self.parseData(searchString)
@@ -162,11 +162,11 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
         tableView.reloadData()
     }
     
-    func moviesArrived(newMovies: [Movie]) {
+    func moviesArrived(_ newMovies: [Movie]) {
         return
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         //If the change isn't meaningless make a search
         
@@ -174,7 +174,7 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
             
             //Check what the change means
             
-            let replaced = NSString(string: textField.text ?? "").stringByReplacingCharactersInRange(range, withString: string)
+            let replaced = NSString(string: textField.text ?? "").replacingCharacters(in: range, with: string)
             if  replaced != "" {
                 
                 //If the result isn't empty check if we cached something for it
@@ -196,32 +196,32 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
         }
         return true
     }
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if elements.count == 0 {
-            tableView.separatorColor = UIColor.clearColor()
+            tableView.separatorColor = UIColor.clear
         } else {
-            tableView.separatorColor = UIColor.whiteColor()
+            tableView.separatorColor = UIColor.white
         }
         return max(elements.count, 1)
     }
     
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if elements.count == 0 {
             
             //Create cell and suggest something randomly
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("welcome") ?? UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "welcome") ?? UITableViewCell()
             cell.textLabel?.numberOfLines = 0
             var text = "I'm here to help.\nJust Type Away!\nWhat Are you waiting for?"
-            if let movieTitle = popFilm?[(Int) (random()) % (popFilm?.count ?? 0)].title {
-                if (Int) (random())%2 == 0 {
+            if let movieTitle = popFilm?[(Int) (arc4random()) % (popFilm?.count ?? 0)].title {
+                if (Int) (arc4random())%2 == 0 {
                     text = "Search for \"" + movieTitle + "\", maybe...\nI've heard it's good."
                 }
             }
@@ -229,22 +229,22 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
             //Make sure it looks nice!
             
             cell.textLabel?.text = text
-            cell.backgroundColor = UIColor.clearColor()
-            cell.textLabel?.textColor = UIColor.whiteColor()
-            cell.textLabel?.textAlignment = NSTextAlignment.Center
+            cell.backgroundColor = UIColor.clear
+            cell.textLabel?.textColor = UIColor.white
+            cell.textLabel?.textAlignment = NSTextAlignment.center
             return cell
         } else {
             
             //Check the current element and return the proper Cell
             
             if let actor = elements[indexPath.row] as? Actor {
-                let cell = tableView.dequeueReusableCellWithIdentifier("actor") as? ActorTableViewCell ?? ActorTableViewCell()
-                cell.color = UIColor.whiteColor()
+                let cell = tableView.dequeueReusableCell(withIdentifier: "actor") as? ActorTableViewCell ?? ActorTableViewCell()
+                cell.color = UIColor.white
                 cell.actor = (actor, actor.bio)
                 cell.setUpImageView()
                 return cell
             } else if let movie = elements[indexPath.row] as? Movie {
-                let cell = tableView.dequeueReusableCellWithIdentifier("movie") as? ClearMovieTableViewCell ?? ClearMovieTableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: "movie") as? ClearMovieTableViewCell ?? ClearMovieTableViewCell()
                 cell.movie = movie
                 return cell
             }
@@ -255,7 +255,7 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
         return UITableViewCell()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //Point selector to new item and hide Keyboard
         
@@ -269,18 +269,18 @@ class SearchTableViewController: UITableViewController, UITextFieldDelegate, Mov
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         //Set self as delegate of the next view!
         
-        if let mvc = segue.destinationViewController as? MovieDetailViewController {
+        if let mvc = segue.destination as? MovieDetailViewController {
             mvc.movieDataSource = self
-        } else if let mvc = segue.destinationViewController as? PersonViewController {
+        } else if let mvc = segue.destination as? PersonViewController {
             mvc.delegate = self
         }
     }
     
-    func textFieldShouldClear(textField: UITextField) -> Bool {
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
         
         //If text is clearing delete elements and reload.
         

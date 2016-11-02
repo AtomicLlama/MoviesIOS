@@ -1,1 +1,0 @@
-../../../JFMinimalNotifications/JFMinimalNotification/JFMinimalNotificationArt.h

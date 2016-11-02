@@ -10,7 +10,7 @@ import UIKit
 
 class TicketTableViewController: UITableViewController, TicketReceiverProtocol, MovieReceiverProtocol {
     
-    func moviesArrived(newMovies: [Movie]) {}
+    func moviesArrived(_ newMovies: [Movie]) {}
     
     func imageDownloaded() {
         tableView.reloadData()
@@ -28,23 +28,23 @@ class TicketTableViewController: UITableViewController, TicketReceiverProtocol, 
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         fetcher?.fetchTickets(self)
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.backgroundColor = Constants.tintColor
-        tableView.separatorColor = UIColor.clearColor()
+        tableView.separatorColor = UIColor.clear
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tickets.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ticket", forIndexPath: indexPath) as? TicketTableViewCell ?? TicketTableViewCell()
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ticket", for: indexPath) as? TicketTableViewCell ?? TicketTableViewCell()
         cell.ticket = tickets[indexPath.row]
         print("New Ticket")
         print(indexPath.row)
@@ -53,7 +53,7 @@ class TicketTableViewController: UITableViewController, TicketReceiverProtocol, 
         return cell
     }
     
-    func receiveTickets(tickets: [TicketEntity]) {
+    func receiveTickets(_ tickets: [TicketEntity]) {
         self.tickets = tickets
         tableView.reloadData()
     }

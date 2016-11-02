@@ -12,12 +12,12 @@ class ImageDownloadManager {
     
     static var cache = [String:UIImage]()
     
-    static func getImageInURL(url: String, handler: (UIImage) -> ()) {
+    static func getImageInURL(_ url: String, handler: @escaping (UIImage) -> ()) {
         if let image = cache[url] {
             handler(image)
         } else {
-            Alamofire.request(.GET, url).responseData() { (response) in
-                if let data = response.data, image = UIImage(data: data) {
+            Alamofire.request(url).responseData() { (response) in
+                if let data = response.data, let image = UIImage(data: data) {
                     cache[url] = image
                     handler(image)
                 }

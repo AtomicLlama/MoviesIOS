@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class Person {
+open class Person {
     let name: String
     let id: String
     var image: UIImage?

@@ -1,48 +1,74 @@
 PODS:
-  - Alamofire (3.4.0)
-  - AlamofireObjectMapper (3.0.0):
-    - Alamofire (~> 3.2)
-    - ObjectMapper (~> 1.0)
-  - DoneHUD (1.0.0)
-  - GMStepper (1.1.0)
+  - Alamofire (4.0.1)
+  - AlamofireObjectMapper (4.0.0):
+    - Alamofire (~> 4.0)
+    - ObjectMapper (~> 2.0)
+  - DoneHUD (1.0.1)
+  - GMStepper (2.0.0)
   - JFMinimalNotifications (0.0.5)
-  - KNSemiModalViewController_hons82 (0.4.4)
+  - KNSemiModalViewController_hons82 (0.4.5)
   - MCSwipeTableViewCell (2.1.4)
   - MXParallaxHeader (0.5.0)
-  - ObjectMapper (1.3.0)
-  - PZPullToRefresh (0.0.7)
+  - ObjectMapper (2.2.1)
+  - PZPullToRefresh (0.0.9)
+  - RAMAnimatedTabBarController (2.0.13)
   - SFFocusViewLayout (3.0.0)
-  - THCalendarDatePicker (1.2.5):
-    - KNSemiModalViewController_hons82 (~> 0.4.3)
+  - THCalendarDatePicker (1.2.8):
+    - KNSemiModalViewController_hons82 (~> 0.4.5)
   - YouTubePlayer (0.3.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.2)
-  - AlamofireObjectMapper (~> 3.0)
-  - DoneHUD
-  - GMStepper
+  - Alamofire (~> 4.0)
+  - AlamofireObjectMapper (~> 4.0)
+  - DoneHUD (from `https://github.com/mathiasquintero/DoneHUD.git`, commit `66c7f875e6eecc6124d2998dd0bca656f2bac032`)
+  - GMStepper (~> 2.0)
   - JFMinimalNotifications (~> 0.0.4)
   - MCSwipeTableViewCell (~> 2.1.4)
   - MXParallaxHeader
-  - ObjectMapper (~> 1.1)
-  - PZPullToRefresh
-  - SFFocusViewLayout
-  - THCalendarDatePicker (~> 1.2.5)
-  - YouTubePlayer (~> 0.2)
+  - ObjectMapper (~> 2.2.1)
+  - PZPullToRefresh (from `https://github.com/mathiasquintero/PZPullToRefresh.git`)
+  - RAMAnimatedTabBarController (~> 2.0.13)
+  - SFFocusViewLayout (~> 3.0)
+  - THCalendarDatePicker (~> 1.2.6)
+  - YouTubePlayer (from `https://github.com/jr9098/Swift-YouTube-Player.git`, branch `swift3`)
+
+EXTERNAL SOURCES:
+  DoneHUD:
+    :commit: 66c7f875e6eecc6124d2998dd0bca656f2bac032
+    :git: https://github.com/mathiasquintero/DoneHUD.git
+  PZPullToRefresh:
+    :git: https://github.com/mathiasquintero/PZPullToRefresh.git
+  YouTubePlayer:
+    :branch: swift3
+    :git: https://github.com/jr9098/Swift-YouTube-Player.git
+
+CHECKOUT OPTIONS:
+  DoneHUD:
+    :commit: 66c7f875e6eecc6124d2998dd0bca656f2bac032
+    :git: https://github.com/mathiasquintero/DoneHUD.git
+  PZPullToRefresh:
+    :commit: bebc997af293f0bc9fee607da8bcd27f7956e0a8
+    :git: https://github.com/mathiasquintero/PZPullToRefresh.git
+  YouTubePlayer:
+    :commit: 1d70f29b263036b24a0718ac9651a8b00cff413d
+    :git: https://github.com/jr9098/Swift-YouTube-Player.git
 
 SPEC CHECKSUMS:
-  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
-  AlamofireObjectMapper: 2d16585d06177be0116d76de73497e77437798af
-  DoneHUD: e3717eefe0ed8a977153024400693e100a3bc0e9
-  GMStepper: 3b7922778a80e0eab89a55003ca36b25fc2393b7
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  AlamofireObjectMapper: 9faa3ce5a240efda1b209009a2d6e1e949227abc
+  DoneHUD: 864c1e6f5fd0f17a9ebbc43f3774000690f80539
+  GMStepper: 6aff0c881afac2f432e5c9b0df71e44e14110a06
   JFMinimalNotifications: c0d1eba2b826c1599416880dd48059c9153a6d9a
-  KNSemiModalViewController_hons82: 22aead5ef5d8ca749bc1babb43fa7d6f14b030a3
+  KNSemiModalViewController_hons82: 0ef0ef5ed7c3814ddd0fa9c884ab74d5495de16b
   MCSwipeTableViewCell: 1b303e16c3a26b1982f3a68386e9b8c5fc8344c3
   MXParallaxHeader: c7dfdf8d769a8eb868a431ec3aeaf994a147b8bc
-  ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
-  PZPullToRefresh: a596d42b90ca42f979f181b5f35c4820406c2136
+  ObjectMapper: 41e43e1a89f8060ef5ea5d04ba852e269a621d68
+  PZPullToRefresh: 5141d8ea10cf8966c8d9697482fe670b5613045b
+  RAMAnimatedTabBarController: 2510f3b66954c3f77ea1042a35d34df8f5f3b604
   SFFocusViewLayout: 4766bec5d2214038526d5e03d08405f1f126688d
-  THCalendarDatePicker: 65c63c1814d1a27defc89f4b72ec7a1d01d5503d
-  YouTubePlayer: 88713a96c356f2c88da8925eb61438eda88bcd57
+  THCalendarDatePicker: fd1a1103ae0d1d1f2d0f9a1463a3f628a23a25a5
+  YouTubePlayer: 162bd51d7a77b4b6ad914b0b87af07b7e81f8b70
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: f42309ee8745431748664893456e32379521f15e
+
+COCOAPODS: 1.2.0.beta.1

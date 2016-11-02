@@ -20,7 +20,7 @@ class MovieListViewController: UICollectionViewController, MovieDetailDataSource
     
     var currentMovie = 0
     
-    func moviesArrived(newMovies: [Movie]) {
+    func moviesArrived(_ newMovies: [Movie]) {
         
         for movie in newMovies {
             movie.fetchDetailImage(self)
@@ -39,13 +39,13 @@ class MovieListViewController: UICollectionViewController, MovieDetailDataSource
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView!.reloadData()
+        collectionView?.reloadData()
     }
     
     func imageDownloaded() {
-        collectionView!.reloadData()
+        collectionView?.reloadData()
     }
 
     override func viewDidLoad() {
@@ -57,9 +57,9 @@ class MovieListViewController: UICollectionViewController, MovieDetailDataSource
         
         //Set up basic UI
         collectionView!.backgroundColor = Constants.tintColor
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge()
         if refreshHeaderView == nil {
-            let view = PZPullToRefreshView(frame: CGRectMake(0, 0 - collectionView!.bounds.size.height, collectionView!.bounds.size.width, collectionView!.bounds.size.height))
+            let view = PZPullToRefreshView(frame: CGRect(x: 0, y: 0 - collectionView!.bounds.size.height, width: collectionView!.bounds.size.width, height: collectionView!.bounds.size.height))
             view.delegate = self
             self.collectionView!.addSubview(view)
             refreshHeaderView = view
@@ -84,36 +84,36 @@ class MovieListViewController: UICollectionViewController, MovieDetailDataSource
         // Dispose of any resources that can be recreated.
     }
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return movies.count
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let dequeuedCell = collectionView.dequeueReusableCell(forIndexPath: indexPath) as CollectionViewCell
         dequeuedCell.movie = movies[indexPath.row]
         return dequeuedCell
     }
     
-    func viewWithImage(image: UIImage?) -> UIView {
-        let imageView = UIImageView(image: image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate))
-        imageView.tintColor = UIColor.whiteColor()
-        imageView.contentMode = UIViewContentMode.Center
+    func viewWithImage(_ image: UIImage?) -> UIView {
+        let imageView = UIImageView(image: image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate))
+        imageView.tintColor = UIColor.white
+        imageView.contentMode = UIViewContentMode.center
         return imageView
     }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         currentMovie = indexPath.row
-        performSegueWithIdentifier("showMovie", sender: self)
+        performSegue(withIdentifier: "showMovie", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationViewController = segue.destinationViewController as? MovieDetailViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? MovieDetailViewController {
             destinationViewController.movieDataSource = self
-        } else if let destinationViewController = segue.destinationViewController as? SearchTableViewController {
+        } else if let destinationViewController = segue.destination as? SearchTableViewController {
             destinationViewController.delegate = fetcher
             destinationViewController.popFilm = movies
         }
@@ -123,20 +123,20 @@ class MovieListViewController: UICollectionViewController, MovieDetailDataSource
         return movies[currentMovie]
     }
     
-    func pullToRefreshDidTrigger(view: PZPullToRefreshView) {
+    func pullToRefreshDidTrigger(_ view: PZPullToRefreshView) {
         refreshHeaderView?.isLoading = true
         fetcher?.fetchNewMovies()
     }
     
-    func pullToRefreshLastUpdated(view: PZPullToRefreshView) -> NSDate {
-        return NSDate()
+    func pullToRefreshLastUpdated(_ view: PZPullToRefreshView) -> Date {
+        return Date()
     }
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         refreshHeaderView?.refreshScrollViewDidScroll(scrollView)
     }
     
-    override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         refreshHeaderView?.refreshScrollViewDidEndDragging(scrollView)
     }
     

@@ -22,7 +22,7 @@ class TrailerViewCell: UITableViewCell {
     
     @IBOutlet weak var player: YouTubePlayerView! {
         didSet {
-            backgroundColor = UIColor.clearColor()
+            backgroundColor = UIColor.clear
         }
     }
 }

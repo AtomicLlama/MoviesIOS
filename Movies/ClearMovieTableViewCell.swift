@@ -27,7 +27,7 @@ class ClearMovieTableViewCell: UITableViewCell {
     
     @IBOutlet weak var posterImageView: UIImageView! {
         didSet {
-            backgroundColor = UIColor.clearColor()
+            backgroundColor = UIColor.clear
             posterImageView.layer.shadowOpacity = 0.4
             posterImageView.layer.shadowOffset = CGSize(width: 3.0, height: 2.0)
         }

@@ -25,7 +25,7 @@ class FollowingTableViewController: UITableViewController,ActorReceiverProtocol,
     
     var delegate: MovieDataFetcher?
     
-    func receiveActors(actors: [Actor]) {
+    func receiveActors(_ actors: [Actor]) {
         subs = actors
         tableView.reloadData()
     }
@@ -33,7 +33,7 @@ class FollowingTableViewController: UITableViewController,ActorReceiverProtocol,
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.backgroundColor = Constants.tintColor
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         if let mvc = tabBarController as? MoviesTabBarController {
@@ -41,7 +41,7 @@ class FollowingTableViewController: UITableViewController,ActorReceiverProtocol,
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         delegate?.getActorsFromSubscriptions(self)
     }
@@ -52,50 +52,50 @@ class FollowingTableViewController: UITableViewController,ActorReceiverProtocol,
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return max(1, subs.count)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if subs.isEmpty {
-            let cell = tableView.dequeueReusableCellWithIdentifier("not") ?? UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "not") ?? UITableViewCell()
             return cell
         }
-        let cell = tableView.dequeueReusableCellWithIdentifier("actor") as? ActorFollowingTableViewCell ?? ActorFollowingTableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "actor") as? ActorFollowingTableViewCell ?? ActorFollowingTableViewCell()
         let actor = subs[indexPath.row]
         cell.actor = actor
         let handler = { () -> () in
-            if let path = self.tableView.indexPathForCell(cell) {
-                self.subs.removeAtIndex(path.row)
+            if let path = self.tableView.indexPath(for: cell) {
+                self.subs.remove(at: path.row)
                 cell.actor?.toggleActorInSubscriptions()
                 if !self.subs.isEmpty {
-                    self.tableView.deleteRowsAtIndexPaths([path], withRowAnimation: UITableViewRowAnimation.Top)
+                    self.tableView.deleteRows(at: [path], with: UITableViewRowAnimation.top)
                 } else {
                     self.tableView.reloadData()
                 }
             }
         }
         cell.defaultColor = Constants.tintColor
-        cell.setSwipeGestureWithView(UIView(), color: Constants.tintColor, mode: MCSwipeTableViewCellMode.Exit, state: MCSwipeTableViewCellState.State1) { (void) in handler() }
-        cell.setSwipeGestureWithView(UIView(), color: Constants.tintColor, mode: MCSwipeTableViewCellMode.Exit, state: MCSwipeTableViewCellState.State2) { (void) in handler() }
-        cell.setSwipeGestureWithView(UIView(), color: Constants.tintColor, mode: MCSwipeTableViewCellMode.Exit, state: MCSwipeTableViewCellState.State3) { (void) in handler() }
-        cell.setSwipeGestureWithView(UIView(), color: Constants.tintColor, mode: MCSwipeTableViewCellMode.Exit, state: MCSwipeTableViewCellState.State4) { (void) in handler() }
+        cell.setSwipeGestureWith(UIView(), color: Constants.tintColor, mode: MCSwipeTableViewCellMode.exit, state: MCSwipeTableViewCellState.state1) { (void) in handler() }
+        cell.setSwipeGestureWith(UIView(), color: Constants.tintColor, mode: MCSwipeTableViewCellMode.exit, state: MCSwipeTableViewCellState.state2) { (void) in handler() }
+        cell.setSwipeGestureWith(UIView(), color: Constants.tintColor, mode: MCSwipeTableViewCellMode.exit, state: MCSwipeTableViewCellState.state3) { (void) in handler() }
+        cell.setSwipeGestureWith(UIView(), color: Constants.tintColor, mode: MCSwipeTableViewCellMode.exit, state: MCSwipeTableViewCellState.state4) { (void) in handler() }
         return cell
     }
     
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         if !subs.isEmpty {
             currentActor = subs[indexPath.row]
         }
         return indexPath
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let mvc = segue.destinationViewController as? PersonViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let mvc = segue.destination as? PersonViewController {
             mvc.delegate = self
         }
     }

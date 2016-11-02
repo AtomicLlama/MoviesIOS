@@ -29,11 +29,11 @@ class Movie: Mappable {
     var trailerID: String?
     var netflixLink: String?
     var detailImage: UIImage?
-    var releaseDate = NSDate() {
+    var releaseDate = Date() {
         didSet {
-            let calendar = NSCalendar.currentCalendar()
-            let dateComponents = calendar.components(NSCalendarUnit.Year, fromDate: releaseDate)
-            year = dateComponents.year
+            let calendar = Calendar.current
+            let dateComponents = (calendar as NSCalendar).components(NSCalendar.Unit.year, from: releaseDate)
+            year = dateComponents.year!
         }
     }
     
@@ -42,36 +42,36 @@ class Movie: Mappable {
     
     var movieTimes = [String:[Showtime]]()
     
-    func getTimesForDate(date: NSDate) -> [Showtime] {
-        let dateformatter = NSDateFormatter()
+    func getTimesForDate(_ date: Date) -> [Showtime] {
+        let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy MM dd"
-        return movieTimes[dateformatter.stringFromDate(date)] ?? []
+        return movieTimes[dateformatter.string(from: date)] ?? []
     }
     
-    func addTime(time: Showtime) {
-        let dateformatter = NSDateFormatter()
+    func addTime(_ time: Showtime) {
+        let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy MM dd"
-        if movieTimes[dateformatter.stringFromDate(time.time)] != nil {
-            movieTimes[dateformatter.stringFromDate(time.time)]?.append(time)
+        if movieTimes[dateformatter.string(from: time.time as Date)] != nil {
+            movieTimes[dateformatter.string(from: time.time as Date)]?.append(time)
         } else {
-            movieTimes[dateformatter.stringFromDate(time.time)] = [time]
+            movieTimes[dateformatter.string(from: time.time as Date)] = [time]
         }
     }
     
-    required init?(_ map: Map) {
+    required init?(map: Map) {
         
     }
     
     func mapping(map: Map) {
         title <- map["original_title"]
         description <- map["overview"]
-        let dateformatter = NSDateFormatter()
+        let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-mm-dd"
-        dateformatter.timeZone = NSTimeZone.defaultTimeZone()
+        dateformatter.timeZone = TimeZone.current
         releaseDate <- (map["release_date"], DateFormatterTransform(dateFormatter: dateformatter))
         id <- map["id"]
         rating <- map["vote_average"]
-        if let path = map.JSONDictionary["poster_path"] as? String {
+        if let path = map.JSON["poster_path"] as? String {
             let url = "https://image.tmdb.org/t/p/w150" + path
             ImageDownloadManager.getImageInURL(url) { (image) in
                 self.poster = image
@@ -81,7 +81,7 @@ class Movie: Mappable {
         
     }
     
-    func fetchDetailImage(subscriber: MovieReceiverProtocol) {
+    func fetchDetailImage(_ subscriber: MovieReceiverProtocol) {
         
         if detailImage != nil {
             return
@@ -91,16 +91,17 @@ class Movie: Mappable {
         
         // Start request
         
-        Alamofire.request(.GET, url).responseJSON() { (response) in
+        Alamofire.request(url).responseJSON() { (response) in
             
-            if let body = response.result.value as? [String:AnyObject], backdrops = body["backdrops"] as? [AnyObject], firstImageObject = backdrops.first as? [String:AnyObject], path = firstImageObject["file_path"] as? String {
+            if let body = response.result.value as? [String:AnyObject], let backdrops = body["backdrops"] as? [AnyObject], let firstImageObject = backdrops.first as? [String:AnyObject], let path = firstImageObject["file_path"] as? String {
                 
                 let imageURL = "https://image.tmdb.org/t/p/w500" + path
                 
-                dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)) {
-                    if let url = NSURL(string: imageURL), dataFromImage = NSData(contentsOfURL: url), image = UIImage(data: dataFromImage) {
+                let queue = DispatchQueue(label: "io.popcorn", qos: .userInitiated, target: nil)
+                queue.async {
+                    if let url = URL(string: imageURL), let dataFromImage = try? Data(contentsOf: url), let image = UIImage(data: dataFromImage) {
                         self.detailImage = image
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             subscriber.imageDownloaded()
                         }
                     }
@@ -111,13 +112,13 @@ class Movie: Mappable {
         }
     }
     
-    func fetchStreamingLinks(handler: () -> ()) {
+    func fetchStreamingLinks(_ handler: @escaping () -> ()) {
         if !linksLoaded {
             let url = "https://moviesbackend.herokuapp.com/streaming/" + id.description
-            Alamofire.request(.GET, url).responseJSON() { (response) in
+            Alamofire.request(url).responseJSON() { (response) in
                 if let links = response.result.value as? [AnyObject] {
                     for item in links {
-                        if let data = item as? [String:AnyObject], service = data["service"] as? String, link = data["link"] as? String {
+                        if let data = item as? [String:AnyObject], let service = data["service"] as? String, let link = data["link"] as? String {
                             self.streamingLinks.append((service, link))
                         }
                     }
@@ -153,7 +154,7 @@ class Movie: Mappable {
         }
     }
 
-    func subscribeToImage(controller: MovieReceiverProtocol) {
+    func subscribeToImage(_ controller: MovieReceiverProtocol) {
 
         //Add Subscribed View Controllers in case of a segue before the image has been downloaded.
 
@@ -163,13 +164,13 @@ class Movie: Mappable {
 
     }
 
-    func getTrailerUrl(controller: MovieReceiverProtocol) {
+    func getTrailerUrl(_ controller: MovieReceiverProtocol) {
         if trailerID == nil {
             let url = "http://api.themoviedb.org/3/movie/" + id.description + "/videos?api_key=18ec732ece653360e23d5835670c47a0"
-            Alamofire.request(.GET, url).responseJSON() { (response) in
-                if let dictionary = response.result.value as? [String:AnyObject], results = dictionary["results"] as? [AnyObject], trailer = results.first as? [String:AnyObject], videoID = trailer["key"] as? String {
+            Alamofire.request(url).responseJSON() { (response) in
+                if let dictionary = response.result.value as? [String:AnyObject], let results = dictionary["results"] as? [AnyObject], let trailer = results.first as? [String:AnyObject], let videoID = trailer["key"] as? String {
                     self.trailerID = videoID
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         controller.imageDownloaded()
                     }
                 }
@@ -177,24 +178,24 @@ class Movie: Mappable {
         }
     }
 
-    func fetchActors(receiver: MovieActorsReceiver, all: Bool) {
+    func fetchActors(_ receiver: MovieActorsReceiver, all: Bool) {
         if !actors.isEmpty && !all {
             receiver.actorsFetched()
             return
         }
         actors = []
         let url = "http://api.themoviedb.org/3/movie/" + id.description + "/credits?api_key=18ec732ece653360e23d5835670c47a0"
-        Alamofire.request(.GET, url).responseJSON() { (response) in
+        Alamofire.request(url).responseJSON() { (response) in
             if let dictionary = response.result.value as? [String:AnyObject],
-                    cast = dictionary["cast"] as? [AnyObject],
-                    crew = dictionary["crew"] as? [AnyObject] {
+                    let cast = dictionary["cast"] as? [AnyObject],
+                    let crew = dictionary["crew"] as? [AnyObject] {
                 let lastIndex = all ? cast.count-1 : (min(max(cast.count-1,0), 4))
                 for actor in cast[0...lastIndex] {
-                    if let actorAsDictionary = actor as? [String:AnyObject], character = actorAsDictionary["character"] as? String, id = actorAsDictionary["id"] as? Int {
+                    if let actorAsDictionary = actor as? [String:AnyObject], let character = actorAsDictionary["character"] as? String, let id = actorAsDictionary["id"] as? Int {
                         if let actorKnown = self.delegate?.knownPerson(id.description) {
                             self.actors.append(actorKnown, character)
                         } else {
-                            if let actor = Mapper<Actor>().map(actorAsDictionary) {
+                            if let actor = Mapper<Actor>().map(JSON: actorAsDictionary) {
                                 self.actors.append((actor, character))
                                 self.delegate?.learnPerson(id.description, actor: actor)
                             }
@@ -205,13 +206,13 @@ class Movie: Mappable {
                 if !crew.isEmpty {
                     for member in crew {
                         if let crewMemberAsDictionary = member as? [String:AnyObject],
-                                jobTitle = crewMemberAsDictionary["job"] as? String,
-                                id = crewMemberAsDictionary["id"] as? Int {
+                                let jobTitle = crewMemberAsDictionary["job"] as? String,
+                                let id = crewMemberAsDictionary["id"] as? Int {
                             if jobTitle == "Director" {
                                 if let actorKnown = self.delegate?.knownPerson(id.description) {
                                     self.actors.append(actorKnown, jobTitle)
                                 } else {
-                                    if let actor = Mapper<Actor>().map(crewMemberAsDictionary) {
+                                    if let actor = Mapper<Actor>().map(JSON: crewMemberAsDictionary) {
                                         self.director = actor
                                         self.delegate?.learnPerson(id.description, actor: actor)
                                     }
@@ -222,7 +223,7 @@ class Movie: Mappable {
                     }
                 }
             } else {
-                if let data = response.result.value as? [String:AnyObject], status = data["status"] as? Int {
+                if let data = response.result.value as? [String:AnyObject], let status = data["status"] as? Int {
                     if status == 25 {
                         self.fetchActors(receiver, all: all)
                     }

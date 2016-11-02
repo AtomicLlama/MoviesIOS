@@ -33,7 +33,7 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
         return movieDataSource?.currentMovieForDetail()?.poster
     }
     
-    func likeMovie(send: AnyObject?) {
+    func likeMovie(_ send: AnyObject?) {
         if movieDataSource?.currentMovieForDetail()?.toggleMovieInWatchList() ?? false {
             likeButton?.image = UIImage(named: "Like Filled-25")
             DoneHUD.showInView(self.view.superview ?? self.view, message: "Added To Watch List")
@@ -47,10 +47,10 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
             if tableView.parallaxHeader.view === nil {
                 if let detailImage = movieUnwrapped.detailImage {
                     let imageView = UIImageView(image: detailImage)
-                    imageView.contentMode = UIViewContentMode.ScaleAspectFill
+                    imageView.contentMode = UIViewContentMode.scaleAspectFill
                     tableView.parallaxHeader.view = imageView
                     tableView.parallaxHeader.height = 250
-                    tableView.parallaxHeader.mode = MXParallaxHeaderMode.Fill
+                    tableView.parallaxHeader.mode = MXParallaxHeaderMode.fill
                 }
             }
         }
@@ -61,13 +61,13 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
         tableView.reloadData()
     }
     
-    func moviesArrived(newMovies: [Movie]) {
+    func moviesArrived(_ newMovies: [Movie]) {
         tableView.reloadData()
     }
     
     // MARK: Table View Stuff
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         if movieDataSource?.currentMovieForDetail()?.trailerID != nil {
             return 6
         } else {
@@ -75,25 +75,25 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 3 {
             return min((movieDataSource?.currentMovieForDetail()?.actors.count) ?? 0, 5) + 1
         }
         return 1
     }
     
-    override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section >= 2
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0: return titleRow()
         case 1: return descriptionRow()
         case 2: return directorRow()
         case 3:
             if (indexPath.row == min((movieDataSource?.currentMovieForDetail()?.actors.count) ?? 0, 5)) {
-                let cell = tableView.dequeueReusableCellWithIdentifier("allcast") ?? UITableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: "allcast") ?? UITableViewCell()
                 return cell
             }
             return actorRow(indexPath.row)
@@ -102,7 +102,7 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 3 &&
             indexPath.row != min((movieDataSource?.currentMovieForDetail()?.actors.count) ?? 0, 5) {
             currentActor = movieDataSource?.currentMovieForDetail()?.actors[indexPath.row].0
@@ -112,7 +112,7 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
     }
     
     func titleRow() -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("title") as? DetailViewTitleTableCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "title") as? DetailViewTitleTableCell {
             cell.movie = movieDataSource?.currentMovieForDetail()
             return cell
         } else {
@@ -123,7 +123,7 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
     }
     
     func descriptionRow() -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("description") as? DescriptionTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "description") as? DescriptionTableViewCell {
             if let descriptionUnwrapped = movieDataSource?.currentMovieForDetail()?.description {
                 cell.descriptionText = descriptionUnwrapped
             }
@@ -138,8 +138,8 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
     }
     
     func directorRow() -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("director") {
-            cell.backgroundColor = UIColor.clearColor()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "director") {
+            cell.backgroundColor = UIColor.clear
             if let director = movieDataSource?.currentMovieForDetail()?.director {
                 cell.textLabel?.text = "Director: " + director.name
             }
@@ -153,8 +153,8 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
         }
     }
     
-    func actorRow(actor: Int) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("actor") as? ActorTableViewCell {
+    func actorRow(_ actor: Int) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "actor") as? ActorTableViewCell {
             cell.actor = movieDataSource?.currentMovieForDetail()?.actors[actor]
             return cell
         } else {
@@ -165,8 +165,8 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
     }
     
     func bookingRow() -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("book") {
-            cell.backgroundColor = UIColor.clearColor()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "book") {
+            cell.backgroundColor = UIColor.clear
             return cell
         } else {
             return UITableViewCell()
@@ -174,7 +174,7 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
     }
     
     func trailerRow() -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("trailer") as? TrailerViewCell ?? TrailerViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "trailer") as? TrailerViewCell ?? TrailerViewCell()
         if !cell.player.ready {
             cell.player.loadVideoID(movieDataSource?.currentMovieForDetail()?.trailerID ?? "")
         }
@@ -186,11 +186,11 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(MovieDetailViewController.likeMovie(_:)))
+        likeButton = UIBarButtonItem(image: UIImage(named: "heart-7"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(MovieDetailViewController.likeMovie(_:)))
         navigationItem.rightBarButtonItem = likeButton
         tableView.estimatedRowHeight = 400
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         if let movieUnwrapped = movieDataSource?.currentMovieForDetail() {
             self.title = movieUnwrapped.title
@@ -201,48 +201,48 @@ class MovieDetailViewController: UITableViewController, PersonBioDataSource, Mov
             movieUnwrapped.getTrailerUrl(self)
             if let detailImage = movieUnwrapped.detailImage {
                 let imageView = UIImageView(image: detailImage)
-                imageView.contentMode = UIViewContentMode.ScaleAspectFill
+                imageView.contentMode = UIViewContentMode.scaleAspectFill
                 tableView.parallaxHeader.view = imageView
                 tableView.parallaxHeader.height = 250
-                tableView.parallaxHeader.mode = MXParallaxHeaderMode.Fill
+                tableView.parallaxHeader.mode = MXParallaxHeaderMode.fill
                 tableView.parallaxHeader.minimumHeight = 0
             }
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         movieDataSource?.currentMovieForDetail()?.fetchDetailImage(self)
         movieDataSource?.currentMovieForDetail()?.fetchActors(self, all: false)
         if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let personDetailViewController = segue.destinationViewController as? PersonViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let personDetailViewController = segue.destination as? PersonViewController {
             personDetailViewController.delegate = self
         }
-        if let mvc = segue.destinationViewController as? MovieTimesDetailTableViewController {
+        if let mvc = segue.destination as? MovieTimesDetailTableViewController {
             mvc.movie = movieDataSource?.currentMovieForDetail()
         }
-        if let mvc = segue.destinationViewController as? AllCastTableViewController {
+        if let mvc = segue.destination as? AllCastTableViewController {
             mvc.delegate = movieDataSource
         }
-        if let mvc = segue.destinationViewController as? StreamingTableViewController {
+        if let mvc = segue.destination as? StreamingTableViewController {
             mvc.delegate = movieDataSource
         }
     }
     
-    func playerQualityChanged(videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
+    func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
         // print(playbackQuality)
     }
     
-    func playerReady(videoPlayer: YouTubePlayerView) {
+    func playerReady(_ videoPlayer: YouTubePlayerView) {
         // print("Player Ready")
     }
     
-    func playerStateChanged(videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
+    func playerStateChanged(_ videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
 //        if playerState == YouTubePlayerState.Playing {
 //            viewWillDisappear(true)
 //            viewDidDisappear(true)

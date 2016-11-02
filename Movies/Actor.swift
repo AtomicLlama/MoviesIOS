@@ -23,12 +23,12 @@ class Actor: Mappable {
     var delegate: MovieInfoDataSource?
     var receivingView: MovieReceiverProtocol?
     
-    required init?(_ map: Map) { }
+    required init?(map: Map) { }
     
     func mapping(map: Map) {
         name <- map["name"]
         id <- map["id"]
-        if let profilePath = map.JSONDictionary["profile_path"] as? String {
+        if let profilePath = map.JSON["profile_path"] as? String {
             let url = "https://image.tmdb.org/t/p/w185" + profilePath
             ImageDownloadManager.getImageInURL(url) { (image) in
                 self.headshot = image
@@ -38,23 +38,23 @@ class Actor: Mappable {
     }
     
     func getBio() {
-        if let actorUrl = ("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + name.stringByReplacingOccurrencesOfString(" ", withString: "+")).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLFragmentAllowedCharacterSet()) {
-            Alamofire.request(.GET, actorUrl).responseJSON() { (response) in
-                if let batch = response.result.value as? [String:AnyObject], query = batch["query"] as? [String:AnyObject], pages = query["pages"] as? [String:AnyObject] {
+        if let actorUrl = ("https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=" + name.replacingOccurrences(of: " ", with: "+")).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlFragmentAllowed) {
+            Alamofire.request(actorUrl).responseJSON() { (response) in
+                if let batch = response.result.value as? [String:AnyObject], let query = batch["query"] as? [String:AnyObject], let pages = query["pages"] as? [String:AnyObject] {
                     for (_, actor) in pages {
                         if let actorData = actor as? [String:AnyObject] {
-                            self.bio = (actorData["extract"] as? String ?? "No Biography Available").componentsSeparatedByString("\n")[0]
+                            self.bio = (actorData["extract"] as? String ?? "No Biography Available").components(separatedBy: "\n")[0]
                         }
                         break
                     }
                 } else {
-                    print("Error. No Biography Data Available " + (response.result.value?.description ?? "Nothing!"))
+                    print("Error. No Biography Data Available " + ((response.result.value as AnyObject).description ?? "Nothing!"))
                 }
             }
         }
     }
     
-    func fetchMovies(receivingView: MovieReceiverProtocol, all: Bool) {
+    func fetchMovies(_ receivingView: MovieReceiverProtocol, all: Bool) {
         
         if movies != nil && (movies?.count ?? 0 > 5 || !all) {
             receivingView.moviesArrived(movies ?? [])
@@ -63,9 +63,9 @@ class Actor: Mappable {
         movies = []
         
         let url = "http://api.themoviedb.org/3/person/" + self.id.description + "/movie_credits?api_key=18ec732ece653360e23d5835670c47a0"
-        Alamofire.request(.GET, url).responseJSON() { (response) in
+        Alamofire.request(url).responseJSON() { (response) in
             
-            if let dictionary = response.result.value as? [String:AnyObject], cast = dictionary["cast"] as? [AnyObject], crew = dictionary["crew"] as? [AnyObject] {
+            if let dictionary = response.result.value as? [String:AnyObject], let cast = dictionary["cast"] as? [AnyObject], let crew = dictionary["crew"] as? [AnyObject] {
                 let arrayToIterate: [AnyObject]
                 if crew.count > cast.count {
                     arrayToIterate = crew
@@ -79,7 +79,7 @@ class Actor: Mappable {
                         self.movies?.append(knownMovie)
                         receivingView.moviesArrived(self.movies ?? [])
                     } else {
-                        Alamofire.request(.GET, "http://api.themoviedb.org/3/movie/" + id.description + "?api_key=18ec732ece653360e23d5835670c47a0").responseObject() { (response: Response<Movie, NSError>) in
+                        Alamofire.request("http://api.themoviedb.org/3/movie/" + id.description + "?api_key=18ec732ece653360e23d5835670c47a0").responseObject() { (response: DataResponse<Movie>) in
                             if let movie = response.result.value {
                                 self.delegate?.learnMovie(movie.id.description, movie: movie)
                                 self.movies?.append(movie)
@@ -94,7 +94,7 @@ class Actor: Mappable {
     }
     
     func isActorInSubscriptions() -> Bool {
-        return delegate?.isActorInSubscriptions(Int(id) ?? -1) ?? false
+        return delegate?.isActorInSubscriptions(id) ?? false
     }
     
     func toggleActorInSubscriptions() -> Bool {

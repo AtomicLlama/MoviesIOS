@@ -1,1 +1,0 @@
-../../../JFMinimalNotifications/JFMinimalNotification/JFMinimalNotification.h

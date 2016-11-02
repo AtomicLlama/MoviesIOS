@@ -18,7 +18,7 @@ class FriendListTableViewController: UITableViewController {
     
     var selectedFriend: Person?
     
-    func updateFriends(friends: [Person]) {
+    func updateFriends(_ friends: [Person]) {
         self.friends = friends.filter()  { (item) in
             return doNotInclude.filter() { (person) in
                 return person.id == item.id
@@ -31,7 +31,7 @@ class FriendListTableViewController: UITableViewController {
         super.viewDidLoad()
         user?.getFriends(updateFriends)
         tableView.backgroundColor = Constants.tintColor
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,22 +40,22 @@ class FriendListTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("friend") as? FriendTableViewCell ?? FriendTableViewCell()
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "friend") as? FriendTableViewCell ?? FriendTableViewCell()
         cell.person = friends[indexPath.row]
         cell.backgroundColor = Constants.tintColor
         return cell
     }
     
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         self.selectedFriend = friends[indexPath.row]
         return indexPath
     }

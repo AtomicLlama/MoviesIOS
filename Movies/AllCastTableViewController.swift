@@ -31,7 +31,7 @@ class AllCastTableViewController: UITableViewController, MovieActorsReceiver, Pe
         delegate?.currentMovieForDetail()?.fetchActors(self, all: true)
         tableView.estimatedRowHeight = 400
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         if let unwrappedMovie = delegate?.currentMovieForDetail() {
             title = "Cast of: " + unwrappedMovie.title
         }
@@ -43,16 +43,16 @@ class AllCastTableViewController: UITableViewController, MovieActorsReceiver, Pe
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return delegate?.currentMovieForDetail()?.actors.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("actor") as? ActorTableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "actor") as? ActorTableViewCell {
             cell.actor = delegate?.currentMovieForDetail()?.actors[indexPath.row]
             return cell
         } else {
@@ -62,12 +62,12 @@ class AllCastTableViewController: UITableViewController, MovieActorsReceiver, Pe
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentActor = delegate?.currentMovieForDetail()?.actors[indexPath.row].0
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let mvc = segue.destinationViewController as? PersonViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let mvc = segue.destination as? PersonViewController {
             mvc.delegate = self
         }
     }

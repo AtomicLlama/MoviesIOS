@@ -10,8 +10,8 @@ import UIKit
 import GMStepper
 class BuyTicketsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBAction func returnToBuyTicketsView(segue:UIStoryboardSegue) {
-        if let mvc = segue.sourceViewController as? FriendListTableViewController, friend = mvc.selectedFriend {
+    @IBAction func returnToBuyTicketsView(_ segue:UIStoryboardSegue) {
+        if let mvc = segue.source as? FriendListTableViewController, let friend = mvc.selectedFriend {
             people.append(friend)
             stepper?.stepper.minimumValue = Double(people.count)
             tableView.reloadData()
@@ -38,22 +38,22 @@ class BuyTicketsViewController: UIViewController, UITableViewDataSource, UITable
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = Constants.tintColor
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.sectionOpen = 0
         if let mvc = tabBarController as? MoviesTabBarController, let user = mvc.currentUser {
             people.append(user.toPerson())
         }
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 80
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (self.tableView.sectionOpen != NSNotFound && section == self.tableView.sectionOpen) {
             switch section {
             case 0: return 1
@@ -65,7 +65,7 @@ class BuyTicketsViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0: return "How many Tickets?"
         case 1: return "Who's coming?"
@@ -74,67 +74,67 @@ class BuyTicketsViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier("stepper") as? StepperTableViewCell ?? StepperTableViewCell()
-            cell.backgroundColor = UIColor.clearColor()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "stepper") as? StepperTableViewCell ?? StepperTableViewCell()
+            cell.backgroundColor = UIColor.clear
             stepper = cell
             return cell
         case 1:
             if indexPath.row < people.count {
-                let cell = tableView.dequeueReusableCellWithIdentifier("friend") as? FriendTableViewCell ?? FriendTableViewCell()
-                cell.backgroundColor = UIColor.clearColor()
+                let cell = tableView.dequeueReusableCell(withIdentifier: "friend") as? FriendTableViewCell ?? FriendTableViewCell()
+                cell.backgroundColor = UIColor.clear
                 cell.person = people[indexPath.row]
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCellWithIdentifier("add") ?? UITableViewCell()
-                cell.backgroundColor = UIColor.clearColor()
+                let cell = tableView.dequeueReusableCell(withIdentifier: "add") ?? UITableViewCell()
+                cell.backgroundColor = UIColor.clear
                 return cell
             }
         default: break
         }
         let cell = UITableViewCell()
-        cell.backgroundColor = UIColor.clearColor()
+        cell.backgroundColor = UIColor.clear
         return cell
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = HeaderView(tableView: self.tableView, section: section)
-        headerView.backgroundColor = UIColor.whiteColor()
+        headerView.backgroundColor = UIColor.white
         let label = UILabel(frame: headerView.frame)
         label.text = self.tableView(tableView, titleForHeaderInSection: section)
-        label.textAlignment = NSTextAlignment.Center
+        label.textAlignment = NSTextAlignment.center
         label.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
         label.textColor = Constants.tintColor
         headerView.addSubview(label)
         return headerView
     }
     
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return indexPath.section == 1 && indexPath.row > 0 && indexPath.row < people.count
     }
     
-    func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let handler = { (action: UITableViewRowAction, indexPath: NSIndexPath) in
-            self.people.removeAtIndex(indexPath.row)
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let handler = { (action: UITableViewRowAction, indexPath: IndexPath) in
+            self.people.remove(at: indexPath.row)
             if Int(self.tickets) == self.people.count+1 {
                 tableView.reloadData()
             } else {
-                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+                self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
             }
             self.stepper?.stepper.minimumValue = Double(self.people.count)
         }
-        let action = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Remove", handler: handler)
+        let action = UITableViewRowAction(style: .default, title: "Remove", handler: handler)
         return [action]
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dvc = segue.destinationViewController.childViewControllers.first as? FriendListTableViewController, let mvc = tabBarController as? MoviesTabBarController, let user = mvc.currentUser {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dvc = segue.destination.childViewControllers.first as? FriendListTableViewController, let mvc = tabBarController as? MoviesTabBarController, let user = mvc.currentUser {
             dvc.user = user
             dvc.doNotInclude = people
         }

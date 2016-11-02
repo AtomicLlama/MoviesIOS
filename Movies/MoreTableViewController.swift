@@ -17,7 +17,7 @@ class MoreTableViewController: UITableViewController, ActorReceiverProtocol {
         }
     }
     
-    func receiveActors(actors: [Actor]) {
+    func receiveActors(_ actors: [Actor]) {
         if actors.count == 1 {
             followingLabel.text = "1 Person"
         } else {
@@ -39,17 +39,17 @@ class MoreTableViewController: UITableViewController, ActorReceiverProtocol {
         }
         if let watchlistToggle = user?.notifyWatchlist {
             watchlistSwitch.setOn(watchlistToggle, animated: false)
-            watchlistSwitch.addTarget(self, action: Selector("updateUserOnBool"), forControlEvents: UIControlEvents.ValueChanged)
+            watchlistSwitch.addTarget(self, action: #selector(MoreTableViewController.updateUserOnBool), for: UIControlEvents.valueChanged)
         }
         if let artistToggle = user?.notifyArtist {
             artistSwitch.setOn(artistToggle, animated: false)
-            artistSwitch.addTarget(self, action: Selector("updateUserOnBool"), forControlEvents: UIControlEvents.ValueChanged)
+            artistSwitch.addTarget(self, action: #selector(MoreTableViewController.updateUserOnBool), for: UIControlEvents.valueChanged)
         }
     }
     
     func updateUserOnBool() {
-        user?.notifyArtist = artistSwitch.on
-        user?.notifyWatchlist = watchlistSwitch.on
+        user?.notifyArtist = artistSwitch.isOn
+        user?.notifyWatchlist = watchlistSwitch.isOn
     }
 
     override func viewDidLoad() {
@@ -60,7 +60,7 @@ class MoreTableViewController: UITableViewController, ActorReceiverProtocol {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadSettings()
     }
@@ -73,7 +73,7 @@ class MoreTableViewController: UITableViewController, ActorReceiverProtocol {
     
     @IBOutlet weak var userTableViewCell: UserTableViewCell!
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 4 {
             FBSDKLoginManager().logOut()
             if let mvc = tabBarController as? MoviesTabBarController {
@@ -99,19 +99,19 @@ class MoreTableViewController: UITableViewController, ActorReceiverProtocol {
     
     @IBOutlet weak var languageCell: UITableViewCell!
     
-    override func tableView(tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+    override func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         if section == 4 {
-            if let footer = view as? UITableViewHeaderFooterView, label = footer.textLabel {
-                label.textAlignment = .Center
+            if let footer = view as? UITableViewHeaderFooterView, let label = footer.textLabel {
+                label.textAlignment = .center
                 footer.setNeedsDisplay()
             }
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let languageController = segue.destinationViewController as? LanguagePreferenceSelector {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let languageController = segue.destination as? LanguagePreferenceSelector {
             languageController.user = user
-        } else if let distanceController = segue.destinationViewController as? DistancePreferenceSelector {
+        } else if let distanceController = segue.destination as? DistancePreferenceSelector {
             distanceController.user = user
         }
     }

@@ -12,17 +12,17 @@ protocol MovieInfoDataSource {
     
     // Protocol for the Object that will cache the Movies and Actors
     
-    func knownMovie(id: String) -> Movie?
-    func learnMovie(id:String, movie: Movie)
-    func knownPerson(id: String) -> Actor?
-    func learnPerson(id: String, actor: Actor)
-    func addToWatchList(id: Int)
-    func removeFromWatchList(id: Int)
-    func addToSubscriptions(id: Int)
-    func removeFromSubscriptions(id: Int)
-    func isMovieInWatchList(id: Int) -> Bool
-    func isActorInSubscriptions(id: Int) -> Bool
-    func reArrangeWatchList(from: Int, to: Int)
-    func fetchTickets(requestingView: TicketReceiverProtocol)
+    func knownMovie(_ id: String) -> Movie?
+    func learnMovie(_ id:String, movie: Movie)
+    func knownPerson(_ id: String) -> Actor?
+    func learnPerson(_ id: String, actor: Actor)
+    func addToWatchList(_ id: Int)
+    func removeFromWatchList(_ id: Int)
+    func addToSubscriptions(_ id: Int)
+    func removeFromSubscriptions(_ id: Int)
+    func isMovieInWatchList(_ id: Int) -> Bool
+    func isActorInSubscriptions(_ id: Int) -> Bool
+    func reArrangeWatchList(_ from: Int, to: Int)
+    func fetchTickets(_ requestingView: TicketReceiverProtocol)
     
 }

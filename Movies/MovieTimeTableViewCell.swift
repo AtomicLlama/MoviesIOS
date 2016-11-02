@@ -13,9 +13,9 @@ class MovieTimeTableViewCell: UITableViewCell {
     var item: Showtime? {
         didSet{
             if let time = item {
-                let dateforamtter = NSDateFormatter()
+                let dateforamtter = DateFormatter()
                 dateforamtter.dateFormat = "HH:mm"
-                timeLabel.text = dateforamtter.stringFromDate(time.time)
+                timeLabel.text = dateforamtter.string(from: time.time as Date)
                 titleLabel.text = time.name
             }
         }
@@ -23,7 +23,7 @@ class MovieTimeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var posterImage: UIImageView! {
         didSet {
-            self.backgroundColor = UIColor.clearColor()
+            self.backgroundColor = UIColor.clear
             posterImage.clipsToBounds = true
         }
     }

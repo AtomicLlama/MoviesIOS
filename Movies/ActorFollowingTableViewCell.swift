@@ -32,11 +32,11 @@ class ActorFollowingTableViewCell: MCSwipeTableViewCell {
     @IBOutlet weak var roleLabel: UILabel!
     @IBOutlet weak var headshotImageView: UIImageView! {
         didSet {
-            backgroundColor = UIColor.clearColor()
+            backgroundColor = UIColor.clear
             headshotImageView.layer.cornerRadius = CGFloat (20)
             headshotImageView.clipsToBounds = true
-            headshotImageView.layer.frame = CGRectInset(headshotImageView.layer.frame, 20, 20)
-            headshotImageView.layer.borderColor = UIColor.whiteColor().CGColor
+            headshotImageView.layer.frame = headshotImageView.layer.frame.insetBy(dx: 20, dy: 20)
+            headshotImageView.layer.borderColor = UIColor.white.cgColor
             headshotImageView.layer.borderWidth = 2.0
         }
     }

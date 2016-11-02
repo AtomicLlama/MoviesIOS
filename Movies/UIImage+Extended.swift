@@ -10,12 +10,12 @@ import UIKit
 
 extension UIImage {
 
-    static func decompressedImageFromImageString(filename: String) -> UIImage {
+    static func decompressedImageFromImageString(_ filename: String) -> UIImage {
         let image = UIImage(named: filename)!
         UIGraphicsBeginImageContextWithOptions(image.size, true, 0)
-        image.drawAtPoint(CGPoint())
+        image.draw(at: CGPoint())
         let decompressedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return decompressedImage
+        return decompressedImage!
     }
 }

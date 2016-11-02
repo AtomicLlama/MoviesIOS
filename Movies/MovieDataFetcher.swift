@@ -11,12 +11,12 @@ import Alamofire
 import AlamofireObjectMapper
 
 protocol ActorReceiverProtocol {
-    func receiveActors(actors: [Actor])
+    func receiveActors(_ actors: [Actor])
 }
 
 class MovieDataFetcher: MovieInfoDataSource {
     
-    let defaults = NSUserDefaults.standardUserDefaults()
+    let defaults = UserDefaults.standard
     
     var getter: WatchListGetter?
     
@@ -54,7 +54,7 @@ class MovieDataFetcher: MovieInfoDataSource {
     }
     
     func fetchNewMovies() {
-        Alamofire.request(.GET, newMoviesURLString).responseArray() { (response: Response<[Movie], NSError>) in
+        Alamofire.request(newMoviesURLString).responseArray() { (response: DataResponse<[Movie]>) in
             if var movies = response.result.value {
                 for i in 0..<movies.count {
                     if let movie = self.knownMovies[movies[i].id.description] {
@@ -67,11 +67,11 @@ class MovieDataFetcher: MovieInfoDataSource {
                         movies[i].subscribeToImage(receiver)
                     }
                 }
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.receiver?.moviesArrived(movies)
                 }
             } else {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.receiver?.moviesArrived([])
                 }
             }
@@ -79,51 +79,51 @@ class MovieDataFetcher: MovieInfoDataSource {
         
     }
     
-    func fetchTickets(requestingView: TicketReceiverProtocol) {
+    func fetchTickets(_ requestingView: TicketReceiverProtocol) {
         requestingView.receiveTickets(tickets)
     }
     
-    func addToSubscriptions(id: Int) {
+    func addToSubscriptions(_ id: Int) {
         subs.append(id)
         getter?.addSubscription(id)
     }
     
-    func removeFromSubscriptions(id: Int) {
+    func removeFromSubscriptions(_ id: Int) {
         getter?.removeSubscription(id)
         subs = subs.filter() { item in
             return item != id
         }
     }
     
-    func addToWatchList(id: Int) {
+    func addToWatchList(_ id: Int) {
         watchList.append(id)
         getter?.addToWatchList(id)
     }
     
-    func removeFromWatchList(id: Int) {
+    func removeFromWatchList(_ id: Int) {
         getter?.removeFromWatchList(id)
         watchList = watchList.filter() { item in
             return item != id
         }
     }
     
-    func isMovieInWatchList(id: Int) -> Bool {
+    func isMovieInWatchList(_ id: Int) -> Bool {
         return watchList.contains(id)
     }
     
-    func isActorInSubscriptions(id: Int) -> Bool {
+    func isActorInSubscriptions(_ id: Int) -> Bool {
         return subs.contains(id)
     }
     
-    func getListOfMovies(delegate: MovieReceiverProtocol) {
+    func getListOfMovies(_ delegate: MovieReceiverProtocol) {
         getMoviesForWatchList(watchList, delegate: delegate)
     }
     
-    func getActorsFromSubscriptions(delegate: ActorReceiverProtocol) {
+    func getActorsFromSubscriptions(_ delegate: ActorReceiverProtocol) {
         getListOfActors(subs, delegate: delegate)
     }
     
-    func getListOfActors(ids: [Int], delegate: ActorReceiverProtocol) {
+    func getListOfActors(_ ids: [Int], delegate: ActorReceiverProtocol) {
         if ids.isEmpty {
             delegate.receiveActors([])
             return
@@ -134,19 +134,19 @@ class MovieDataFetcher: MovieInfoDataSource {
             if let alreadyKnownActor = self.knownActors[ids[iterator].description] {
                 actors.append(alreadyKnownActor)
                 if iterator == ids.count - 1 {
-                    actors.sortInPlace() { (a,b) in
+                    actors.sort() { (a,b) in
                         return a.name <= b.name
                     }
                     delegate.receiveActors(actors)
                 }
             } else {
-                Alamofire.request(.GET, getActorURL(ids[iterator])).responseObject() { (response: Response<Actor,NSError>) in
+                Alamofire.request(getActorURL(ids[iterator])).responseObject() { (response: DataResponse<Actor>) in
                     if let actor = response.result.value {
                         actors.append(actor)
-                        actors.sortInPlace() { (a,b) in
+                        actors.sort { (a,b) in
                             return a.name <= b.name
                         }
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             delegate.receiveActors(actors)
                         }
                     }
@@ -155,15 +155,15 @@ class MovieDataFetcher: MovieInfoDataSource {
         }
     }
     
-    func getMovieURL(id: Int) -> String {
+    func getMovieURL(_ id: Int) -> String {
         return "http://api.themoviedb.org/3/movie/" + id.description + "?api_key=18ec732ece653360e23d5835670c47a0"
     }
     
-    func getActorURL(id: Int) -> String {
+    func getActorURL(_ id: Int) -> String {
         return "http://api.themoviedb.org/3/person/" + id.description + "?api_key=18ec732ece653360e23d5835670c47a0"
     }
     
-    func getMoviesForWatchList(ids: [Int], delegate: MovieReceiverProtocol) {
+    func getMoviesForWatchList(_ ids: [Int], delegate: MovieReceiverProtocol) {
         if ids.count == 0 {
             delegate.moviesArrived([])
             return
@@ -173,19 +173,19 @@ class MovieDataFetcher: MovieInfoDataSource {
         for iterator in 0..<ids.count {
             if let alreadyKnownMovie = self.knownMovies[ids[iterator].description] {
                 movies.append(alreadyKnownMovie)
-                movies.sortInPlace() { (a,b) in
+                movies.sort() { (a,b) in
                     return a.title  <= b.title
                 }
                 if iterator == ids.count - 1 {
                     delegate.moviesArrived(movies)
                 }
             } else {
-                Alamofire.request(.GET, getMovieURL(ids[iterator])).responseObject() { (response: Response<Movie, NSError>) in
+                Alamofire.request(getMovieURL(ids[iterator])).responseObject() { (response: DataResponse<Movie>) in
                     if let movie = response.result.value {
                         self.learnMovie(movie.id.description, movie: movie)
                         movies.append(movie)
                     }
-                    movies.sortInPlace() { (a,b) in
+                    movies.sort() { (a,b) in
                         return a.title  <= b.title
                     }
                     if iterator == ids.count - 1 {
@@ -197,27 +197,27 @@ class MovieDataFetcher: MovieInfoDataSource {
         
     }
     
-    func reArrangeWatchList(from: Int, to: Int) {
+    func reArrangeWatchList(_ from: Int, to: Int) {
         let id = watchList[from]
-        watchList.removeAtIndex(from)
-        watchList.insert(id, atIndex: to)
+        watchList.remove(at: from)
+        watchList.insert(id, at: to)
     }
     
     // public access to the cache system of the object.
     
-    func knownMovie(id: String) -> Movie? {
+    func knownMovie(_ id: String) -> Movie? {
         return knownMovies[id]
     }
     
-    func knownPerson(id: String) -> Actor? {
+    func knownPerson(_ id: String) -> Actor? {
         return knownActors[id]
     }
     
-    func learnMovie(id: String, movie: Movie) {
+    func learnMovie(_ id: String, movie: Movie) {
         knownMovies[id] = movie
     }
     
-    func learnPerson(id: String, actor: Actor) {
+    func learnPerson(_ id: String, actor: Actor) {
         knownActors[id] = actor
     }
     

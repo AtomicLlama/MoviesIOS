@@ -13,12 +13,12 @@ class TicketEntity {
     
     let movie: Movie
     let theatre: Theatre
-    let time: NSDate
+    let time: Date
     
     init(movie: Movie) {
         self.movie = movie
         theatre = Theatre()
-        time = NSDate()
+        time = Date()
     }
     
 }

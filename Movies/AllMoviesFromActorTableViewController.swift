@@ -26,7 +26,7 @@ class AllMoviesFromActorTableViewController: UITableViewController, MovieDetailD
         tableView.reloadData()
     }
     
-    func moviesArrived(newMovies: [Movie]) {
+    func moviesArrived(_ newMovies: [Movie]) {
         tableView.reloadData()
     }
     
@@ -35,7 +35,7 @@ class AllMoviesFromActorTableViewController: UITableViewController, MovieDetailD
         delegate?.currentPerson().fetchMovies(self, all: true)
         tableView.estimatedRowHeight = 400
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         if let unwrappedActor = delegate?.currentPerson() {
             title = "Movies with: " + unwrappedActor.name
         }
@@ -47,16 +47,16 @@ class AllMoviesFromActorTableViewController: UITableViewController, MovieDetailD
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return delegate?.currentPerson().movies?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCellWithIdentifier("movie") as? ClearMovieTableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "movie") as? ClearMovieTableViewCell {
             cell.movie = delegate?.currentPerson().movies?[indexPath.row]
             return cell
         } else {
@@ -66,12 +66,12 @@ class AllMoviesFromActorTableViewController: UITableViewController, MovieDetailD
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentMovie = delegate?.currentPerson().movies?[indexPath.row]
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destiationViewController = segue.destinationViewController as? MovieDetailViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destiationViewController = segue.destination as? MovieDetailViewController {
             destiationViewController.movieDataSource = self
             currentMovie?.subscribeToImage(destiationViewController)
         }

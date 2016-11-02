@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0E3BAD5E3B06F411B470F594'
+               BlueprintIdentifier = 'E75E5BAC0FE6E4C6A5E5F95EA6807F8A'
                BlueprintName = 'MXParallaxHeader'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MXParallaxHeader.framework'>
